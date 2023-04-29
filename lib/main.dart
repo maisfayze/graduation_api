@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/ui/patient/patient_home.dart';
 import 'package:graduation/ui/patient/specialities.dart';
 import 'package:graduation/ui/patient/top_doctors.dart';
+import 'package:graduation/ui/profile/edit_profile.dart';
 import 'package:graduation/ui/profile/profile.dart';
 import 'package:graduation/ui/profile/profile_setting.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
               Provider.of<LocalizationProvider>(context, listen: true)
                   .languages),
           title: 'Flutter Demo',
-          initialRoute: ProfileSetting.id,
+          initialRoute: EditProfile.id,
           routes: {
             OnBoarding.id: (context) => OnBoarding(),
             Auth.id: (context) => Auth(),
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
             TopDoctors.id: (context) => TopDoctors(),
             Profile.id: (context) => Profile(),
             ProfileSetting.id: (context) => ProfileSetting(),
+            EditProfile.id: (context) => EditProfile(),
           },
         );
       },

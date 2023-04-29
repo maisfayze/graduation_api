@@ -1,6 +1,6 @@
-class Country {
+class Blood {
   final int id;
   final String title;
 
-  Country({required this.id, required this.title});
+  Blood({required this.id, required this.title});
 }
