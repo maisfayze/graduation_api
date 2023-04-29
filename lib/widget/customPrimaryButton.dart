@@ -23,6 +23,7 @@ class CustomPrimaryButton extends StatelessWidget {
             color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
       ),
       style: ElevatedButton.styleFrom(
+          shadowColor: Colors.transparent,
           minimumSize: Size(double.infinity, 59),
           backgroundColor: Constant.primaryColor,
           shape: RoundedRectangleBorder(

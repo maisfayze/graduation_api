@@ -10,6 +10,11 @@ import 'package:graduation/ui/auth/patient_sign_up.dart';
 import 'package:graduation/ui/auth/reset.dart';
 import 'package:graduation/ui/onBoarding/onboarding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:graduation/ui/patient/patient_home.dart';
+import 'package:graduation/ui/patient/specialities.dart';
+import 'package:graduation/ui/patient/top_doctors.dart';
+import 'package:graduation/ui/profile/profile.dart';
+import 'package:graduation/ui/profile/profile_setting.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -44,7 +49,7 @@ class MyApp extends StatelessWidget {
               Provider.of<LocalizationProvider>(context, listen: true)
                   .languages),
           title: 'Flutter Demo',
-          initialRoute: OnBoarding.id,
+          initialRoute: ProfileSetting.id,
           routes: {
             OnBoarding.id: (context) => OnBoarding(),
             Auth.id: (context) => Auth(),
@@ -54,6 +59,11 @@ class MyApp extends StatelessWidget {
             DocSignUp.id: (context) => DocSignUp(),
             ForgotScreen.id: (context) => ForgotScreen(),
             ResetScreen.id: (context) => ResetScreen(),
+            PatientHome.id: (context) => PatientHome(),
+            Specialities.id: (context) => Specialities(),
+            TopDoctors.id: (context) => TopDoctors(),
+            Profile.id: (context) => Profile(),
+            ProfileSetting.id: (context) => ProfileSetting(),
           },
         );
       },

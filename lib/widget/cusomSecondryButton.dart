@@ -25,11 +25,12 @@ class CustomSecondaryButton extends StatelessWidget {
             fontWeight: FontWeight.w500),
       ),
       style: ElevatedButton.styleFrom(
+          shadowColor: Colors.transparent,
           minimumSize: Size(double.infinity, 59),
           backgroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              width: .5,
+              width: 1,
               color: Constant.primaryColor,
             ),
             borderRadius: BorderRadius.circular(60),

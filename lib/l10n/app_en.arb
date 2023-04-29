@@ -45,7 +45,28 @@
   "new_pass": "New Password",
   "confirm_new": "Confirm New Password",
   "not_match": "Passwords doesn't match",
-  "get_sub": "Login to enjoy the features we’ve provided "
+  "get_sub": "Login to enjoy the features we’ve provided ",
+  "specialities": "Specialities",
+  "search_title": " Search",
+  "top": "Top Doctors",
+  "book": "Book Now",
+  "view_profile": "View Profile",
+  "profile_setting": "Profile Settings",
+  "make_changes_to_your_account": "Make changes to your account",
+  "my_favourites": "My favourites",
+  "see_your_favorite_doctors": "See your favorite doctors",
+  "my_billing": "My billing",
+  "see_your_paid_pending": "See your paid, pending and refunded invoices",
+  "save_your_log_in_info": "Save your log in info?",
+  "save_your_sub": "We’ll save the login info for your account , so you won’t need to enter it next time you log in",
+  "save": "Save",
+  "not_now": "Not Now",
+  "log_out": "Log Out",
+  "cancel": "Cancel",
+  "log_out_of_your_account": "Log out of your account ?",
+  "edit_personal_information": "Edit personal information",
+  "change_password": "Change my password"
+
 
 
 }
