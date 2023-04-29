@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/spec.dart';
+import '../../../provider/localization_provider.dart';
 import '../../../widget/bookButton.dart';
+import '../../../widget/drawer_widget.dart';
 import '../../../widget/search_bar.dart';
 import '../../../widget/see_all_row.dart';
 import '../../../widget/viewProfileButton.dart';
@@ -47,17 +51,22 @@ class _PatientHomeState extends State<PatientHome> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(
-          icon: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 23),
-            child: Icon(
-              Icons.menu,
-              color: Colors.black,
-              size: 24,
-            ),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 23),
+                child: Icon(
+                  Icons.menu,
+                  color: Colors.black,
+                  size: 24,
+                ),
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
           },
         ),
         centerTitle: true,
@@ -65,11 +74,11 @@ class _PatientHomeState extends State<PatientHome> {
         elevation: 0,
         actions: [
           Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 23,
             ),
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.notifications_none_outlined,
                 color: Colors.black,
                 size: 24,
@@ -438,6 +447,136 @@ class _PatientHomeState extends State<PatientHome> {
           ),
         ),
       ),
+      drawer: Drawer(
+        width: 266,
+        backgroundColor: Constant.primaryColor,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 35),
+          child: Column(
+            // Important: Remove any padding from the ListView.
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DrawerWidget(
+                img: 'images/trans.png',
+                onPressed: () {
+                  Provider.of<LocalizationProvider>(context, listen: false)
+                      .changLang();
+                },
+                title: AppLocalizations.of(context)!.change_Language,
+              ),
+              DrawerWidget(
+                img: 'images/comp.png',
+                onPressed: () {},
+                title: AppLocalizations.of(context)!.complaints_box,
+              ),
+              DrawerWidget(
+                img: 'images/about.png',
+                onPressed: () {},
+                title: AppLocalizations.of(context)!.about_Us,
+              ),
+              const SizedBox(
+                height: 90,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  buildShowDialog(context);
+                },
+                style: ElevatedButton.styleFrom(
+                    shadowColor: Colors.transparent,
+                    minimumSize: Size(131, 53),
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(60),
+                    )),
+                child: Text(
+                  AppLocalizations.of(context)!.log_out,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
+  }
+
+  Future<dynamic> buildShowDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // titlePadding: EdgeInsets.symmetric(horizontal: 34),
+            title: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40),
+              child: Center(
+                child: Text(
+                  AppLocalizations.of(context)!.log_out_of_your_account,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            // actionsPadding: EdgeInsets.only(bottom: 34),
+            actions: [
+              Column(
+                children: [
+                  Divider(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      SystemNavigator.pop();
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.log_out,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                        color: Color(0xffDE1C1C),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.cancel,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ],
+          );
+        });
   }
 }
