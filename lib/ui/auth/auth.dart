@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/ui/auth/getStarted.dart';
 import 'package:graduation/ui/auth/login.dart';
@@ -37,7 +38,7 @@ class Auth extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
                         color: Color(0xff8B8989),
-                        fontSize: 17,
+                        fontSize: 17.sp,
                         fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -46,7 +47,7 @@ class Auth extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                       color: Color(0xff8B8989),
-                      fontSize: 17,
+                      fontSize: 17.sp,
                       fontWeight: FontWeight.w500),
                 ),
               ],
@@ -62,7 +63,7 @@ class Auth extends StatelessWidget {
                     AppLocalizations.of(context)!.welcome,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
-                        fontSize: 24, fontWeight: FontWeight.w600),
+                        fontSize: 24.sp, fontWeight: FontWeight.w600),
                   ),
                 ),
                 FadeInLeft(
@@ -70,14 +71,14 @@ class Auth extends StatelessWidget {
                     AppLocalizations.of(context)!.are_you,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
-                        fontSize: 18, fontWeight: FontWeight.w400),
+                        fontSize: 18.sp, fontWeight: FontWeight.w400),
                   ),
                 ),
                 SizedBox(
                   height: 32,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 46),
+                  padding: EdgeInsets.symmetric(horizontal: 46.w),
                   child: FadeInUp(
                     child: CustomPrimaryButton(
                         text: AppLocalizations.of(context)!.doctor,
@@ -93,10 +94,10 @@ class Auth extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 16.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 46),
+                  padding: EdgeInsets.symmetric(horizontal: 46.w),
                   child: FadeInUp(
                     child: CustomPrimaryButton(
                         text: AppLocalizations.of(context)!.patient,

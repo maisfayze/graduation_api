@@ -1,13 +1,21 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/spec.dart';
+import '../../../provider/localization_provider.dart';
 import '../../../widget/bookButton.dart';
+import '../../../widget/drawer_widget.dart';
 import '../../../widget/search_bar.dart';
 import '../../../widget/see_all_row.dart';
 import '../../../widget/viewProfileButton.dart';
+import '../specialities.dart';
+import '../top_doctors.dart';
 
 class PatientHome extends StatefulWidget {
   const PatientHome({Key? key}) : super(key: key);
@@ -47,17 +55,22 @@ class _PatientHomeState extends State<PatientHome> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(
-          icon: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 23),
-            child: Icon(
-              Icons.menu,
-              color: Colors.black,
-              size: 24,
-            ),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 23.w),
+                child: Icon(
+                  Icons.menu,
+                  color: Colors.black,
+                  size: 24,
+                ),
+              ),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
           },
         ),
         centerTitle: true,
@@ -66,10 +79,10 @@ class _PatientHomeState extends State<PatientHome> {
         actions: [
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 23,
+              horizontal: 23.w,
             ),
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.notifications_none_outlined,
                 color: Colors.black,
                 size: 24,
@@ -82,362 +95,532 @@ class _PatientHomeState extends State<PatientHome> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+        padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 16.h),
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 214,
-                child: Text(
-                  AppLocalizations.of(context)!.find_the_best_clinic_and_doctor,
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,
-                    color: Colors.black,
+          child: FadeInLeft(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 214.w,
+                  child: Text(
+                    AppLocalizations.of(context)!
+                        .find_the_best_clinic_and_doctor,
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20.sp,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              SearchBar(
-                  type: TextInputType.text,
-                  controller: _searchController,
-                  hint: AppLocalizations.of(context)!.search_title,
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.grey,
-                  )),
-              SizedBox(
-                height: 24,
-              ),
-              SeeALLRow(
-                title: AppLocalizations.of(context)!.specialities,
-                onPressed: () {},
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: 108),
-                child: ListView.builder(
-                  itemCount: _specialities.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.only(right: 12),
-                      width: 80,
-                      height: 108,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 80,
-                            height: 80,
-                            constraints:
-                                BoxConstraints(maxHeight: 80, maxWidth: 80),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                border:
-                                    Border.all(color: Colors.grey, width: .5)),
-                            child: Center(
-                                child: Image.asset(
-                              "${_specialities[index].img}",
-                              height: 50,
-                              width: 50,
-                            )),
-                          ),
-                          SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-                            _specialities[index].title,
-                            style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.grey),
-                          )
-                        ],
-                      ),
-                    );
+                SizedBox(
+                  height: 16.h,
+                ),
+                SearchBar(
+                    type: TextInputType.text,
+                    controller: _searchController,
+                    hint: AppLocalizations.of(context)!.search_title,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.grey,
+                    )),
+                SizedBox(
+                  height: 16.h,
+                ),
+                SeeALLRow(
+                  title: AppLocalizations.of(context)!.specialities,
+                  onPressed: () {
+                    Navigator.pushNamed(context, Specialities.id);
                   },
                 ),
-              ),
-              SizedBox(
-                height: 22,
-              ),
-              //top
-              SeeALLRow(
-                title: AppLocalizations.of(context)!.top,
-                onPressed: () {},
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: 260),
-                child: ListView.builder(
-                  itemCount: 4,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.only(right: 12),
-                      width: 163,
-                      height: 250,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.grey, width: .5)),
-                      child: Padding(
-                        padding: EdgeInsets.all(16),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxHeight: 108.h),
+                  child: ListView.builder(
+                    itemCount: _specialities.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.only(right: 20.w),
+                        width: 80.w,
+                        height: 10.h,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.asset(
-                                  'images/doctorw.jpg',
-                                  height: 95,
-                                  width: 131,
-                                  fit: BoxFit.cover,
-                                )),
+                            Container(
+                              width: 77.w,
+                              height: 77.h,
+                              constraints: BoxConstraints(
+                                  maxHeight: 77.h, maxWidth: 77.w),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(50.r),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xff6B7280).withOpacity(0.1),
+                                    spreadRadius: 3,
+                                    blurRadius: 3,
+                                    // changes position of shadow
+                                  ),
+                                ],
+
+                                // border: Border.all(color: Colors.grey),
+                              ),
+                              child: Center(
+                                  child: Image.asset(
+                                "${_specialities[index].img}",
+                                height: 33.h,
+                                width: 33.w,
+                              )),
+                            ),
                             SizedBox(
-                              height: 16,
+                              height: 6.h,
                             ),
                             Text(
-                              'Dr.Ruby Perin',
+                              _specialities[index].title,
                               style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14,
-                                color: Colors.black,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.grey),
+                            )
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 22.h,
+                ),
+                //top
+                SeeALLRow(
+                  title: AppLocalizations.of(context)!.top,
+                  onPressed: () {
+                    Navigator.pushNamed(context, TopDoctors.id);
+                  },
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxHeight: 260.h),
+                  child: ListView.builder(
+                    itemCount: 4,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.only(right: 12),
+                        width: 163,
+                        height: 250,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                                color: Colors.grey.shade400, width: .5)),
+                        child: Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  child: Image.asset(
+                                    'images/doctorw.jpg',
+                                    height: 95,
+                                    width: 131,
+                                    fit: BoxFit.cover,
+                                  )),
+                              SizedBox(
+                                height: 16.h,
                               ),
-                            ),
-                            Text(
-                              'Dentist',
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Colors.grey,
+                              Text(
+                                'Dr.Ruby Perin',
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14.sp,
+                                  color: Colors.black,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  height: 13.5,
-                                  width: 33,
-                                  decoration: BoxDecoration(
-                                      color: Constant.primaryColor
-                                          .withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(2)),
-                                  child: Row(
+                              Text(
+                                'Dentist',
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12.sp,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 12.h,
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 13.5,
+                                    width: 33,
+                                    decoration: BoxDecoration(
+                                        color: Constant.primaryColor
+                                            .withOpacity(0.2),
+                                        borderRadius: BorderRadius.circular(2)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          size: 8,
+                                          color: Colors.yellow,
+                                        ),
+                                        Text(
+                                          '4.7',
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 8,
+                                            color: Constant.primaryColor,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Icon(
-                                        Icons.star,
-                                        size: 8,
-                                        color: Colors.yellow,
+                                        Icons.location_on,
+                                        size: 10,
+                                        color: Colors.grey.shade400,
                                       ),
                                       Text(
-                                        '4.7',
+                                        'Gaza',
                                         style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 8,
-                                          color: Constant.primaryColor,
+                                          fontSize: 10.sp,
+                                          color: Colors.grey.shade400,
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 30,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Icon(
-                                      Icons.location_on,
-                                      size: 10,
-                                      color: Colors.grey.shade400,
-                                    ),
-                                    Text(
-                                      'Gaza',
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 10,
-                                        color: Colors.grey.shade400,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 14,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                viewProfileButton(
-                                  text: AppLocalizations.of(context)!
-                                      .view_profile,
-                                  onPressed: () {},
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                BookButton(
-                                    text: AppLocalizations.of(context)!.book,
-                                    onPressed: () {}),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 22,
-              ),
-              //blogs
-              SeeALLRow(
-                title: AppLocalizations.of(context)!.blogs,
-                onPressed: () {},
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: 340),
-                child: ListView.builder(
-                  itemCount: 4,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.only(right: 12),
-                      width: 211,
-                      height: 326,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.grey, width: .5)),
-                      child: Padding(
-                        padding: EdgeInsets.all(14),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.asset(
-                                  'images/blogs2.jpg',
-                                  height: 95,
-                                  width: 179,
-                                  fit: BoxFit.cover,
-                                )),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Text(
-                              'What We Know So Far About COVID-19 Transmission ?',
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                                color: Colors.black,
+                                ],
                               ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              // mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.asset(
-                                          'images/doctorw.jpg',
-                                          height: 20,
-                                          width: 20,
-                                          fit: BoxFit.cover,
-                                        )),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      'Dr. Linda toben',
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 10,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Spacer(),
-                                Row(
-                                  // crossAxisAlignment: CrossAxisAlignment.end,
-                                  // mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Icon(
-                                      Icons.watch_later_outlined,
-                                      size: 10,
-                                      color: Colors.grey,
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      '3. Jan .2023',
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 10,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            SizedBox(
-                              width: 183,
-                              height: 70,
-                              child: Text(
-                                overflow: TextOverflow.fade,
-                                'Many of us woke up today to the shocking news that the President Donald Trump and first ',
+                              SizedBox(
+                                height: 14,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  viewProfileButton(
+                                    text: AppLocalizations.of(context)!
+                                        .view_profile,
+                                    onPressed: () {},
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  BookButton(
+                                      text: AppLocalizations.of(context)!.book,
+                                      onPressed: () {}),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 22,
+                ),
+                //blogs
+                SeeALLRow(
+                  title: AppLocalizations.of(context)!.blogs,
+                  onPressed: () {},
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxHeight: 340.h),
+                  child: ListView.builder(
+                    itemCount: 4,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.only(right: 12.w),
+                        width: 211,
+                        height: 326,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.r),
+                            border: Border.all(
+                                color: Colors.grey.shade400, width: .5)),
+                        child: Padding(
+                          padding: EdgeInsets.all(14),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  child: Image.asset(
+                                    'images/blogs2.jpg',
+                                    height: 95.h,
+                                    width: 179.w,
+                                    fit: BoxFit.cover,
+                                  )),
+                              SizedBox(
+                                height: 16.h,
+                              ),
+                              Text(
+                                'What We Know So Far About COVID-19 Transmission ?',
                                 style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12.sp,
                                   color: Colors.black,
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 14,
-                            ),
-                            viewProfileButton(
-                              text: AppLocalizations.of(context)!.read_more,
-                              onPressed: () {},
-                            ),
-                          ],
+                              SizedBox(
+                                height: 8.h,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                // mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10.r),
+                                          child: Image.asset(
+                                            'images/doctorw.jpg',
+                                            height: 20.h,
+                                            width: 20.w,
+                                            fit: BoxFit.cover,
+                                          )),
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      Text(
+                                        'Dr. Linda toben',
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 10.sp,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    // crossAxisAlignment: CrossAxisAlignment.end,
+                                    // mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Icon(
+                                        Icons.watch_later_outlined,
+                                        size: 10,
+                                        color: Colors.grey,
+                                      ),
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      Text(
+                                        '3. Jan .2023',
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 10.sp,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 12.h,
+                              ),
+                              SizedBox(
+                                width: 183.w,
+                                height: 70.h,
+                                child: Text(
+                                  overflow: TextOverflow.fade,
+                                  'Many of us woke up today to the shocking news that the President Donald Trump and first ',
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12.sp,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 14.h,
+                              ),
+                              viewProfileButton(
+                                text: AppLocalizations.of(context)!.read_more,
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
+                SizedBox(
+                  height: 16.h,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      drawer: Drawer(
+        width: 266.w,
+        backgroundColor: Constant.primaryColor,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 35.w),
+          child: Column(
+            // Important: Remove any padding from the ListView.
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              DrawerWidget(
+                img: 'images/Blo.png',
+                onPressed: () {},
+                title: AppLocalizations.of(context)!.blogs,
+              ),
+              DrawerWidget(
+                img: 'images/about.png',
+                onPressed: () {},
+                title: AppLocalizations.of(context)!.about_Us,
+              ),
+              DrawerWidget(
+                img: 'images/price.png',
+                onPressed: () {},
+                title: AppLocalizations.of(context)!.pricing_plan,
+              ),
+              DrawerWidget(
+                img: 'images/faqs.png',
+                onPressed: () {},
+                title: AppLocalizations.of(context)!.asked_questions,
+              ),
+              DrawerWidget(
+                img: 'images/client.png',
+                onPressed: () {},
+                title: AppLocalizations.of(context)!.client_Sayings,
+              ),
+              DrawerWidget(
+                img: 'images/trans.png',
+                onPressed: () {
+                  Provider.of<LocalizationProvider>(context, listen: false)
+                      .changLang();
+                },
+                title: AppLocalizations.of(context)!.change_Language,
+              ),
+              DrawerWidget(
+                img: 'images/comp.png',
+                onPressed: () {},
+                title: AppLocalizations.of(context)!.complaints_box,
               ),
               SizedBox(
-                height: 16,
+                height: 50.h,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  buildShowDialog(context);
+                },
+                style: ElevatedButton.styleFrom(
+                    shadowColor: Colors.transparent,
+                    minimumSize: Size(131.w, 53.h),
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(60.r),
+                    )),
+                child: Text(
+                  AppLocalizations.of(context)!.log_out,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w500),
+                ),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<dynamic> buildShowDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // titlePadding: EdgeInsets.symmetric(horizontal: 34),
+            title: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40.w),
+              child: Center(
+                child: Text(
+                  AppLocalizations.of(context)!.log_out_of_your_account,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16.sp,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0.r)),
+            // actionsPadding: EdgeInsets.only(bottom: 34),
+            actions: [
+              Column(
+                children: [
+                  Divider(),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      SystemNavigator.pop();
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.log_out,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14.sp,
+                        color: Color(0xffDE1C1C),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.cancel,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14.sp,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                ],
+              ),
+            ],
+          );
+        });
   }
 }

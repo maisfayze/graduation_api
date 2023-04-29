@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/ui/auth/doc_signup.dart';
 import 'package:graduation/ui/auth/login.dart';
@@ -26,7 +27,7 @@ class GetStarted extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 28, left: 28, right: 28),
+            padding: EdgeInsets.only(top: 28.h, left: 28.w, right: 28.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -41,7 +42,7 @@ class GetStarted extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
                         color: Color(0xff8B8989),
-                        fontSize: 17,
+                        fontSize: 17.sp,
                         fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -50,7 +51,7 @@ class GetStarted extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                       color: Color(0xff8B8989),
-                      fontSize: 17,
+                      fontSize: 17.sp,
                       fontWeight: FontWeight.w500),
                 ),
               ],
@@ -66,30 +67,30 @@ class GetStarted extends StatelessWidget {
                     AppLocalizations.of(context)!.lets_get_started,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
-                        fontSize: 24, fontWeight: FontWeight.w600),
+                        fontSize: 24.sp, fontWeight: FontWeight.w600),
                   ),
                 ),
                 SizedBox(
-                  height: 8,
+                  height: 8.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 70.0),
+                  padding: EdgeInsets.symmetric(horizontal: 70.0.w),
                   child: FadeInUp(
                     child: Text(
                       AppLocalizations.of(context)!.get_sub,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                           color: Color(0xffB2B0B0),
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.w400),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: 32,
+                  height: 32.h,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 46),
+                  padding: EdgeInsets.symmetric(horizontal: 46.w),
                   child: FadeInUp(
                     child: CustomPrimaryButton(
                         text: AppLocalizations.of(context)!.login,
@@ -115,10 +116,10 @@ class GetStarted extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 16.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 46),
+                  padding: EdgeInsets.symmetric(horizontal: 46.w),
                   child: FadeInUp(
                     child: CustomSecondaryButton(
                         text: AppLocalizations.of(context)!.sign_up,

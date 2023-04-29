@@ -72,8 +72,18 @@
   "find_the_best_clinic_and_doctor": "Find the best clinic and doctor",
   "see_all": "See all",
   "blogs": "Blogs",
-  "read_more": "Read more"
-
-
+  "read_more": "Read more",
+  "change_Language": "Change Language",
+  "complaints_box": "Complaints box",
+  "about_Us": "About Us",
+  "favourites": "Favourites",
+   "chang_your_password_easily": "Change your password easily",
+  "pricing_plan": "Pricing Plan",
+"asked_questions": "Asked Questions",
+  "client_Sayings": "Client Sayings",
+  "first_name": "First Name",
+  "enter_first_name": "Enter your first Name",
+  "last_name": "Last Name",
+  "enter_last_name": "Enter your last Name"
 
 }

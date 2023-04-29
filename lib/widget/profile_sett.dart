@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileSett extends StatelessWidget {
@@ -25,17 +26,17 @@ class ProfileSett extends StatelessWidget {
                 children: [
                   Image.asset(
                     'images/$img.png',
-                    width: 22,
-                    height: 17,
+                    width: 22.w,
+                    height: 17.h,
                   ),
                   SizedBox(
-                    width: 16,
+                    width: 16.w,
                   ),
                   Text(
                     title,
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w500,
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       color: Colors.black,
                     ),
                   ),

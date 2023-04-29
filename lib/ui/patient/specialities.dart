@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
 import 'package:graduation/widget/search_bar.dart';
@@ -62,7 +63,7 @@ class _SpecialitiesState extends State<Specialities> {
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: 18.sp,
             color: Colors.black,
           ),
         ),
@@ -70,14 +71,14 @@ class _SpecialitiesState extends State<Specialities> {
         elevation: 0,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 25),
+        padding: EdgeInsets.symmetric(horizontal: 25.w),
         child: Column(
           children: [
             SizedBox(
-              height: 34,
+              height: 34.h,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: 10.h),
               child: SearchBar(
                   type: TextInputType.text,
                   controller: _searchController,
@@ -88,47 +89,58 @@ class _SpecialitiesState extends State<Specialities> {
                   )),
             ),
             SizedBox(
-              height: 27,
+              height: 27.h,
             ),
             Expanded(
               child: GridView.builder(
                 scrollDirection: Axis.vertical,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisSpacing: 16,
-                    mainAxisSpacing: 20,
-                    childAspectRatio: .9,
+                    mainAxisSpacing: 30,
+                    childAspectRatio: .8,
                     crossAxisCount: 3),
                 itemCount: _specialities.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    width: 80,
-                    height: 108,
+                    width: 80.w,
+                    height: 10.h,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 80,
-                          height: 80,
+                          width: 86.w,
+                          height: 86.w,
                           constraints:
-                              BoxConstraints(maxHeight: 80, maxWidth: 80),
+                              BoxConstraints(maxHeight: 86.h, maxWidth: 86.w),
                           child: Center(
                               child: Image.asset(
                             "${_specialities[index].img}",
-                            height: 50,
-                            width: 50,
+                            height: 36.h,
+                            width: 36.w,
                           )),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(color: Colors.grey)),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50.r),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0xff6B7280).withOpacity(0.1),
+                                spreadRadius: 3,
+                                blurRadius: 3,
+                                // changes position of shadow
+                              ),
+                            ],
+
+                            // border: Border.all(color: Colors.grey),
+                          ),
                         ),
                         SizedBox(
-                          height: 6,
+                          height: 16.h,
                         ),
                         Text(
                           _specialities[index].title,
                           style: GoogleFonts.poppins(
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.normal,
                               color: Colors.grey),
                         )
@@ -139,7 +151,7 @@ class _SpecialitiesState extends State<Specialities> {
               ),
             ),
             SizedBox(
-              height: 50,
+              height: 50.h,
             )
           ],
         ),

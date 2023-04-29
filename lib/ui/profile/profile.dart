@@ -1,13 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:graduation/ui/profile/new_pass.dart';
+import 'package:graduation/ui/profile/profile_setting.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/constant.dart';
 import '../../provider/localization_provider.dart';
 import '../../widget/profile_widget.dart';
+import '../patient/my_favourite.dart';
+import 'edit_profile.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
@@ -17,38 +22,42 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        shadowColor: Colors.transparent,
-        shape: Border(
-          bottom: BorderSide(
-            color: Constant.primaryColor,
-          ),
-        ),
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_sharp,
-            color: Colors.black,
-            size: 24,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        backgroundColor: Constant.primaryColor,
-      ),
+      // appBar: AppBar(
+      //   shadowColor: Colors.transparent,
+      //   shape: Border(
+      //     bottom: BorderSide(
+      //       color: Constant.primaryColor,
+      //
+      //     ),
+      //   ),
+      //   foregroundColor: Constant.primaryColor,
+      //   surfaceTintColor: Constant.primaryColor,
+      //   elevation: 0,
+      //   leading: IconButton(
+      //     icon: Icon(
+      //       Icons.arrow_back_ios_sharp,
+      //       color: Colors.black,
+      //       size: 24,
+      //     ),
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //   ),
+      //   backgroundColor: Constant.primaryColor,
+      // ),
       body: Stack(
         alignment: Alignment.center,
         children: <Widget>[
           // background image and bottom contents
-          Column(
+
+          ListView(
             children: <Widget>[
               Container(
-                height: 100.0,
+                height: 150.0.h,
                 color: Constant.primaryColor,
               ),
               SizedBox(
-                height: 54,
+                height: 54.h,
               ),
               Expanded(
                 child: Container(
@@ -61,7 +70,7 @@ class Profile extends StatelessWidget {
                             'Ahmad hamad',
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w600,
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               color: Colors.black,
                             ),
                           ),
@@ -69,39 +78,17 @@ class Profile extends StatelessWidget {
                             'ahmad.188@hotmail.com',
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w400,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               color: Colors.grey,
                             ),
                           ),
                         ],
                       ),
                       Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 40, vertical: 85),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 40.h, horizontal: 40.w),
                         child: Column(
                           children: [
-                            ProfileWidget(
-                              img: 'profile_setting',
-                              title:
-                                  AppLocalizations.of(context)!.profile_setting,
-                              sub_title: AppLocalizations.of(context)!
-                                  .make_changes_to_your_account,
-                              onPresseed: () {},
-                            ),
-                            SizedBox(
-                              height: 24,
-                            ),
-                            ProfileWidget(
-                              img: 'fav',
-                              title:
-                                  AppLocalizations.of(context)!.my_favourites,
-                              sub_title: AppLocalizations.of(context)!
-                                  .see_your_favorite_doctors,
-                              onPresseed: () {},
-                            ),
-                            SizedBox(
-                              height: 24,
-                            ),
                             ProfileWidget(
                               img: 'bill',
                               title: AppLocalizations.of(context)!.my_billing,
@@ -110,7 +97,46 @@ class Profile extends StatelessWidget {
                               onPresseed: () {},
                             ),
                             SizedBox(
-                              height: 24,
+                              height: 24.h,
+                            ),
+                            ProfileWidget(
+                              img: 'fav',
+                              title:
+                                  AppLocalizations.of(context)!.my_favourites,
+                              sub_title: AppLocalizations.of(context)!
+                                  .see_your_favorite_doctors,
+                              onPresseed: () {
+                                Navigator.pushNamed(context, Favourites.id);
+                              },
+                            ),
+                            SizedBox(
+                              height: 24.h,
+                            ),
+                            ProfileWidget(
+                              img: 'profile_setting',
+                              title:
+                                  AppLocalizations.of(context)!.profile_setting,
+                              sub_title: AppLocalizations.of(context)!
+                                  .make_changes_to_your_account,
+                              onPresseed: () {
+                                Navigator.pushNamed(context, EditProfile.id);
+                              },
+                            ),
+                            SizedBox(
+                              height: 24.h,
+                            ),
+                            ProfileWidget(
+                              img: 'chang_pass',
+                              title:
+                                  AppLocalizations.of(context)!.change_password,
+                              sub_title: AppLocalizations.of(context)!
+                                  .chang_your_password_easily,
+                              onPresseed: () {
+                                Navigator.pushNamed(context, NewPassword.id);
+                              },
+                            ),
+                            SizedBox(
+                              height: 24.h,
                             ),
                             InkWell(
                               onTap: () {
@@ -125,13 +151,13 @@ class Profile extends StatelessWidget {
                                     color: Color(0xffDE1C1C),
                                   ),
                                   SizedBox(
-                                    width: 10,
+                                    width: 10.w,
                                   ),
                                   Text(
                                     AppLocalizations.of(context)!.log_out,
                                     style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 18,
+                                      fontSize: 18.sp,
                                       color: Color(0xffDE1C1C),
                                     ),
                                   ),
@@ -149,12 +175,12 @@ class Profile extends StatelessWidget {
           ),
           // Profile image
           Positioned(
-            top: 42.0, // (background container size) - (circle height / 2)
+            top: 110.0.h, // (background container size) - (circle height / 2)
             child: Container(
-              height: 110.0,
-              width: 110.0,
+              height: 110.0.h.h,
+              width: 110.0.w,
               child: CircleAvatar(
-                radius: 55,
+                radius: 55.r,
                 backgroundImage: AssetImage('images/profile.jpg'),
               ),
               decoration:
@@ -173,28 +199,28 @@ class Profile extends StatelessWidget {
           return AlertDialog(
             // titlePadding: EdgeInsets.symmetric(horizontal: 34),
             title: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: EdgeInsets.symmetric(horizontal: 40.w),
               child: Center(
                 child: Text(
                   AppLocalizations.of(context)!.log_out_of_your_account,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w500,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     color: Colors.black,
                   ),
                 ),
               ),
             ),
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0)),
+                borderRadius: BorderRadius.circular(20.0.r)),
             // actionsPadding: EdgeInsets.only(bottom: 34),
             actions: [
               Column(
                 children: [
                   Divider(),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   InkWell(
                     onTap: () {
@@ -205,17 +231,17 @@ class Profile extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w600,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: Color(0xffDE1C1C),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   Divider(),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   InkWell(
                     onTap: () {
@@ -226,13 +252,13 @@ class Profile extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w600,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: Colors.grey,
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                 ],
               ),
@@ -266,12 +292,12 @@ class Profile extends StatelessWidget {
 // shadowColor: Colors.transparent,
 // backgroundColor: Constant.primaryColor,
 // shape: RoundedRectangleBorder(
-// borderRadius: BorderRadius.circular(10),
+// borderRadius: BorderRadius.circular(10.r),
 // )),
 // ),
 // ),
 // SizedBox(
-// width: 16,
+// width: 16.w,
 // ),
 // SizedBox(
 // height: 36,
@@ -295,7 +321,7 @@ class Profile extends StatelessWidget {
 // width: 1.5,
 // color: Color(0xffA2ABAB),
 // ),
-// borderRadius: BorderRadius.circular(10),
+// borderRadius: BorderRadius.circular(10.r),
 // )),
 // ),
 // ),

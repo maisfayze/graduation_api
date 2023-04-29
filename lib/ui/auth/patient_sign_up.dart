@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/constant/constant.dart';
@@ -27,7 +28,11 @@ class _PatientSignUpState extends State<PatientSignUp> {
   late TextEditingController _mobile;
   late TextEditingController _pass;
   late TextEditingController _name;
+  late TextEditingController _fname;
+  late TextEditingController _Lname;
   late TextEditingController _confirmpass;
+  late TextEditingController _email;
+
   bool _passobsecure = true;
   bool _copassobsecure = true;
 
@@ -37,7 +42,11 @@ class _PatientSignUpState extends State<PatientSignUp> {
     super.initState();
     _mobile = TextEditingController();
     _pass = TextEditingController();
+    _fname = TextEditingController();
+    _Lname = TextEditingController();
     _name = TextEditingController();
+    _email = TextEditingController();
+
     _confirmpass = TextEditingController();
     _tapGestureRecognizer = TapGestureRecognizer()
       ..onTap = createNewAccountAction;
@@ -51,6 +60,10 @@ class _PatientSignUpState extends State<PatientSignUp> {
     _pass.dispose();
     _name.dispose();
     _confirmpass.dispose();
+    _fname.dispose();
+    _Lname.dispose();
+    _email.dispose();
+
     super.dispose();
   }
 
@@ -79,7 +92,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: 18.sp,
             color: Colors.black,
           ),
         ),
@@ -87,56 +100,103 @@ class _PatientSignUpState extends State<PatientSignUp> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 48),
+        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 48.h),
         child: FadeInLeft(
           child: ListView(
             children: [
               Text(
-                AppLocalizations.of(context)!.name,
+                AppLocalizations.of(context)!.first_name,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: Colors.black,
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               CustomTextFiled(
-                hint: AppLocalizations.of(context)!.enter_name,
-                prefixIcon: Icon(
-                  Icons.person_2_outlined,
-                ),
-                controller: _name,
+                hint: AppLocalizations.of(context)!.enter_first_name,
+                // prefixIcon: Icon(
+                //   Icons.person_2_outlined,
+                // ),
+                controller: _fname,
                 type: TextInputType.phone,
               ),
+              SizedBox(
+                height: 16.h,
+              ),
               Text(
-                AppLocalizations.of(context)!.phone_number,
+                AppLocalizations.of(context)!.last_name,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: Colors.black,
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
-              MobileTextFiled(
+              CustomTextFiled(
+                hint: AppLocalizations.of(context)!.enter_last_name,
+                // prefixIcon: Icon(
+                //   Icons.person_2_outlined,
+                // ),
+                controller: _Lname,
                 type: TextInputType.phone,
-                controller: _mobile,
-                // errorText: _MobileErorr,
-                counter: 10,
               ),
+              SizedBox(
+                height: 16.h,
+              ),
+              Text(
+                AppLocalizations.of(context)!.email,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              CustomTextFiled(
+                hint: AppLocalizations.of(context)!.enter_email,
+                prefixIcon: Icon(
+                  Icons.email_outlined,
+                ),
+                controller: _email,
+                type: TextInputType.emailAddress,
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              // Text(
+              //   AppLocalizations.of(context)!.phone_number,
+              //   style: GoogleFonts.poppins(
+              //     fontWeight: FontWeight.w600,
+              //     fontSize: 18.sp,
+              //     color: Colors.black,
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 10.h,
+              // ),
+              // MobileTextFiled(
+              //   type: TextInputType.phone,
+              //   controller: _mobile,
+              //   // errorText: _MobileErorr,
+              //   counter: 10,
+              // ),
               Text(
                 AppLocalizations.of(context)!.password,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: Colors.black,
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               CustomTextFiled(
                 controller: _pass,
@@ -155,16 +215,19 @@ class _PatientSignUpState extends State<PatientSignUp> {
                         : Icons.visibility)),
                 obscureText: _passobsecure,
               ),
+              SizedBox(
+                height: 16.h,
+              ),
               Text(
                 AppLocalizations.of(context)!.confirm,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: Colors.black,
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               CustomTextFiled(
                 controller: _confirmpass,
@@ -183,6 +246,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                         : Icons.visibility)),
                 obscureText: _copassobsecure,
               ),
+
               Align(
                 alignment:
                     Provider.of<LocalizationProvider>(context, listen: true)
@@ -202,25 +266,29 @@ class _PatientSignUpState extends State<PatientSignUp> {
                           TextSpan(
                             text: AppLocalizations.of(context)!.terms,
                             style: GoogleFonts.poppins(
-                                color: Constant.primaryColor,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.none,
-                                fontSize: 14),
+                              color: Constant.primaryColor,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.none,
+                              fontSize: 14.sp,
+                            ),
                           ),
                           TextSpan(text: '  '),
                           TextSpan(
                             text: AppLocalizations.of(context)!.and,
                             style: GoogleFonts.poppins(
-                                color: Colors.black87, fontSize: 14),
+                              color: Colors.black87,
+                              fontSize: 14.sp,
+                            ),
                           ),
                           TextSpan(text: '  '),
                           TextSpan(
                             text: AppLocalizations.of(context)!.privacy,
                             style: GoogleFonts.poppins(
-                                color: Constant.primaryColor,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.none,
-                                fontSize: 14),
+                              color: Constant.primaryColor,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.none,
+                              fontSize: 14.sp,
+                            ),
                           ),
                         ]),
                   ),
@@ -251,13 +319,13 @@ class _PatientSignUpState extends State<PatientSignUp> {
                 //                     color: Constant.primaryColor,
                 //                     fontWeight: FontWeight.bold,
                 //                     decoration: TextDecoration.none,
-                //                     fontSize: 14),
+                //                     fontSize: 14.sp,),
                 //               ),
                 //               TextSpan(text: '  '),
                 //               TextSpan(
                 //                 text: AppLocalizations.of(context)!.and,
                 //                 style: GoogleFonts.poppins(
-                //                     color: Colors.black87, fontSize: 14),
+                //                     color: Colors.black87, fontSize: 14.sp,),
                 //               ),
                 //               TextSpan(text: '  '),
                 //               TextSpan(
@@ -266,7 +334,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                 //                     color: Constant.primaryColor,
                 //                     fontWeight: FontWeight.bold,
                 //                     decoration: TextDecoration.none,
-                //                     fontSize: 14),
+                //                     fontSize: 14.sp,),
                 //               ),
                 //             ]),
                 //       ),
@@ -275,14 +343,14 @@ class _PatientSignUpState extends State<PatientSignUp> {
                 // ),
               ),
               SizedBox(
-                height: 43,
+                height: 43.h,
               ),
               CustomPrimaryButton(
                   text: AppLocalizations.of(context)!.sign_up,
                   onPressed: () {}),
-              SizedBox(height: 8),
+              SizedBox(height: 8.h),
               SizedBox(
-                height: 85,
+                height: 85.h,
               ),
             ],
           ),

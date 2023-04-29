@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/constant/constant.dart';
@@ -28,7 +29,8 @@ class _DocSignUpState extends State<DocSignUp> {
   late TextEditingController _pass;
   late TextEditingController _email;
   late TextEditingController _name;
-
+  late TextEditingController _fname;
+  late TextEditingController _Lname;
   late TextEditingController _confirmpass;
   bool _passobsecure = true;
   bool _copassobsecure = true;
@@ -39,7 +41,8 @@ class _DocSignUpState extends State<DocSignUp> {
     super.initState();
     _mobile = TextEditingController();
     _pass = TextEditingController();
-    _name = TextEditingController();
+    _fname = TextEditingController();
+    _Lname = TextEditingController();
     _email = TextEditingController();
 
     _confirmpass = TextEditingController();
@@ -56,6 +59,8 @@ class _DocSignUpState extends State<DocSignUp> {
     _name.dispose();
     _confirmpass.dispose();
     _email.dispose();
+    _fname.dispose();
+    _Lname.dispose();
     super.dispose();
   }
 
@@ -84,7 +89,7 @@ class _DocSignUpState extends State<DocSignUp> {
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: 18.sp,
             color: Colors.black,
           ),
         ),
@@ -92,39 +97,64 @@ class _DocSignUpState extends State<DocSignUp> {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 48),
+        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 48.h),
         child: FadeInLeft(
           child: ListView(
             children: [
               Text(
-                AppLocalizations.of(context)!.name,
+                AppLocalizations.of(context)!.first_name,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: Colors.black,
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               CustomTextFiled(
-                hint: AppLocalizations.of(context)!.enter_name,
-                prefixIcon: Icon(
-                  Icons.person_2_outlined,
-                ),
-                controller: _name,
+                hint: AppLocalizations.of(context)!.enter_first_name,
+                // prefixIcon: Icon(
+                //   Icons.person_2_outlined,
+                // ),
+                controller: _fname,
                 type: TextInputType.phone,
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              Text(
+                AppLocalizations.of(context)!.last_name,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              CustomTextFiled(
+                hint: AppLocalizations.of(context)!.enter_last_name,
+                // prefixIcon: Icon(
+                //   Icons.person_2_outlined,
+                // ),
+                controller: _Lname,
+                type: TextInputType.phone,
+              ),
+              SizedBox(
+                height: 16.h,
               ),
               Text(
                 AppLocalizations.of(context)!.email,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: Colors.black,
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               CustomTextFiled(
                 hint: AppLocalizations.of(context)!.enter_email,
@@ -134,33 +164,36 @@ class _DocSignUpState extends State<DocSignUp> {
                 controller: _email,
                 type: TextInputType.emailAddress,
               ),
-              Text(
-                AppLocalizations.of(context)!.phone_number,
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                  color: Colors.black,
-                ),
-              ),
               SizedBox(
-                height: 10,
+                height: 16.h,
               ),
-              MobileTextFiled(
-                type: TextInputType.phone,
-                controller: _mobile,
-                // errorText: _MobileErorr,
-                counter: 10,
-              ),
+              // Text(
+              //   AppLocalizations.of(context)!.phone_number,
+              //   style: GoogleFonts.poppins(
+              //     fontWeight: FontWeight.w600,
+              //     fontSize: 18.sp,
+              //     color: Colors.black,
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 10.h,
+              // ),
+              // MobileTextFiled(
+              //   type: TextInputType.phone,
+              //   controller: _mobile,
+              //   // errorText: _MobileErorr,
+              //   counter: 10,
+              // ),
               Text(
                 AppLocalizations.of(context)!.password,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: Colors.black,
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               CustomTextFiled(
                 controller: _pass,
@@ -179,16 +212,19 @@ class _DocSignUpState extends State<DocSignUp> {
                         : Icons.visibility)),
                 obscureText: _passobsecure,
               ),
+              SizedBox(
+                height: 16.h,
+              ),
               Text(
                 AppLocalizations.of(context)!.confirm,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: Colors.black,
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               CustomTextFiled(
                 controller: _confirmpass,
@@ -208,13 +244,13 @@ class _DocSignUpState extends State<DocSignUp> {
                 obscureText: _copassobsecure,
               ),
               SizedBox(
-                height: 30,
+                height: 30.h,
               ),
               CustomPrimaryButton(
                   text: AppLocalizations.of(context)!.next, onPressed: () {}),
-              SizedBox(height: 8),
+              SizedBox(height: 8.h),
               SizedBox(
-                height: 73,
+                height: 73.h,
               ),
             ],
           ),

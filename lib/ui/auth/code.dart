@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/ui/auth/reset.dart';
 import 'package:graduation/widget/code_text_filed.dart';
@@ -76,7 +77,7 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: 18.sp,
             color: Colors.black,
           ),
         ),
@@ -84,16 +85,16 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 46,
+        padding: EdgeInsets.symmetric(
+          horizontal: 46.w,
         ),
         child: ListView(children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 34, vertical: 22),
+            padding: EdgeInsets.symmetric(horizontal: 34.w, vertical: 22.h),
             child: Image.asset(
               'images/code.png',
-              height: 257.9,
-              width: 251.36,
+              height: 257.9.h,
+              width: 251.36.w,
               matchTextDirection: true,
             ),
           ),
@@ -101,13 +102,13 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
             padding: Provider.of<LocalizationProvider>(context, listen: true)
                         .languages ==
                     'en'
-                ? EdgeInsets.only(left: 20, right: 50)
-                : EdgeInsets.only(left: 130, right: 20),
+                ? EdgeInsets.only(left: 20.w, right: 50.w)
+                : EdgeInsets.only(left: 130.w, right: 20.w),
             child: Text(
               AppLocalizations.of(context)!.code,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w600,
-                fontSize: 30,
+                fontSize: 30.sp,
                 color: Colors.black,
               ),
             ),
@@ -116,14 +117,14 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
             padding: Provider.of<LocalizationProvider>(context, listen: true)
                         .languages ==
                     'en'
-                ? EdgeInsets.symmetric(horizontal: 20, vertical: 16)
-                : EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                ? EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h)
+                : EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
             child: RichText(
               text: TextSpan(
                   text: AppLocalizations.of(context)!.sent_code,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w400,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     color: Colors.grey,
                   ),
                   children: [
@@ -140,7 +141,7 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -152,10 +153,10 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
             ),
           ),
           SizedBox(
-            height: 73,
+            height: 73.h,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: CustomPrimaryButton(
                 text: AppLocalizations.of(context)!.submit,
                 onPressed: () {

@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/constant/constant.dart';
@@ -15,6 +16,7 @@ import '../../widget/customPrimaryButton.dart';
 import '../../widget/custom_text_filed.dart';
 import '../../widget/mobile_text_filed.dart';
 import '../../widget/social.dart';
+import '../patient/PatientBtn/btn_patient.dart';
 import 'doc_signup.dart';
 import 'forget_pass.dart';
 
@@ -33,15 +35,19 @@ class _LoginPageState extends State<LoginPage> with Helpers {
   late TapGestureRecognizer _tapGestureRecognizer;
   late TextEditingController _mobile;
   late TextEditingController _pass;
+
   String? _MobileErorr;
   String? _passwordErorr;
   bool _obsecure = true;
+  late TextEditingController _email;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _mobile = TextEditingController();
     _pass = TextEditingController();
+    _email = TextEditingController();
 
     _tapGestureRecognizer = TapGestureRecognizer()
       ..onTap = createNewAccountAction;
@@ -51,6 +57,8 @@ class _LoginPageState extends State<LoginPage> with Helpers {
   void dispose() {
     _mobile.dispose();
     _pass.dispose();
+    _email.dispose();
+
     super.dispose();
   }
 
@@ -97,7 +105,7 @@ class _LoginPageState extends State<LoginPage> with Helpers {
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: 18.sp,
             color: Colors.black,
           ),
         ),
@@ -105,38 +113,40 @@ class _LoginPageState extends State<LoginPage> with Helpers {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 46, vertical: 48),
+        padding: EdgeInsets.symmetric(horizontal: 46.w, vertical: 48.h),
         child: FadeInLeft(
           child: ListView(
             key: _formKey,
             children: [
               Text(
-                AppLocalizations.of(context)!.phone_number,
+                AppLocalizations.of(context)!.email,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: Colors.black,
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
-              MobileTextFiled(
-                type: TextInputType.phone,
-                controller: _mobile,
-                errorText: _MobileErorr,
-                counter: 10,
+              CustomTextFiled(
+                hint: AppLocalizations.of(context)!.enter_email,
+                prefixIcon: Icon(
+                  Icons.email_outlined,
+                ),
+                controller: _email,
+                type: TextInputType.emailAddress,
               ),
               Text(
                 AppLocalizations.of(context)!.password,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w600,
-                  fontSize: 18,
+                  fontSize: 18.sp,
                   color: Colors.black,
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               CustomTextFiled(
                 controller: _pass,
@@ -176,14 +186,14 @@ class _LoginPageState extends State<LoginPage> with Helpers {
                     )),
               ),
               SizedBox(
-                height: 16,
+                height: 16.h,
               ),
               CustomPrimaryButton(
                   text: AppLocalizations.of(context)!.login,
                   onPressed: () {
                     performLogin();
                   }),
-              SizedBox(height: 8),
+              SizedBox(height: 8.h),
               Center(
                 child: RichText(
                   text: TextSpan(
@@ -206,7 +216,7 @@ class _LoginPageState extends State<LoginPage> with Helpers {
                 ),
               ),
               SizedBox(
-                height: 75,
+                height: 75.h,
               ),
               Row(
                 children: [
@@ -216,7 +226,7 @@ class _LoginPageState extends State<LoginPage> with Helpers {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 10.h),
                     child: Text(
                       AppLocalizations.of(context)!.or,
                       style: GoogleFonts.poppins(
@@ -234,21 +244,21 @@ class _LoginPageState extends State<LoginPage> with Helpers {
                 ],
               ),
               SizedBox(
-                height: 37,
+                height: 37.h,
               ),
               SocialMediaButton(
                 imgName: 'gmail',
                 text: AppLocalizations.of(context)!.gmail,
               ),
               SizedBox(
-                height: 16,
+                height: 16.h,
               ),
               SocialMediaButton(
                 imgName: 'facebook',
                 text: AppLocalizations.of(context)!.facebook,
               ),
               SizedBox(
-                height: 112,
+                height: 112.h,
               ),
             ],
           ),
@@ -264,7 +274,7 @@ class _LoginPageState extends State<LoginPage> with Helpers {
   }
 
   bool checkData() {
-    if (_mobile.text.isNotEmpty && _pass.text.isNotEmpty) {
+    if (_email.text.isNotEmpty && _pass.text.isNotEmpty) {
       _controlErrorValue();
       return true;
     }
@@ -278,9 +288,9 @@ class _LoginPageState extends State<LoginPage> with Helpers {
   void _controlErrorValue() {
     setState(
       () {
-        if (_mobile.text.isEmpty) {
+        if (_email.text.isEmpty) {
           _MobileErorr = AppLocalizations.of(context)!.enter_mobile;
-        } else if (_mobile.text.isNotEmpty && _mobile.text.length < 9) {
+        } else if (_email.text.isNotEmpty && _mobile.text.length < 9) {
           _MobileErorr = AppLocalizations.of(context)!.valid_mobile;
         } else {
           _MobileErorr = null;
@@ -294,6 +304,6 @@ class _LoginPageState extends State<LoginPage> with Helpers {
   }
 
   void login() {
-    Navigator.pushNamed(context, '');
+    Navigator.pushNamed(context, BtnPatient.id);
   }
 }

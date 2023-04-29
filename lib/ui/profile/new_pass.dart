@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utiles/helpers.dart';
@@ -68,11 +69,11 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 46),
+        padding: EdgeInsets.symmetric(horizontal: 46.w),
         child: ListView(
           children: [
-            const SizedBox(
-              height: 46,
+            SizedBox(
+              height: 46.h,
             ),
             //create new pass
             Text(
@@ -80,12 +81,12 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w500,
-                fontSize: 25,
+                fontSize: 25.sp,
                 color: Colors.black,
               ),
             ),
-            const SizedBox(
-              height: 16,
+            SizedBox(
+              height: 16.h,
             ),
             //sub title
             Center(
@@ -94,25 +95,25 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(
                   fontWeight: FontWeight.w400,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   color: Colors.grey,
                 ),
               ),
             ),
-            const SizedBox(
-              height: 16,
+            SizedBox(
+              height: 16.h,
             ),
             //old pass
             Text(
               AppLocalizations.of(context)!.old_pass,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w600,
-                fontSize: 18,
+                fontSize: 18.sp,
                 color: Colors.black,
               ),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             CustomTextFiled(
               controller: _oldpass,
@@ -132,20 +133,20 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
                       : Icons.visibility)),
               obscureText: _oldpassobsecure,
             ),
-            const SizedBox(
-              height: 16,
+            SizedBox(
+              height: 16.h,
             ),
             //new
             Text(
               AppLocalizations.of(context)!.new_pass,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w600,
-                fontSize: 18,
+                fontSize: 18.sp,
                 color: Colors.black,
               ),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             CustomTextFiled(
               controller: _pass,
@@ -164,20 +165,20 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
                       _passobsecure ? Icons.visibility_off : Icons.visibility)),
               obscureText: _passobsecure,
             ),
-            const SizedBox(
-              height: 16,
+            SizedBox(
+              height: 16.h,
             ),
             //confirm
             Text(
               AppLocalizations.of(context)!.confirm_new,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w600,
-                fontSize: 18,
+                fontSize: 18.sp,
                 color: Colors.black,
               ),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: 10.h,
             ),
             CustomTextFiled(
               controller: _confirmpass,
@@ -197,16 +198,16 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
                       : Icons.visibility)),
               obscureText: _copassobsecure,
             ),
-            const SizedBox(
-              height: 21,
+            SizedBox(
+              height: 21.h,
             ),
             CustomPrimaryButton(
                 text: AppLocalizations.of(context)!.submit,
                 onPressed: () {
                   performSubmit();
                 }),
-            const SizedBox(
-              height: 66,
+            SizedBox(
+              height: 66.h,
             ),
           ],
         ),

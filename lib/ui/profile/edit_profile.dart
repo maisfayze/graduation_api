@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -120,10 +121,10 @@ class _EditProfileState extends State<EditProfile> {
         children: [
           Padding(
             padding: EdgeInsets.only(
-              top: 143,
-              right: 46,
-              left: 46,
-              bottom: 16,
+              top: 143.h,
+              right: 46.w,
+              left: 46.w,
+              bottom: 16.h,
             ),
             child: ListView(
               key: _formKey,
@@ -133,50 +134,50 @@ class _EditProfileState extends State<EditProfile> {
                   'First Name',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: Colors.black,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 CustomTextFiled(
                   controller: _fname,
                   type: TextInputType.text,
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 16.h,
                 ),
                 //last name
                 Text(
                   'last Name',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: Colors.black,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 CustomTextFiled(
                   controller: _Lname,
                   type: TextInputType.text,
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 16.h,
                 ),
                 //DateOfBirth
                 Text(
                   'Date of Birth',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: Colors.black,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 CustomTextFiled(
                   controller: _date,
@@ -203,19 +204,19 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 16.h,
                 ),
                 //Blood
                 Text(
                   'Blood Type',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: Colors.black,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 DropdownButtonFormField(
                   elevation: 20,
@@ -223,13 +224,13 @@ class _EditProfileState extends State<EditProfile> {
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 35),
                       constraints: BoxConstraints(
-                        maxHeight: 60,
-                        minHeight: 60,
+                        maxHeight: 60.h,
+                        minHeight: 60.h,
                       ),
 
                       // contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 34),
                       hintStyle: GoogleFonts.poppins(
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.normal,
                           color: Colors.grey),
                       filled: true,
@@ -238,27 +239,27 @@ class _EditProfileState extends State<EditProfile> {
                       border: InputBorder.none,
                       enabledBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xffe7e7e7), width: 1),
-                        borderRadius: BorderRadius.circular(80),
+                            BorderSide(color: Color(0xffe7e7e7), width: 1.w),
+                        borderRadius: BorderRadius.circular(80.r),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Constant.primaryColor, width: 1),
-                        borderRadius: BorderRadius.circular(80),
+                        borderRadius: BorderRadius.circular(80.r),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.red, width: 1),
-                        borderRadius: BorderRadius.circular(80),
+                        borderRadius: BorderRadius.circular(80.r),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.red, width: 1),
-                        borderRadius: BorderRadius.circular(80),
+                        borderRadius: BorderRadius.circular(80.r),
                       ),
-                      errorStyle: GoogleFonts.poppins(fontSize: 12)),
+                      errorStyle: GoogleFonts.poppins(fontSize: 12.sp)),
 
                   isExpanded: true,
                   hint: Text('Select Blood'),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.r),
                   dropdownColor: Colors.white,
                   itemHeight: 48,
                   focusColor: Colors.pink,
@@ -278,38 +279,38 @@ class _EditProfileState extends State<EditProfile> {
                   },
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 16.h,
                 ),
                 //Email
                 Text(
                   'Email',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: Colors.black,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 CustomTextFiled(
                   controller: _email,
                   type: TextInputType.emailAddress,
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 16.h,
                 ),
                 //Mobile
                 Text(
                   'Phone Number',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: Colors.black,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 MobileTextFiled(
                   type: TextInputType.phone,
@@ -317,83 +318,83 @@ class _EditProfileState extends State<EditProfile> {
                   counter: 10,
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 16.h,
                 ),
                 //Address
                 Text(
                   'Address',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: Colors.black,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 CustomTextFiled(
                   controller: _fname,
                   type: TextInputType.text,
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 16.h,
                 ),
                 //City
                 Text(
                   'City',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: Colors.black,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 CustomTextFiled(
                   controller: _city,
                   type: TextInputType.text,
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 16.h,
                 ),
                 //State
                 Text(
                   'State',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: Colors.black,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 CustomTextFiled(
                   controller: _state,
                   type: TextInputType.text,
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 16.h,
                 ),
                 //Country
                 Text(
                   'Country',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: Colors.black,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 CustomTextFiled(
                   controller: _country,
                   type: TextInputType.text,
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 16.h,
                 ),
                 CustomPrimaryButton(text: 'Update', onPressed: () {}),
               ],
@@ -406,26 +407,26 @@ class _EditProfileState extends State<EditProfile> {
             child: Center(
               child: _imageFile == null
                   ? Container(
-                      width: 110.0,
-                      height: 110.0,
+                      width: 110.0.w,
+                      height: 110.0.h,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(
                                 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
                             fit: BoxFit.contain),
                         color: Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(70)),
+                        borderRadius: BorderRadius.all(Radius.circular(70.r)),
                       ),
                     )
                   : Container(
-                      width: 110.0,
-                      height: 110.0,
+                      width: 110.0.w,
+                      height: 110.0.h,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             image: FileImage(File(_imageFile!.path)),
                             fit: BoxFit.cover),
                         color: Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(70)),
+                        borderRadius: BorderRadius.all(Radius.circular(70.r)),
                       ),
                     ),
             ),
@@ -435,13 +436,13 @@ class _EditProfileState extends State<EditProfile> {
           //   left: 151,
           //   top: -10,
           //   child: Container(
-          //     height: 110.0,
-          //     width: 110.0,
+          //     height: 110.0.h,
+          //     width: 110.0.w,
           //     decoration: BoxDecoration(
           //       borderRadius: BorderRadius.circular(55)
           //     ),
           //     // child: CircleAvatar(
-          //     //   radius: 55,
+          //     //   radius: 55.r,
           //     //   // backgroundImage: _imageFile != null
           //     //   //     ? AssetImage('images/profile.jpg')
           //     //   //     : FileImage(File(_imageFile.path)),
@@ -449,14 +450,14 @@ class _EditProfileState extends State<EditProfile> {
           //   ),
           // ),
           Positioned(
-            right: 110,
-            left: 220,
-            top: 100,
+            right: 110.w,
+            left: 220.w,
+            top: 100.h,
             child: InkWell(
               onTap: _pickImage,
               child: Container(
-                width: 21,
-                height: 21,
+                width: 21.w,
+                height: 21.h,
                 child: Image.asset('images/pen.png'),
               ),
             ),

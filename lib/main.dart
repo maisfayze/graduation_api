@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:graduation/provider/fav_provider.dart';
 import 'package:graduation/provider/localization_provider.dart';
 import 'package:graduation/ui/auth/auth.dart';
 import 'package:graduation/ui/auth/doc_signup.dart';
@@ -11,6 +13,7 @@ import 'package:graduation/ui/auth/reset.dart';
 import 'package:graduation/ui/onBoarding/onboarding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/ui/patient/PatientBtn/btn_patient.dart';
+import 'package:graduation/ui/patient/my_favourite.dart';
 import 'package:graduation/ui/patient/specialities.dart';
 import 'package:graduation/ui/patient/top_doctors.dart';
 import 'package:graduation/ui/profile/edit_profile.dart';
@@ -20,7 +23,11 @@ import 'package:graduation/ui/profile/profile_setting.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<FavouriteProvider>(
+      create: (context) => FavouriteProvider(),
+    )
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -32,42 +39,50 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<LocalizationProvider>(
       create: (context) => LocalizationProvider(),
       builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          //***************localization**************//
-          // localizationsDelegates: [
-          //   AppLocalizations.delegate,
-          //   GlobalMaterialLocalizations.delegate,
-          //   GlobalCupertinoLocalizations.delegate,
-          //   GlobalWidgetsLocalizations.delegate,
-          // ],
-          // supportedLocales: [
-          //   Locale('en'),
-          //   Locale('ar'),
-          // ],
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
-          locale: Locale(
-              Provider.of<LocalizationProvider>(context, listen: true)
-                  .languages),
-          title: 'Flutter Demo',
-          initialRoute: BtnPatient.id,
-          routes: {
-            OnBoarding.id: (context) => OnBoarding(),
-            Auth.id: (context) => Auth(),
-            GetStarted.id: (context) => GetStarted(),
-            LoginPage.id: (context) => LoginPage(),
-            PatientSignUp.id: (context) => PatientSignUp(),
-            DocSignUp.id: (context) => DocSignUp(),
-            ForgotScreen.id: (context) => ForgotScreen(),
-            ResetScreen.id: (context) => ResetScreen(),
-            BtnPatient.id: (context) => BtnPatient(),
-            Specialities.id: (context) => Specialities(),
-            TopDoctors.id: (context) => TopDoctors(),
-            Profile.id: (context) => Profile(),
-            ProfileSetting.id: (context) => ProfileSetting(),
-            EditProfile.id: (context) => EditProfile(),
-            NewPassword.id: (context) => NewPassword(),
+        return ScreenUtilInit(
+          designSize: const Size(414, 896),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (context, child) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              //***************localization**************//
+              // localizationsDelegates: [
+              //   AppLocalizations.delegate,
+              //   GlobalMaterialLocalizations.delegate,
+              //   GlobalCupertinoLocalizations.delegate,
+              //   GlobalWidgetsLocalizations.delegate,
+              // ],
+              // supportedLocales: [
+              //   Locale('en'),
+              //   Locale('ar'),
+              // ],
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: Locale(
+                  Provider.of<LocalizationProvider>(context, listen: true)
+                      .languages),
+              title: 'Flutter Demo',
+              initialRoute: OnBoarding.id,
+              routes: {
+                OnBoarding.id: (context) => OnBoarding(),
+                Auth.id: (context) => Auth(),
+                GetStarted.id: (context) => GetStarted(),
+                LoginPage.id: (context) => LoginPage(),
+                PatientSignUp.id: (context) => PatientSignUp(),
+                DocSignUp.id: (context) => DocSignUp(),
+                ForgotScreen.id: (context) => ForgotScreen(),
+                ResetScreen.id: (context) => ResetScreen(),
+                BtnPatient.id: (context) => BtnPatient(),
+                Specialities.id: (context) => Specialities(),
+                TopDoctors.id: (context) => TopDoctors(),
+                Profile.id: (context) => Profile(),
+                ProfileSetting.id: (context) => ProfileSetting(),
+                EditProfile.id: (context) => EditProfile(),
+                NewPassword.id: (context) => NewPassword(),
+                Favourites.id: (context) => Favourites(),
+              },
+            );
           },
         );
       },

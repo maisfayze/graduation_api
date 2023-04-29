@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -40,43 +41,43 @@ class SearchBar extends StatelessWidget {
                     .languages ==
                 'en'
             ? Padding(
-                padding: EdgeInsets.only(left: 24, right: 8),
+                padding: EdgeInsets.only(left: 24.w, right: 8.w),
                 child: prefixIcon,
               )
             : Padding(
-                padding: EdgeInsets.only(left: 8, right: 24),
+                padding: EdgeInsets.only(left: 8.w, right: 24.w),
                 child: prefixIcon,
               ),
         contentPadding: EdgeInsets.zero,
         constraints: BoxConstraints(
-          maxHeight: 57,
-          minHeight: 57,
+          maxHeight: 57.h,
+          minHeight: 57.h,
         ),
 
         // contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 34),
         hintStyle: GoogleFonts.poppins(
-            fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey),
-        filled: true,
-        fillColor: Constant.textFiledColor,
+            fontSize: 16.sp, fontWeight: FontWeight.normal, color: Colors.grey),
+        // filled: true,
+        // fillColor: Constant.textFiledColor,
         counterText: '',
         border: InputBorder.none,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Color(0xffe7e7e7), width: 1),
-          borderRadius: BorderRadius.circular(80),
+          borderRadius: BorderRadius.circular(80.r),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Constant.primaryColor, width: 1),
-          borderRadius: BorderRadius.circular(80),
+          borderRadius: BorderRadius.circular(80.r),
         ),
         // focusedErrorBorder: OutlineInputBorder(
         //   borderSide: BorderSide(color: Colors.red, width: 1),
-        //   borderRadius: BorderRadius.circular(80),
+        //   borderRadius: BorderRadius.circular(80.r),
         // ),
         // errorBorder: OutlineInputBorder(
         //   borderSide: BorderSide(color: Colors.red, width: 1),
-        //   borderRadius: BorderRadius.circular(80),
+        //   borderRadius: BorderRadius.circular(80.r),
         // ),
-        // errorStyle: GoogleFonts.poppins(fontSize: 12)
+        // errorStyle: GoogleFonts.poppins(fontSize: 12.sp)
       ),
       // maxLength: counter,
     );

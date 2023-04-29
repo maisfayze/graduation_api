@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -22,7 +23,7 @@ class SeeALLRow extends StatelessWidget {
           "$title",
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: 18.sp,
             color: Colors.black,
           ),
         ),
@@ -33,7 +34,7 @@ class SeeALLRow extends StatelessWidget {
             AppLocalizations.of(context)!.see_all,
             style: GoogleFonts.poppins(
               fontWeight: FontWeight.w500,
-              fontSize: 14,
+              fontSize: 14.sp,
               color: Constant.primaryColor,
             ),
           ),

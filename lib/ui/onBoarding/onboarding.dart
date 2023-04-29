@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/ui/auth/auth.dart';
 import 'package:provider/provider.dart';
@@ -65,7 +66,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                           color: Color(0xff8B8989),
-                          fontSize: 17,
+                          fontSize: 17.sp,
                           fontWeight: FontWeight.w500),
                     ),
                   ),
@@ -76,7 +77,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                           color: Color(0xff8B8989),
-                          fontSize: 17,
+                          fontSize: 17.sp,
                           fontWeight: FontWeight.w500),
                     ),
                   ),
@@ -111,7 +112,7 @@ class _OnBoardingState extends State<OnBoarding> {
               ),
             ),
             SizedBox(
-              height: 82,
+              height: 82.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -130,10 +131,10 @@ class _OnBoardingState extends State<OnBoarding> {
               ],
             ),
             SizedBox(
-              height: 15,
+              height: 15.h,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 46),
+              padding: EdgeInsets.symmetric(horizontal: 46.w),
               child: CustomPrimaryButton(
                 text: _currentPage < 2
                     ? AppLocalizations.of(context)!.next
@@ -146,7 +147,7 @@ class _OnBoardingState extends State<OnBoarding> {
               ),
             ),
             SizedBox(
-              height: 66,
+              height: 66.h,
             ),
           ],
         ),

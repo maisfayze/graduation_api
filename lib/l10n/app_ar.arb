@@ -73,8 +73,17 @@
   "find_the_best_clinic_and_doctor": "اعثر على أفضل عيادة وطبيب",
   "see_all": "عرض الكل",
   "blogs": "المقالات",
-  "read_more": "اقرا المزيد"
-
-
-
+  "read_more": "اقرا المزيد",
+  "change_Language": "تغيير اللغة",
+  "complaints_box": "صندوق الشكاوى",
+  "about_Us": "نبذة عنا",
+  "favourites": "المفضلة",
+  "chang_your_password_easily": "قم بتغيير كلمة المرور بسهولة",
+  "pricing_plan": "خطة التسعير",
+  "asked_questions": "الاسئلة الشائعة",
+  "client_Sayings": "اراء العملاء",
+  "first_name": "الاسم الاول",
+  "enter_first_name": "ادخل الاسم الاول",
+  "last_name": "الاسم الاخير",
+  "enter_last_name": "ادخل الاسم الاخير"
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +18,7 @@ class viewProfileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 24,
+      height: 24.h,
       width: 60,
       child: ElevatedButton(
         onPressed: onPressed,
@@ -26,7 +27,7 @@ class viewProfileButton extends StatelessWidget {
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
               color: Constant.primaryColor,
-              fontSize: 9,
+              fontSize: 9.sp,
               fontWeight: FontWeight.w600),
         ),
         style: ElevatedButton.styleFrom(
@@ -59,7 +60,7 @@ class viewProfileButton extends StatelessWidget {
                 width: 1.5,
                 color: Constant.primaryColor,
               ),
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(4.r),
             )),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
 import 'package:graduation/ui/auth/code.dart';
@@ -52,7 +53,7 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: 18.sp,
             color: Colors.black,
           ),
         ),
@@ -60,16 +61,16 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 46,
+        padding: EdgeInsets.symmetric(
+          horizontal: 46.w,
         ),
         child: ListView(key: _formKey, children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 34, vertical: 22),
+            padding: EdgeInsets.symmetric(horizontal: 34.w, vertical: 22.h),
             child: Image.asset(
               'images/forgot.png',
-              height: 257.9,
-              width: 251.36,
+              height: 257.9.h,
+              width: 251.36.w,
               matchTextDirection: true,
             ),
           ),
@@ -83,7 +84,7 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
               AppLocalizations.of(context)!.forgot,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w600,
-                fontSize: 30,
+                fontSize: 30.sp,
                 color: Colors.black,
               ),
             ),
@@ -92,19 +93,19 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
             padding: Provider.of<LocalizationProvider>(context, listen: true)
                         .languages ==
                     'en'
-                ? EdgeInsets.symmetric(horizontal: 12, vertical: 25)
-                : EdgeInsets.symmetric(horizontal: 12, vertical: 25),
+                ? EdgeInsets.symmetric(horizontal: 12.w, vertical: 25.h)
+                : EdgeInsets.symmetric(horizontal: 12.w, vertical: 25.h),
             child: Text(
               AppLocalizations.of(context)!.forgot_sub,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w400,
-                fontSize: 16,
+                fontSize: 16.sp,
                 color: Colors.grey,
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
+            padding: EdgeInsets.symmetric(horizontal: 12.h),
             child: MobileTextFiled(
               type: TextInputType.phone,
               controller: _mobile,
@@ -113,10 +114,10 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
             ),
           ),
           SizedBox(
-            height: 16,
+            height: 16.h,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
+            padding: EdgeInsets.symmetric(horizontal: 12.h),
             child: CustomPrimaryButton(
                 text: AppLocalizations.of(context)!.submit,
                 onPressed: () {

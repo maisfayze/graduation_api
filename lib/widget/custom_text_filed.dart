@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -55,41 +56,43 @@ class CustomTextFiled extends StatelessWidget {
             padding: Provider.of<LocalizationProvider>(context, listen: true)
                         .languages ==
                     'en'
-                ? EdgeInsets.only(right: 34, top: 0, bottom: 0)
-                : EdgeInsets.only(left: 34, top: 0, bottom: 0),
+                ? EdgeInsets.only(right: 34.w, top: 0, bottom: 0)
+                : EdgeInsets.only(left: 34.w, top: 0, bottom: 0),
             child: suffixIcon,
           ),
           contentPadding: EdgeInsets.zero,
           constraints: BoxConstraints(
             maxHeight: errorText == null ? 60 : 85,
-            minHeight: 60,
+            minHeight: 60.h,
           ),
 
           // contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 34),
           hintStyle: GoogleFonts.poppins(
-              fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey),
-          filled: true,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.normal,
+              color: Colors.grey),
+          filled: false,
           errorText: errorText,
-          fillColor: Constant.textFiledColor,
+          // fillColor: Constant.textFiledColor,
           counterText: '',
           border: InputBorder.none,
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Color(0xffe7e7e7), width: 1),
-            borderRadius: BorderRadius.circular(80),
+            borderRadius: BorderRadius.circular(80.r),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Constant.primaryColor, width: 1),
-            borderRadius: BorderRadius.circular(80),
+            borderRadius: BorderRadius.circular(80.r),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.red, width: 1),
-            borderRadius: BorderRadius.circular(80),
+            borderRadius: BorderRadius.circular(80.r),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.red, width: 1),
-            borderRadius: BorderRadius.circular(80),
+            borderRadius: BorderRadius.circular(80.r),
           ),
-          errorStyle: GoogleFonts.poppins(fontSize: 12)
+          errorStyle: GoogleFonts.poppins(fontSize: 12.sp)
           // border: UnderlineInputBorder(
           //   borderSide: BorderSide(color: Color(0xffe7e7e7), width: 1),
           // ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -24,11 +25,12 @@ class SocialMediaButton extends StatelessWidget {
           ? Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 28.w, vertical: 14.h),
                   child: Image.asset(
                     'images/$imgName.png',
-                    width: 25,
-                    height: 24,
+                    width: 25.w,
+                    height: 24.h,
                   ),
                 ),
                 Text(
@@ -36,7 +38,7 @@ class SocialMediaButton extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                     color: Colors.black,
                   ),
                 ),
@@ -45,30 +47,31 @@ class SocialMediaButton extends StatelessWidget {
           : Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
                   child: Text(
                     text,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w600,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: Colors.black,
                     ),
                   ),
                 ),
                 Image.asset(
                   'images/$imgName.png',
-                  width: 25,
-                  height: 24,
+                  width: 25.w,
+                  height: 24.h,
                 ),
               ],
             ),
-      height: 59,
+      height: 59.h,
       decoration: BoxDecoration(
         border: Border.all(
           color: Color(0xffD8D8D8),
         ),
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(50.r),
       ),
     );
   }

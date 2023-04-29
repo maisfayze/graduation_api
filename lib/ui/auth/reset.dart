@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
 import 'package:graduation/ui/auth/code.dart';
@@ -73,7 +74,7 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
-            fontSize: 18,
+            fontSize: 18.sp,
             color: Colors.black,
           ),
         ),
@@ -81,16 +82,16 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 46,
+        padding: EdgeInsets.symmetric(
+          horizontal: 46.w,
         ),
         child: ListView(children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 34, vertical: 22),
             child: Image.asset(
               'images/reset.png',
-              height: 257.9,
-              width: 251.36,
+              height: 257.9.h,
+              width: 251.36.w,
               matchTextDirection: true,
             ),
           ),
@@ -98,36 +99,36 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
             padding: Provider.of<LocalizationProvider>(context, listen: true)
                         .languages ==
                     'en'
-                ? EdgeInsets.only(left: 20, right: 55)
-                : EdgeInsets.only(left: 55, right: 20),
+                ? EdgeInsets.only(left: 20.w, right: 55.w)
+                : EdgeInsets.only(left: 55.w, right: 20.w),
             child: Text(
               AppLocalizations.of(context)!.reset,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w600,
-                fontSize: 30,
+                fontSize: 30.sp,
                 color: Colors.black,
               ),
             ),
           ),
           SizedBox(
-            height: 32,
+            height: 32.h,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Text(
               AppLocalizations.of(context)!.new_pass,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w600,
-                fontSize: 18,
+                fontSize: 18.sp,
                 color: Colors.black,
               ),
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 10.h,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: CustomTextFiled(
               controller: _pass,
               type: TextInputType.text,
@@ -150,21 +151,21 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
             height: 30,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Text(
               AppLocalizations.of(context)!.confirm_new,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w600,
-                fontSize: 18,
+                fontSize: 18.sp,
                 color: Colors.black,
               ),
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 10.h,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: CustomTextFiled(
               controller: _confirmpass,
               type: TextInputType.text,
@@ -185,10 +186,10 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
             ),
           ),
           SizedBox(
-            height: 18,
+            height: 18.h,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: CustomPrimaryButton(
                 text: AppLocalizations.of(context)!.submit,
                 onPressed: () {
@@ -196,7 +197,7 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
                 }),
           ),
           SizedBox(
-            height: 66,
+            height: 66.h,
           ),
         ]),
       ),

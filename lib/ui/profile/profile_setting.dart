@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -45,11 +46,11 @@ class ProfileSetting extends StatelessWidget {
           Column(
             children: <Widget>[
               Container(
-                height: 100.0,
+                height: 10.0.h,
                 color: Constant.primaryColor,
               ),
               SizedBox(
-                height: 54,
+                height: 54.h,
               ),
               Expanded(
                 child: Container(
@@ -62,7 +63,7 @@ class ProfileSetting extends StatelessWidget {
                             'Ahmad hamad',
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w600,
-                              fontSize: 16,
+                              fontSize: 16.sp,
                               color: Colors.black,
                             ),
                           ),
@@ -70,15 +71,15 @@ class ProfileSetting extends StatelessWidget {
                             'ahmad.188@hotmail.com',
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w400,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               color: Colors.grey,
                             ),
                           ),
                         ],
                       ),
                       Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 40, vertical: 85),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 40.w, vertical: 85.h),
                         child: Column(
                           children: [
                             ProfileSett(
@@ -88,7 +89,7 @@ class ProfileSetting extends StatelessWidget {
                               onPresseed: () {},
                             ),
                             SizedBox(
-                              height: 24,
+                              height: 24.h,
                             ),
                             ProfileSett(
                               img: 'pass',
@@ -109,10 +110,10 @@ class ProfileSetting extends StatelessWidget {
           Positioned(
             top: 42.0, // (background container size) - (circle height / 2)
             child: Container(
-              height: 110.0,
-              width: 110.0,
+              height: 110.0.h,
+              width: 110.0.w,
               child: CircleAvatar(
-                radius: 55,
+                radius: 55.r,
                 backgroundImage: AssetImage('images/profile.jpg'),
               ),
               decoration:

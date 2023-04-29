@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/constant.dart';
@@ -20,14 +21,14 @@ class CustomPrimaryButton extends StatelessWidget {
         '$text',
         textAlign: TextAlign.center,
         style: GoogleFonts.poppins(
-            color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
+            color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.w500),
       ),
       style: ElevatedButton.styleFrom(
           shadowColor: Colors.transparent,
-          minimumSize: Size(double.infinity, 59),
+          minimumSize: Size(double.infinity, 59.h),
           backgroundColor: Constant.primaryColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(60),
+            borderRadius: BorderRadius.circular(60.r),
           )),
     );
   }
