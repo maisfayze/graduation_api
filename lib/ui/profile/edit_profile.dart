@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 import '../../constant/constant.dart';
-import '../../models/country.dart';
+import '../../models/blood.dart';
 import '../../widget/customPrimaryButton.dart';
 import '../../widget/custom_text_filed.dart';
 import '../../provider/localization_provider.dart';
@@ -73,7 +73,7 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   int? _selectedBlood;
-  final List<Blood> _countries = <Blood>[
+  final List<Blood> _blood = <Blood>[
     Blood(id: 1, title: 'A-'),
     Blood(id: 2, title: 'A+'),
     Blood(id: 3, title: 'B-'),
@@ -267,7 +267,7 @@ class _EditProfileState extends State<EditProfile> {
                   //   height: 0,
                   // ),
                   value: _selectedBlood,
-                  items: _countries
+                  items: _blood
                       .map((Blood) => DropdownMenuItem<int>(
                             child: Text(Blood.title),
                             value: Blood.id,

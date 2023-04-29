@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
 import 'package:graduation/widget/search_bar.dart';
 
+import '../../models/spec.dart';
+
 class Specialities extends StatefulWidget {
   const Specialities({Key? key}) : super(key: key);
   static const id = 'Specialities';
@@ -28,6 +30,16 @@ class _SpecialitiesState extends State<Specialities> {
     _searchController.dispose();
     super.dispose();
   }
+
+  final List<SpecialitiesModel> _specialities = <SpecialitiesModel>[
+    SpecialitiesModel(img: 'images/den.png', title: 'Dentist'),
+    SpecialitiesModel(img: 'images/cardiology.png', title: 'Cardiology'),
+    SpecialitiesModel(img: 'images/Dermatology.png', title: 'Dermatology'),
+    SpecialitiesModel(img: 'images/Hematology.png', title: 'Hematology'),
+    SpecialitiesModel(img: 'images/Obstetrics.png', title: 'Obstetrics'),
+    SpecialitiesModel(img: 'images/Orthopedics.png', title: 'Orthopedics'),
+    SpecialitiesModel(img: 'images/Urology.png', title: 'Urology'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +98,7 @@ class _SpecialitiesState extends State<Specialities> {
                     mainAxisSpacing: 20,
                     childAspectRatio: .9,
                     crossAxisCount: 3),
-                itemCount: 20,
+                itemCount: _specialities.length,
                 itemBuilder: (context, index) {
                   return Container(
                     width: 80,
@@ -102,7 +114,7 @@ class _SpecialitiesState extends State<Specialities> {
                               BoxConstraints(maxHeight: 80, maxWidth: 80),
                           child: Center(
                               child: Image.asset(
-                            'images/test.png',
+                            "${_specialities[index].img}",
                             height: 50,
                             width: 50,
                           )),
@@ -114,7 +126,7 @@ class _SpecialitiesState extends State<Specialities> {
                           height: 6,
                         ),
                         Text(
-                          'Dentist',
+                          _specialities[index].title,
                           style: GoogleFonts.poppins(
                               fontSize: 14,
                               fontWeight: FontWeight.normal,

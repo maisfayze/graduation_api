@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/constant/constant.dart';
-import 'package:graduation/models/country.dart';
+import 'package:graduation/models/blood.dart';
 import 'package:graduation/ui/auth/patient_sign_up.dart';
 import 'package:provider/provider.dart';
 
