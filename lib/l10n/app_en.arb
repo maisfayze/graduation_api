@@ -65,7 +65,10 @@
   "cancel": "Cancel",
   "log_out_of_your_account": "Log out of your account ?",
   "edit_personal_information": "Edit personal information",
-  "change_password": "Change my password"
+  "change_password": "Change my password",
+  "create_new": "Create New Password ",
+  "create_new_sub_title": "Your new password must must be different from previous used passwords ",
+  "old_pass": "Old Password"
 
 
 
