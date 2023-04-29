@@ -18,7 +18,7 @@ class BtnPatient extends StatefulWidget {
 }
 
 class _BtnPatientState extends State<BtnPatient> {
-  int _selectedItem = 1;
+  int _selectedItem = 0;
 
   final List<BtnScreen> _screens = <BtnScreen>[
     const BtnScreen(title: 'Home', widget: PatientHome()),

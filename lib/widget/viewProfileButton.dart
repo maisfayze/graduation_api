@@ -18,7 +18,7 @@ class viewProfileButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 24,
-      width: 66,
+      width: 60,
       child: ElevatedButton(
         onPressed: onPressed,
         child: Text(

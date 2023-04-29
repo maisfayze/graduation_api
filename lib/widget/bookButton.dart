@@ -21,8 +21,8 @@ class BookButton extends StatelessWidget {
       width:
           Provider.of<LocalizationProvider>(context, listen: true).languages ==
                   'en'
-              ? 66
-              : 68,
+              ? 60
+              : 66,
       child: ElevatedButton(
         onPressed: onPressed,
         child: Text(

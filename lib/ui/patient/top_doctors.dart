@@ -39,7 +39,7 @@ class TopDoctors extends StatelessWidget {
         elevation: 0,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24),
+        padding: EdgeInsets.symmetric(horizontal: 20),
         child: ListView.builder(
           itemCount: 20,
           itemBuilder: (context, index) {
@@ -70,6 +70,7 @@ class TopDoctors extends StatelessWidget {
                         //     EdgeInsets.symmetric(horizontal: 18, vertical: 30),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Dr.Ruby Perin',

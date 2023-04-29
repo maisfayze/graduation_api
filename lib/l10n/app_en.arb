@@ -68,7 +68,11 @@
   "change_password": "Change my password",
   "create_new": "Create New Password ",
   "create_new_sub_title": "Your new password must must be different from previous used passwords ",
-  "old_pass": "Old Password"
+  "old_pass": "Old Password",
+  "find_the_best_clinic_and_doctor": "Find the best clinic and doctor",
+  "see_all": "See all",
+  "blogs": "Blogs",
+  "read_more": "Read more"
 
 
 
