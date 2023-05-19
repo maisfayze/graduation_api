@@ -4,8 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:graduation/ui/profile/new_pass.dart';
-import 'package:graduation/ui/profile/profile_setting.dart';
+
 import 'package:provider/provider.dart';
 
 import '../../constant/constant.dart';
@@ -13,9 +12,10 @@ import '../../provider/localization_provider.dart';
 import '../../widget/profile_widget.dart';
 import '../patient/my_favourite.dart';
 import 'edit_profile.dart';
+import 'new_pass.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+class PatientProfile extends StatelessWidget {
+  const PatientProfile({Key? key}) : super(key: key);
   static const id = 'Profile';
 
   @override
@@ -86,82 +86,102 @@ class Profile extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
-                            vertical: 40.h, horizontal: 40.w),
+                          vertical: 40.h,
+                        ),
                         child: Column(
                           children: [
                             ProfileWidget(
                               img: 'bill',
-                              title: AppLocalizations.of(context)!.my_billing,
-                              sub_title: AppLocalizations.of(context)!
-                                  .see_your_paid_pending,
+                              title: AppLocalizations.of(context)!.invoices,
+                              // sub_title: AppLocalizations.of(context)!
+                              //     .see_your_paid_pending,
                               onPresseed: () {},
                             ),
-                            SizedBox(
-                              height: 24.h,
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 12.h),
+                              child: Divider(
+                                color: Colors.grey.shade400,
+                                thickness: .2,
+                              ),
                             ),
                             ProfileWidget(
                               img: 'fav',
                               title:
                                   AppLocalizations.of(context)!.my_favourites,
-                              sub_title: AppLocalizations.of(context)!
-                                  .see_your_favorite_doctors,
+                              // sub_title: AppLocalizations.of(context)!
+                              //     .see_your_favorite_doctors,
                               onPresseed: () {
                                 Navigator.pushNamed(context, Favourites.id);
                               },
                             ),
-                            SizedBox(
-                              height: 24.h,
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 12.h),
+                              child: Divider(
+                                color: Colors.grey.shade400,
+                                thickness: .2,
+                              ),
                             ),
                             ProfileWidget(
                               img: 'profile_setting',
                               title:
                                   AppLocalizations.of(context)!.profile_setting,
-                              sub_title: AppLocalizations.of(context)!
-                                  .make_changes_to_your_account,
+                              // sub_title: AppLocalizations.of(context)!
+                              //     .make_changes_to_your_account,
                               onPresseed: () {
                                 Navigator.pushNamed(context, EditProfile.id);
                               },
                             ),
-                            SizedBox(
-                              height: 24.h,
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 12.h),
+                              child: Divider(
+                                color: Colors.grey.shade400,
+                                thickness: .2,
+                              ),
                             ),
                             ProfileWidget(
                               img: 'chang_pass',
                               title:
                                   AppLocalizations.of(context)!.change_password,
-                              sub_title: AppLocalizations.of(context)!
-                                  .chang_your_password_easily,
+                              // sub_title: AppLocalizations.of(context)!
+                              //     .chang_your_password_easily,
                               onPresseed: () {
                                 Navigator.pushNamed(context, NewPassword.id);
                               },
                             ),
-                            SizedBox(
-                              height: 24.h,
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 12.h),
+                              child: Divider(
+                                color: Colors.grey.shade400,
+                                thickness: .2,
+                              ),
                             ),
-                            InkWell(
-                              onTap: () {
-                                buildShowDialog(context);
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    Icons.logout,
-                                    color: Color(0xffDE1C1C),
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  Text(
-                                    AppLocalizations.of(context)!.log_out,
-                                    style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18.sp,
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 40.0.w),
+                              child: InkWell(
+                                onTap: () {
+                                  buildShowDialog(context);
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.logout,
                                       color: Color(0xffDE1C1C),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Text(
+                                      AppLocalizations.of(context)!.log_out,
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18.sp,
+                                        color: Color(0xffDE1C1C),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             )
                           ],
@@ -175,7 +195,7 @@ class Profile extends StatelessWidget {
           ),
           // Profile image
           Positioned(
-            top: 110.0.h, // (background container size) - (circle height / 2)
+            top: 140.0.h, // (background container size) - (circle height / 2)
             child: Container(
               height: 110.0.h.h,
               width: 110.0.w,

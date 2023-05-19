@@ -121,7 +121,7 @@ class _EditProfileState extends State<EditProfile> {
         children: [
           Padding(
             padding: EdgeInsets.only(
-              top: 143.h,
+              top: 150.h,
               right: 46.w,
               left: 46.w,
               bottom: 16.h,
@@ -402,8 +402,8 @@ class _EditProfileState extends State<EditProfile> {
           ),
           Positioned(
             top: 5,
-            right: 120,
-            left: 120,
+            right: 120.w,
+            left: 120.w,
             child: Center(
               child: _imageFile == null
                   ? Container(
@@ -431,24 +431,6 @@ class _EditProfileState extends State<EditProfile> {
                     ),
             ),
           ),
-          // Positioned(
-          //   right: 151,
-          //   left: 151,
-          //   top: -10,
-          //   child: Container(
-          //     height: 110.0.h,
-          //     width: 110.0.w,
-          //     decoration: BoxDecoration(
-          //       borderRadius: BorderRadius.circular(55)
-          //     ),
-          //     // child: CircleAvatar(
-          //     //   radius: 55.r,
-          //     //   // backgroundImage: _imageFile != null
-          //     //   //     ? AssetImage('images/profile.jpg')
-          //     //   //     : FileImage(File(_imageFile.path)),
-          //     // ),
-          //   ),
-          // ),
           Positioned(
             right: 110.w,
             left: 220.w,

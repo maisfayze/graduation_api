@@ -14,6 +14,7 @@ import '../../../widget/drawer_widget.dart';
 import '../../../widget/search_bar.dart';
 import '../../../widget/see_all_row.dart';
 import '../../../widget/viewProfileButton.dart';
+import '../blogs.dart';
 import '../specialities.dart';
 import '../top_doctors.dart';
 
@@ -117,10 +118,10 @@ class _PatientHomeState extends State<PatientHome> {
                 SizedBox(
                   height: 16.h,
                 ),
-                SearchBar(
+                SearchBarWidget(
                     type: TextInputType.text,
                     controller: _searchController,
-                    hint: AppLocalizations.of(context)!.search_title,
+                    hint: AppLocalizations.of(context)!.search_clinic_doctor,
                     prefixIcon: Icon(
                       Icons.search,
                       color: Colors.grey,
@@ -135,15 +136,16 @@ class _PatientHomeState extends State<PatientHome> {
                   },
                 ),
                 ConstrainedBox(
-                  constraints: BoxConstraints(maxHeight: 108.h),
+                  constraints:
+                      BoxConstraints(maxHeight: 108.h, minWidth: 108.h),
                   child: ListView.builder(
                     itemCount: _specialities.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return Container(
-                        margin: EdgeInsets.only(right: 20.w),
+                        margin: EdgeInsets.only(right: 15.w),
                         width: 80.w,
-                        height: 10.h,
+                        height: 15.h,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -155,10 +157,10 @@ class _PatientHomeState extends State<PatientHome> {
                                   maxHeight: 77.h, maxWidth: 77.w),
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(50.r),
+                                borderRadius: BorderRadius.circular(100.r),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Color(0xff6B7280).withOpacity(0.1),
+                                    color: Color(0xff6B7280).withOpacity(0.06),
                                     spreadRadius: 3,
                                     blurRadius: 3,
                                     // changes position of shadow
@@ -175,7 +177,7 @@ class _PatientHomeState extends State<PatientHome> {
                               )),
                             ),
                             SizedBox(
-                              height: 6.h,
+                              height: 10.h,
                             ),
                             Text(
                               _specialities[index].title,
@@ -191,7 +193,7 @@ class _PatientHomeState extends State<PatientHome> {
                   ),
                 ),
                 SizedBox(
-                  height: 22.h,
+                  height: 20.h,
                 ),
                 //top
                 SeeALLRow(
@@ -208,14 +210,15 @@ class _PatientHomeState extends State<PatientHome> {
                     itemBuilder: (context, index) {
                       return Container(
                         margin: EdgeInsets.only(right: 12),
-                        width: 163,
-                        height: 250,
+                        width: 163.w,
+                        height: 250.h,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.r),
                             border: Border.all(
-                                color: Colors.grey.shade400, width: .5)),
+                                color: Colors.grey.shade400, width: .5.w)),
                         child: Padding(
-                          padding: EdgeInsets.all(16),
+                          padding: EdgeInsets.only(
+                              right: 16.w, top: 16.h, left: 16.w, bottom: 16.h),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -224,8 +227,8 @@ class _PatientHomeState extends State<PatientHome> {
                                   borderRadius: BorderRadius.circular(10.r),
                                   child: Image.asset(
                                     'images/doctorw.jpg',
-                                    height: 95,
-                                    width: 131,
+                                    height: 95.h,
+                                    width: 131.w,
                                     fit: BoxFit.cover,
                                   )),
                               SizedBox(
@@ -253,12 +256,13 @@ class _PatientHomeState extends State<PatientHome> {
                               Row(
                                 children: [
                                   Container(
-                                    height: 13.5,
-                                    width: 33,
+                                    height: 13.5.h,
+                                    width: 33.w,
                                     decoration: BoxDecoration(
                                         color: Constant.primaryColor
                                             .withOpacity(0.2),
-                                        borderRadius: BorderRadius.circular(2)),
+                                        borderRadius:
+                                            BorderRadius.circular(2.r)),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -266,13 +270,13 @@ class _PatientHomeState extends State<PatientHome> {
                                         Icon(
                                           Icons.star,
                                           size: 8,
-                                          color: Colors.yellow,
+                                          color: Color(0xffF4C150),
                                         ),
                                         Text(
                                           '4.7',
                                           style: GoogleFonts.poppins(
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 8,
+                                            fontSize: 8.sp,
                                             color: Constant.primaryColor,
                                           ),
                                         ),
@@ -280,7 +284,7 @@ class _PatientHomeState extends State<PatientHome> {
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 30,
+                                    width: 30.w,
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -304,7 +308,7 @@ class _PatientHomeState extends State<PatientHome> {
                                 ],
                               ),
                               SizedBox(
-                                height: 14,
+                                height: 14.h,
                               ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -315,7 +319,7 @@ class _PatientHomeState extends State<PatientHome> {
                                     onPressed: () {},
                                   ),
                                   SizedBox(
-                                    width: 5,
+                                    width: 5.w,
                                   ),
                                   BookButton(
                                       text: AppLocalizations.of(context)!.book,
@@ -330,12 +334,14 @@ class _PatientHomeState extends State<PatientHome> {
                   ),
                 ),
                 SizedBox(
-                  height: 22,
+                  height: 20.h,
                 ),
                 //blogs
                 SeeALLRow(
                   title: AppLocalizations.of(context)!.blogs,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, Blogs.id);
+                  },
                 ),
                 ConstrainedBox(
                   constraints: BoxConstraints(maxHeight: 340.h),
@@ -350,17 +356,19 @@ class _PatientHomeState extends State<PatientHome> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.r),
                             border: Border.all(
-                                color: Colors.grey.shade400, width: .5)),
+                                color: Colors.grey.shade400, width: .5.w)),
                         child: Padding(
-                          padding: EdgeInsets.all(14),
+                          padding: EdgeInsets.only(
+                              right: 16.w, top: 16.h, left: 16.w, bottom: 16.h),
+                          // padding: EdgeInsets.all(14.r),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ClipRRect(
                                   borderRadius: BorderRadius.circular(10.r),
-                                  child: Image.asset(
-                                    'images/blogs2.jpg',
+                                  child: Image.network(
+                                    'https://blog.feedspot.com/wp-content/uploads/2018/04/Doctor-Blogs.jpg',
                                     height: 95.h,
                                     width: 179.w,
                                     fit: BoxFit.cover,

@@ -8,68 +8,58 @@ class ProfileWidget extends StatelessWidget {
     super.key,
     required this.img,
     required this.title,
-    required this.sub_title,
+    // required this.sub_title,
     required this.onPresseed,
   });
 
   final String img;
   final String title;
-  final String sub_title;
+  // final String sub_title;
   final Function() onPresseed;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Image.asset(
-                    'images/$img.png',
-                    width: 22.w,
-                    height: 17.h,
-                  ),
-                  SizedBox(
-                    width: 16.w,
-                  ),
-                  Text(
-                    title,
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18.sp,
-                      color: Colors.black,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 40.0.w),
+      child: InkWell(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Image.asset(
+                      'images/$img.png',
+                      width: 24.w,
+                      height: 20.h,
                     ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 36.w),
-                child: SizedBox(
-                  width: 220.w,
-                  child: Text(
-                    sub_title,
-                    style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12.sp,
-                      color: Color(0xffABABAB),
+                    SizedBox(
+                      width: 16.w,
                     ),
-                  ),
+                    Text(
+                      title,
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18.sp,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          Spacer(),
-          Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.grey,
-          ),
-        ],
+              ],
+            ),
+            Spacer(),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.grey.shade500,
+              size: 16,
+            ),
+          ],
+        ),
+        onTap: onPresseed,
       ),
-      onTap: onPresseed,
     );
   }
 }

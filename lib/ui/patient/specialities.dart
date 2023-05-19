@@ -79,10 +79,10 @@ class _SpecialitiesState extends State<Specialities> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.h),
-              child: SearchBar(
+              child: SearchBarWidget(
                   type: TextInputType.text,
                   controller: _searchController,
-                  hint: AppLocalizations.of(context)!.search_title,
+                  hint: AppLocalizations.of(context)!.search_spec,
                   prefixIcon: Icon(
                     Icons.search,
                     color: Colors.grey,
@@ -95,8 +95,8 @@ class _SpecialitiesState extends State<Specialities> {
               child: GridView.builder(
                 scrollDirection: Axis.vertical,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 30,
+                    // crossAxisSpacing: 16,
+                    // mainAxisSpacing: 30,
                     childAspectRatio: .8,
                     crossAxisCount: 3),
                 itemCount: _specialities.length,
@@ -124,7 +124,7 @@ class _SpecialitiesState extends State<Specialities> {
                             borderRadius: BorderRadius.circular(50.r),
                             boxShadow: [
                               BoxShadow(
-                                color: Color(0xff6B7280).withOpacity(0.1),
+                                color: Color(0xff6B7280).withOpacity(0.06),
                                 spreadRadius: 3,
                                 blurRadius: 3,
                                 // changes position of shadow

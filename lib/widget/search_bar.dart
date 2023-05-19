@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 import '../constant/constant.dart';
 import '../provider/localization_provider.dart';
 
-class SearchBar extends StatelessWidget {
-  SearchBar(
+class SearchBarWidget extends StatelessWidget {
+  SearchBarWidget(
       {super.key,
       this.counter,
       this.prefixIcon,
@@ -16,6 +16,7 @@ class SearchBar extends StatelessWidget {
       required this.type,
       required this.controller,
       this.hint});
+
   int? counter;
   Widget? prefixIcon;
   Widget? suffixIcon;
@@ -37,6 +38,7 @@ class SearchBar extends StatelessWidget {
               : TextDirection.rtl,
       decoration: InputDecoration(
         hintText: hint,
+
         prefixIcon: Provider.of<LocalizationProvider>(context, listen: true)
                     .languages ==
                 'en'
@@ -56,7 +58,9 @@ class SearchBar extends StatelessWidget {
 
         // contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 34),
         hintStyle: GoogleFonts.poppins(
-            fontSize: 16.sp, fontWeight: FontWeight.normal, color: Colors.grey),
+            fontSize: 16.sp,
+            fontWeight: FontWeight.normal,
+            color: Colors.grey.shade400),
         // filled: true,
         // fillColor: Constant.textFiledColor,
         counterText: '',

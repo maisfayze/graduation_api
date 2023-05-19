@@ -27,7 +27,7 @@ class OnBoardingContent extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 28.w),
           child: Image.asset(
             img,
-            height: 300,
+            height: 300.h,
             matchTextDirection: true,
           ),
         ),

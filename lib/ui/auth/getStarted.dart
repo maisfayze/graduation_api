@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/ui/auth/doc_signup.dart';
-import 'package:graduation/ui/auth/login.dart';
+import 'package:graduation/ui/auth/doctor_login.dart';
+import 'package:graduation/ui/auth/patient_login.dart';
 import 'package:graduation/ui/auth/patient_sign_up.dart';
 import 'package:provider/provider.dart';
 
@@ -100,7 +101,7 @@ class GetStarted extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 settings: RouteSettings(arguments: 1),
-                                builder: (context) => LoginPage(data: 1),
+                                builder: (context) => DoctorLoginPage(data: 1),
                               ),
                             );
                           } else {
@@ -108,7 +109,7 @@ class GetStarted extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 settings: RouteSettings(arguments: 2),
-                                builder: (context) => LoginPage(data: 2),
+                                builder: (context) => PatientLoginPage(data: 2),
                               ),
                             );
                           }

@@ -15,7 +15,7 @@ import '../auth/forget_pass.dart';
 import '../auth/getStarted.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../auth/login.dart';
+import '../auth/doctor_login.dart';
 import '../auth/patient_sign_up.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -119,11 +119,11 @@ class _OnBoardingState extends State<OnBoarding> {
               children: [
                 Indecator(
                   isCurrentPage: _currentPage == 0,
-                  marginEnd: 8,
+                  marginEnd: 8.w,
                 ),
                 Indecator(
                   isCurrentPage: _currentPage == 1,
-                  marginEnd: 8,
+                  marginEnd: 8.w,
                 ),
                 Indecator(
                   isCurrentPage: _currentPage == 2,

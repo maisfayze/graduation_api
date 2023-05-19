@@ -4,6 +4,7 @@ class DoctorModel {
   double rate;
   String spec;
   bool isfav;
+  String country;
   void toggle() {
     isfav = !isfav;
   }
@@ -13,5 +14,6 @@ class DoctorModel {
       required this.name,
       required this.rate,
       required this.spec,
+      required this.country,
       this.isfav = false});
 }

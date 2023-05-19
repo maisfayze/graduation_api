@@ -21,22 +21,48 @@ class TopDoctors extends StatefulWidget {
 class _TopDoctorsState extends State<TopDoctors> {
   final List<DoctorModel> _doctors = <DoctorModel>[
     DoctorModel(
-        img: 'images/doctorw.jpg', spec: 'Dentist', rate: 4.5, name: 'meme'),
+        img: 'images/doctorw.jpg',
+        spec: 'Dentist',
+        rate: 4.5,
+        name: 'meme',
+        country: 'Gaza'),
     DoctorModel(
-        img: 'images/blogs.jpg', spec: 'Cardiology', rate: 4.5, name: 'meme'),
+      img: 'images/blogs.jpg',
+      spec: 'Cardiology',
+      rate: 2,
+      name: 'meme',
+      country: 'Rafah',
+    ),
     DoctorModel(
         img: 'images/doctorw.jpg',
         spec: 'Dermatology',
+        rate: 3,
+        name: 'meme',
+        country: 'Rafah'),
+    DoctorModel(
+        img: 'images/blogs.jpg',
+        spec: 'Hematology',
+        rate: 3.5,
+        name: 'meme',
+        country: 'Nesiratee'),
+    DoctorModel(
+        img: 'images/doctorw.jpg',
+        spec: 'Obstetrics',
+        rate: 2.5,
+        name: 'meme',
+        country: 'MASER'),
+    DoctorModel(
+        img: 'images/blogs.jpg',
+        spec: 'Orthopedics',
         rate: 4.5,
-        name: 'meme'),
+        name: 'meme',
+        country: 'Germany'),
     DoctorModel(
-        img: 'images/blogs.jpg', spec: 'Hematology', rate: 4.5, name: 'meme'),
-    DoctorModel(
-        img: 'images/doctorw.jpg', spec: 'Obstetrics', rate: 4.5, name: 'meme'),
-    DoctorModel(
-        img: 'images/blogs.jpg', spec: 'Orthopedics', rate: 4.5, name: 'meme'),
-    DoctorModel(
-        img: 'images/doctorw.jpg', spec: 'Urology', rate: 4.5, name: 'meme'),
+        img: 'images/doctorw.jpg',
+        spec: 'Urology',
+        rate: 4.5,
+        name: 'meme',
+        country: 'ALzhra'),
   ];
 
   bool _fav = false;
@@ -164,7 +190,7 @@ class _TopDoctorsState extends State<TopDoctors> {
                                       Icon(
                                         Icons.star,
                                         size: 8,
-                                        color: Constant.primaryColor,
+                                        color: Color(0xffF4C150),
                                       ),
                                       Text(
                                         " ${_doctors![index].rate}",
@@ -190,7 +216,7 @@ class _TopDoctorsState extends State<TopDoctors> {
                                       color: Colors.grey.shade400,
                                     ),
                                     Text(
-                                      'Gaza',
+                                      _doctors![index].country,
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 10.sp,

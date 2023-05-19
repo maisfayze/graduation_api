@@ -48,7 +48,7 @@
   "not_match": "كلمات المرور غير متطابقة",
   "get_sub": "قم بتسجيل الدخول للاستمتاع بالميزات التي قدمناها",
    "specialities": "التخصصات",
-  "search_title": "ابحث ",
+  "search_spec": "ابحث عن التخصصات",
   "top": "افضل الاطباء",
   "book": "احجز الان",
    "view_profile": "عرض الملف الشخصي",
@@ -70,7 +70,7 @@
   "create_new": "إنشاء كلمة مرور جديدة ",
   "create_new_sub_title": "يجب أن تكون كلمة مرورك الجديدة مختلفة عن كلمات المرور السابقة",
   "old_pass": "كلمة المرور القديمة",
-  "find_the_best_clinic_and_doctor": "اعثر على أفضل عيادة وطبيب",
+  "find_the_best_clinic_and_doctor": "ابحث عن أفضل الأطباء والعيادات",
   "see_all": "عرض الكل",
   "blogs": "المقالات",
   "read_more": "اقرا المزيد",
@@ -85,5 +85,25 @@
   "first_name": "الاسم الاول",
   "enter_first_name": "ادخل الاسم الاول",
   "last_name": "الاسم الاخير",
-  "enter_last_name": "ادخل الاسم الاخير"
+  "enter_last_name": "ادخل الاسم الاخير",
+  "doctor_profile": "الملف الشخصي للطبيب",
+  "search_blogs": "  ابحث عن المقالات",
+  "search_clinic_doctor": "ابحث عن عيادة,دكتور",
+  "search_title": "ابحث",
+  "read_more": "قراءة المزيد",
+  "chat": "الدردشة",
+  "invoices": "الفواتير",
+  "dashboard": "لوحة معلومات الطبيب",
+  "appointments": "المواعيد",
+  "my_patients": "مرضاي",
+  "schedule_timings": "مواعيد المجدولة",
+  "reviews": "التقييمات",
+  "social_media": "وسائل التواصل الاجتماعي",
+  "search_patient": " ابحث عن المرضى"
+
+
+
+
+
+
 }

@@ -47,7 +47,7 @@
   "not_match": "Passwords doesn't match",
   "get_sub": "Login to enjoy the features we’ve provided ",
   "specialities": "Specialities",
-  "search_title": " Search",
+  "search_spec": " Search specialities",
   "top": "Top Doctors",
   "book": "Book Now",
   "view_profile": "View Profile",
@@ -69,7 +69,7 @@
   "create_new": "Create New Password ",
   "create_new_sub_title": "Your new password must must be different from previous used passwords ",
   "old_pass": "Old Password",
-  "find_the_best_clinic_and_doctor": "Find the best clinic and doctor",
+  "find_the_best_clinic_and_doctor": "Search best doctors and clinics",
   "see_all": "See all",
   "blogs": "Blogs",
   "read_more": "Read more",
@@ -84,6 +84,24 @@
   "first_name": "First Name",
   "enter_first_name": "Enter your first Name",
   "last_name": "Last Name",
-  "enter_last_name": "Enter your last Name"
+  "enter_last_name": "Enter your last Name",
+  "doctor_profile": "Doctor Profile",
+  "search_blogs": " Search blogs ",
+  "search_clinic_doctor": "Search clinic, doctor",
+   "search_title": "Search",
+  "read_more": "Read more",
+  "chat": "chat",
+  "invoices": "Invoices",
+  "dashboard": "Doctor Dashboard",
+  "appointments": "My Appointments",
+  "my_patients": "My Patients",
+  "schedule_timings": "Schedule Timings",
+  "reviews": "Reviews",
+  "social_media": "Social Media",
+  "search_patient": " Search patient"
+
+
+
+
 
 }
