@@ -20,6 +20,7 @@ import 'package:graduation/ui/auth/doctor_login.dart';
 import 'package:graduation/ui/auth/patient_login.dart';
 import 'package:graduation/ui/auth/patient_sign_up.dart';
 import 'package:graduation/ui/auth/reset.dart';
+import 'package:graduation/ui/booking/view_doc_profile.dart';
 import 'package:graduation/ui/onBoarding/onboarding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/ui/patient/PatientBtn/btn_patient.dart';
@@ -97,7 +98,7 @@ class MyApp extends StatelessWidget {
                   Provider.of<LocalizationProvider>(context, listen: true)
                       .languages),
               title: 'Flutter Demo',
-              initialRoute: OnBoarding.id,
+              initialRoute: ViewDoctorProfile.id,
               routes: {
                 OnBoarding.id: (context) => OnBoarding(),
                 Auth.id: (context) => Auth(),
@@ -124,6 +125,7 @@ class MyApp extends StatelessWidget {
                 EditDocProfile.id: (context) => EditDocProfile(),
                 ScheduleTimings.id: (context) => ScheduleTimings(),
                 IntervalPicker.id: (context) => IntervalPicker(),
+                ViewDoctorProfile.id: (context) => ViewDoctorProfile(),
               },
             );
           },
