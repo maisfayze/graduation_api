@@ -21,6 +21,7 @@ import 'package:graduation/ui/auth/patient_login.dart';
 import 'package:graduation/ui/auth/patient_sign_up.dart';
 import 'package:graduation/ui/auth/reset.dart';
 import 'package:graduation/ui/booking/booking.dart';
+import 'package:graduation/ui/booking/success.dart';
 import 'package:graduation/ui/booking/view_doc_profile.dart';
 import 'package:graduation/ui/onBoarding/onboarding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -128,6 +129,7 @@ class MyApp extends StatelessWidget {
                 IntervalPicker.id: (context) => IntervalPicker(),
                 ViewDoctorProfile.id: (context) => ViewDoctorProfile(),
                 Booking.id: (context) => Booking(),
+                Success.id: (context) => Success(),
               },
             );
           },
