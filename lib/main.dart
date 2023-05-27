@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:graduation/constant/constant.dart';
 import 'package:graduation/prefs/prefs.dart';
 import 'package:graduation/provider/fav_provider.dart';
 import 'package:graduation/provider/localization_provider.dart';
+import 'package:graduation/provider/search_filter_provider.dart';
 import 'package:graduation/ui/Doctor/DocBtn/btn_doc.dart';
 import 'package:graduation/ui/Doctor/doctorProfile/my_patient.dart';
 import 'package:graduation/ui/Doctor/doctorProfile/doctor_profile.dart';
@@ -23,6 +25,7 @@ import 'package:graduation/ui/auth/reset.dart';
 import 'package:graduation/ui/booking/booking.dart';
 import 'package:graduation/ui/booking/success.dart';
 import 'package:graduation/ui/booking/view_doc_profile.dart';
+import 'package:graduation/ui/filter.dart';
 import 'package:graduation/ui/onBoarding/onboarding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/ui/patient/PatientBtn/btn_patient.dart';
@@ -35,6 +38,8 @@ import 'package:graduation/ui/patientProfile/edit_profile.dart';
 import 'package:graduation/ui/patientProfile/new_pass.dart';
 import 'package:graduation/ui/patientProfile/profile.dart';
 import 'package:graduation/ui/patientProfile/profile_setting.dart';
+import 'package:graduation/ui/search_page.dart';
+import 'package:graduation/ui/splach.dart';
 import 'package:graduation/yarab.dart';
 
 import 'package:provider/provider.dart';
@@ -61,7 +66,10 @@ void main() async {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<FavouriteProvider>(
       create: (context) => FavouriteProvider(),
-    )
+    ),
+    ChangeNotifierProvider<FilterProvider>(
+      create: (context) => FilterProvider(),
+    ),
   ], child: MyApp()));
 }
 
@@ -82,6 +90,12 @@ class MyApp extends StatelessWidget {
           splitScreenMode: true,
           builder: (context, child) {
             return MaterialApp(
+              theme: ThemeData(
+                radioTheme: RadioThemeData(
+                  fillColor: MaterialStateColor.resolveWith(
+                      (states) => Constant.primaryColor),
+                ),
+              ),
               debugShowCheckedModeBanner: false,
               //***************localization**************//
               // localizationsDelegates: [
@@ -100,9 +114,12 @@ class MyApp extends StatelessWidget {
                   Provider.of<LocalizationProvider>(context, listen: true)
                       .languages),
               title: 'Flutter Demo',
-              initialRoute: OnBoarding.id,
+              initialRoute: SplachScreen.id,
               routes: {
+                SplachScreen.id: (context) => SplachScreen(),
                 OnBoarding.id: (context) => OnBoarding(),
+                SearchPage.id: (context) => SearchPage(),
+                FilterScreen.id: (context) => FilterScreen(),
                 Auth.id: (context) => Auth(),
                 GetStarted.id: (context) => GetStarted(),
                 DoctorLoginPage.id: (context) => DoctorLoginPage(),

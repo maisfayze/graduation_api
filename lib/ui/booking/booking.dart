@@ -276,7 +276,7 @@ class _BookingState extends State<Booking> {
                           alignment: Alignment.center,
                           child: Text(
                             '${event[index]}',
-                            style: TextStyle(
+                            style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.normal,
                                 color: _currentIndex == index
                                     ? Colors.white

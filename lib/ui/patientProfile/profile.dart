@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:graduation/prefs/prefs.dart';
 
 import 'package:provider/provider.dart';
 
@@ -16,35 +17,14 @@ import 'new_pass.dart';
 
 class PatientProfile extends StatelessWidget {
   const PatientProfile({Key? key}) : super(key: key);
-  static const id = 'Profile';
+  static const id = 'PatientProfile';
 
   @override
   Widget build(BuildContext context) {
+    String name = '${SharedPrefController().getValueFor('doctorName')}';
+
     return Scaffold(
       backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   shadowColor: Colors.transparent,
-      //   shape: Border(
-      //     bottom: BorderSide(
-      //       color: Constant.primaryColor,
-      //
-      //     ),
-      //   ),
-      //   foregroundColor: Constant.primaryColor,
-      //   surfaceTintColor: Constant.primaryColor,
-      //   elevation: 0,
-      //   leading: IconButton(
-      //     icon: Icon(
-      //       Icons.arrow_back_ios_sharp,
-      //       color: Colors.black,
-      //       size: 24,
-      //     ),
-      //     onPressed: () {
-      //       Navigator.pop(context);
-      //     },
-      //   ),
-      //   backgroundColor: Constant.primaryColor,
-      // ),
       body: Stack(
         alignment: Alignment.center,
         children: <Widget>[
@@ -67,7 +47,7 @@ class PatientProfile extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            'Ahmad hamad',
+                            name,
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w600,
                               fontSize: 16.sp,
@@ -75,7 +55,7 @@ class PatientProfile extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'ahmad.188@hotmail.com',
+                            SharedPrefController().getValueFor('email'),
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w400,
                               fontSize: 14.sp,
@@ -195,16 +175,24 @@ class PatientProfile extends StatelessWidget {
           ),
           // Profile image
           Positioned(
-            top: 140.0.h, // (background container size) - (circle height / 2)
+            top: 115.0.h, // (background container size) - (circle height / 2)
             child: Container(
-              height: 110.0.h.h,
+              alignment: Alignment.center,
               width: 110.0.w,
-              child: CircleAvatar(
-                radius: 55.r,
-                backgroundImage: AssetImage('images/profile.jpg'),
+              height: 110.0.h,
+              decoration: BoxDecoration(
+                image: SharedPrefController().getValueFor('image') == ''
+                    ? DecorationImage(
+                        image: NetworkImage(
+                            'http://painrehabproducts.com/wp-content/uploads/2014/10/facebook-default-no-profile-pic.jpg'),
+                        fit: BoxFit.cover)
+                    : DecorationImage(
+                        image: NetworkImage(
+                            'http://ac7a1ae098-001-site1.etempurl.com${SharedPrefController().getValueFor('image')}'),
+                        fit: BoxFit.cover),
+                color: Colors.blue,
+                borderRadius: BorderRadius.all(Radius.circular(100.r)),
               ),
-              decoration:
-                  BoxDecoration(shape: BoxShape.circle, color: Colors.white),
             ),
           )
         ],

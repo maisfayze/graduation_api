@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import '../../provider/localization_provider.dart';
 import '../../utiles/helpers.dart';
 import '../../widget/customPrimaryButton.dart';
+import '../../widget/custom_text_filed.dart';
 import '../../widget/mobile_text_filed.dart';
 
 class ForgotScreen extends StatefulWidget {
@@ -21,16 +22,22 @@ class ForgotScreen extends StatefulWidget {
 }
 
 class _ForgotScreenState extends State<ForgotScreen> with Helpers {
-  late TextEditingController _mobile;
+  late TextEditingController _email;
   GlobalKey<FormState> _formKey = GlobalKey();
 
-  String? _MobileErorr;
+  String? _EmailErorr;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _mobile = TextEditingController();
+    _email = TextEditingController();
+  }
+
+  void dispose() {
+    _email.dispose();
+
+    super.dispose();
   }
 
   Widget build(BuildContext context) {
@@ -78,8 +85,8 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
             padding: Provider.of<LocalizationProvider>(context, listen: true)
                         .languages ==
                     'en'
-                ? EdgeInsets.only(left: 12, right: 50)
-                : EdgeInsets.only(left: 120, right: 20),
+                ? EdgeInsets.only(left: 12.w, right: 50.w)
+                : EdgeInsets.only(left: 120.w, right: 20.w),
             child: Text(
               AppLocalizations.of(context)!.forgot,
               style: GoogleFonts.poppins(
@@ -106,11 +113,14 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.h),
-            child: MobileTextFiled(
-              type: TextInputType.phone,
-              controller: _mobile,
-              errorText: _MobileErorr,
-              counter: 10,
+            child: CustomTextFiled(
+              hint: AppLocalizations.of(context)!.enter_email,
+              prefixIcon: Icon(
+                Icons.email_outlined,
+              ),
+              controller: _email,
+              type: TextInputType.emailAddress,
+              errorText: _EmailErorr,
             ),
           ),
           SizedBox(
@@ -124,6 +134,9 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
                   performSubmit();
                 }),
           ),
+          SizedBox(
+            height: 50.h,
+          ),
         ]),
       ),
     );
@@ -136,7 +149,7 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
   }
 
   bool checkData() {
-    if (_mobile.text.isNotEmpty) {
+    if (_email.text.isNotEmpty) {
       _controlErrorValue();
       return true;
     }
@@ -150,12 +163,10 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
   void _controlErrorValue() {
     setState(
       () {
-        if (_mobile.text.isEmpty) {
-          _MobileErorr = AppLocalizations.of(context)!.enter_mobile;
-        } else if (_mobile.text.isNotEmpty && _mobile.text.length < 9) {
-          _MobileErorr = AppLocalizations.of(context)!.valid_mobile;
+        if (_email.text.isEmpty) {
+          _EmailErorr = AppLocalizations.of(context)!.enter_mobile;
         } else {
-          _MobileErorr = null;
+          _EmailErorr = null;
         }
       },
     );
@@ -165,7 +176,7 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
     Navigator.push(
       context,
       MaterialPageRoute(
-        settings: RouteSettings(arguments: _mobile.text),
+        settings: RouteSettings(arguments: _email.text),
         builder: (context) => CodeScreen(),
       ),
     );

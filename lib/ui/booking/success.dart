@@ -58,7 +58,7 @@ class _SuccessState extends State<Success> {
               child: Text(
                 'Your appointment has been successfully selected',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 20.sp,
                   color: Color(0xff272B41),
                   fontWeight: FontWeight.w700,
@@ -74,7 +74,7 @@ class _SuccessState extends State<Success> {
             child: Text(
               'To complete the process, please select a payment method',
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.normal,
                   color: Color(0xff6B7280)),
@@ -177,7 +177,7 @@ class _SuccessState extends State<Success> {
                 Text(
                   'Appointment booked successfully!',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     fontSize: 20.sp,
                     color: Color(0xff272B41),
                     fontWeight: FontWeight.w700,
@@ -189,7 +189,7 @@ class _SuccessState extends State<Success> {
                 Text(
                   'Appointment booked with Dr. Darren Elder on 11 Nov 2019 5:00PM to 6:00PM',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                       fontSize: 15.sp,
                       fontWeight: FontWeight.normal,
                       color: Color(0xff6B7280)),

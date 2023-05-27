@@ -5,15 +5,21 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
+import 'package:graduation/controller/get_top_doctors_controller.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/spec.dart';
+import '../../../controller/get_blogs_api_controllers.dart';
+import '../../../controller/get_specialities.dart';
+import '../../../models/specialities_model.dart';
+import '../../../models/top_doctors.dart';
 import '../../../provider/localization_provider.dart';
 import '../../../widget/bookButton.dart';
 import '../../../widget/drawer_widget.dart';
 import '../../../widget/search_bar.dart';
 import '../../../widget/see_all_row.dart';
 import '../../../widget/viewProfileButton.dart';
+import '../../search_page.dart';
 import '../blogs.dart';
 import '../specialities.dart';
 import '../top_doctors.dart';
@@ -40,16 +46,6 @@ class _PatientHomeState extends State<PatientHome> {
     _searchController.dispose();
     super.dispose();
   }
-
-  final List<SpecialitiesModel> _specialities = <SpecialitiesModel>[
-    SpecialitiesModel(img: 'images/den.png', title: 'Dentist'),
-    SpecialitiesModel(img: 'images/cardiology.png', title: 'Cardiology'),
-    SpecialitiesModel(img: 'images/Dermatology.png', title: 'Dermatology'),
-    SpecialitiesModel(img: 'images/Hematology.png', title: 'Hematology'),
-    SpecialitiesModel(img: 'images/Obstetrics.png', title: 'Obstetrics'),
-    SpecialitiesModel(img: 'images/Orthopedics.png', title: 'Orthopedics'),
-    SpecialitiesModel(img: 'images/Urology.png', title: 'Urology'),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +115,9 @@ class _PatientHomeState extends State<PatientHome> {
                   height: 16.h,
                 ),
                 SearchBarWidget(
+                    onPressed: () {
+                      Navigator.pushNamed(context, SearchPage.id);
+                    },
                     type: TextInputType.text,
                     controller: _searchController,
                     hint: AppLocalizations.of(context)!.search_clinic_doctor,
@@ -135,62 +134,84 @@ class _PatientHomeState extends State<PatientHome> {
                     Navigator.pushNamed(context, Specialities.id);
                   },
                 ),
-                ConstrainedBox(
-                  constraints:
-                      BoxConstraints(maxHeight: 108.h, minWidth: 108.h),
-                  child: ListView.builder(
-                    itemCount: _specialities.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(right: 15.w),
-                        width: 80.w,
-                        height: 15.h,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 77.w,
-                              height: 77.h,
-                              constraints: BoxConstraints(
-                                  maxHeight: 77.h, maxWidth: 77.w),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(100.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0xff6B7280).withOpacity(0.06),
-                                    spreadRadius: 3,
-                                    blurRadius: 3,
-                                    // changes position of shadow
-                                  ),
-                                ],
-
-                                // border: Border.all(color: Colors.grey),
-                              ),
-                              child: Center(
-                                  child: Image.asset(
-                                "${_specialities[index].img}",
-                                height: 33.h,
-                                width: 33.w,
-                              )),
-                            ),
-                            SizedBox(
-                              height: 10.h,
-                            ),
-                            Text(
-                              _specialities[index].title,
-                              style: GoogleFonts.poppins(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.grey),
-                            )
-                          ],
+                FutureBuilder<List<SpecialitiesModel>>(
+                  future: GetSpecialities().getSpec(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Constant.primaryColor,
                         ),
                       );
-                    },
-                  ),
+                    } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                      return ConstrainedBox(
+                        constraints:
+                            BoxConstraints(maxHeight: 108.h, minWidth: 108.h),
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.only(right: 15.w),
+                              width: 80.w,
+                              height: 15.h,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 77.w,
+                                    height: 77.h,
+                                    constraints: BoxConstraints(
+                                        maxHeight: 77.h, maxWidth: 77.w),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.circular(100.r),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color(0xff6B7280)
+                                              .withOpacity(0.06),
+                                          spreadRadius: 3,
+                                          blurRadius: 3,
+                                          // changes position of shadow
+                                        ),
+                                      ],
+
+                                      // border: Border.all(color: Colors.grey),
+                                    ),
+                                    child: Center(
+                                        child: snapshot
+                                                .data![index].image.isNotEmpty
+                                            ? Image.network(
+                                                "http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].image}",
+                                                height: 33.h,
+                                                width: 33.w,
+                                              )
+                                            : null),
+                                  ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Text(
+                                    snapshot.data![index].specialtyName,
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.grey),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    } else {
+                      return Center(
+                        child: Text('NO DATA'),
+                      );
+                    }
+                  },
                 ),
                 SizedBox(
                   height: 20.h,
@@ -202,136 +223,161 @@ class _PatientHomeState extends State<PatientHome> {
                     Navigator.pushNamed(context, TopDoctors.id);
                   },
                 ),
-                ConstrainedBox(
-                  constraints: BoxConstraints(maxHeight: 260.h),
-                  child: ListView.builder(
-                    itemCount: 4,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(right: 12),
-                        width: 163.w,
-                        height: 250.h,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.r),
-                            border: Border.all(
-                                color: Colors.grey.shade400, width: .5.w)),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              right: 16.w, top: 16.h, left: 16.w, bottom: 16.h),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  child: Image.asset(
-                                    'images/doctorw.jpg',
-                                    height: 95.h,
-                                    width: 131.w,
-                                    fit: BoxFit.cover,
-                                  )),
-                              SizedBox(
-                                height: 16.h,
-                              ),
-                              Text(
-                                'Dr.Ruby Perin',
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14.sp,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Text(
-                                'Dentist',
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12.sp,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    height: 13.5.h,
-                                    width: 33.w,
-                                    decoration: BoxDecoration(
-                                        color: Constant.primaryColor
-                                            .withOpacity(0.2),
+                FutureBuilder<List<TopDoctorsModel>>(
+                  future: GetTopDoctors().getTops(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Constant.primaryColor,
+                        ),
+                      );
+                    } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                      return ConstrainedBox(
+                        constraints: BoxConstraints(maxHeight: 260.h),
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.only(right: 12),
+                              width: 163.w,
+                              height: 250.h,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  border: Border.all(
+                                      color: Colors.grey.shade400,
+                                      width: .5.w)),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    right: 16.w,
+                                    top: 16.h,
+                                    left: 16.w,
+                                    bottom: 16.h),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(
                                         borderRadius:
-                                            BorderRadius.circular(2.r)),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                            BorderRadius.circular(10.r),
+                                        child: Image.network(
+                                          'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].doctorImage}',
+                                          height: 95.h,
+                                          width: 131.w,
+                                          fit: BoxFit.fill,
+                                        )),
+                                    SizedBox(
+                                      height: 16.h,
+                                    ),
+                                    Text(
+                                      'Dr.${snapshot.data![index].doctorName}',
+                                      overflow: TextOverflow.ellipsis,
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14.sp,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${snapshot.data![index].specialityName}',
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12.sp,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 12.h,
+                                    ),
+                                    Row(
                                       children: [
-                                        Icon(
-                                          Icons.star,
-                                          size: 8,
-                                          color: Color(0xffF4C150),
-                                        ),
-                                        Text(
-                                          '4.7',
-                                          style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 8.sp,
-                                            color: Constant.primaryColor,
+                                        Container(
+                                          height: 13.5.h,
+                                          width: 33.w,
+                                          decoration: BoxDecoration(
+                                              color: Constant.primaryColor
+                                                  .withOpacity(0.2),
+                                              borderRadius:
+                                                  BorderRadius.circular(2.r)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Icon(
+                                                Icons.star,
+                                                size: 8,
+                                                color: Color(0xffF4C150),
+                                              ),
+                                              Text(
+                                                '4.5',
+                                                style: GoogleFonts.poppins(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 8.sp,
+                                                  color: Constant.primaryColor,
+                                                ),
+                                              ),
+                                            ],
                                           ),
+                                        ),
+                                        SizedBox(
+                                          width: 30.w,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Icon(
+                                              Icons.location_on,
+                                              size: 10,
+                                              color: Colors.grey.shade400,
+                                            ),
+                                            Text(
+                                              '${snapshot.data![index].clinicAddress}',
+                                              style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 10.sp,
+                                                color: Colors.grey.shade400,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 30.w,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Icon(
-                                        Icons.location_on,
-                                        size: 10,
-                                        color: Colors.grey.shade400,
-                                      ),
-                                      Text(
-                                        'Gaza',
-                                        style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 10.sp,
-                                          color: Colors.grey.shade400,
+                                    SizedBox(
+                                      height: 14.h,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        viewProfileButton(
+                                          text: AppLocalizations.of(context)!
+                                              .view_profile,
+                                          onPressed: () {},
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                        SizedBox(
+                                          width: 5.w,
+                                        ),
+                                        BookButton(
+                                            text: AppLocalizations.of(context)!
+                                                .book,
+                                            onPressed: () {}),
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
-                              SizedBox(
-                                height: 14.h,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  viewProfileButton(
-                                    text: AppLocalizations.of(context)!
-                                        .view_profile,
-                                    onPressed: () {},
-                                  ),
-                                  SizedBox(
-                                    width: 5.w,
-                                  ),
-                                  BookButton(
-                                      text: AppLocalizations.of(context)!.book,
-                                      onPressed: () {}),
-                                ],
-                              )
-                            ],
-                          ),
+                            );
+                          },
                         ),
                       );
-                    },
-                  ),
+                    } else {
+                      return Center(
+                        child: Text('NO DATA'),
+                      );
+                    }
+                  },
                 ),
                 SizedBox(
                   height: 20.h,
@@ -343,134 +389,292 @@ class _PatientHomeState extends State<PatientHome> {
                     Navigator.pushNamed(context, Blogs.id);
                   },
                 ),
-                ConstrainedBox(
-                  constraints: BoxConstraints(maxHeight: 340.h),
-                  child: ListView.builder(
-                    itemCount: 4,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(right: 12.w),
-                        width: 211,
-                        height: 326,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.r),
-                            border: Border.all(
-                                color: Colors.grey.shade400, width: .5.w)),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              right: 16.w, top: 16.h, left: 16.w, bottom: 16.h),
-                          // padding: EdgeInsets.all(14.r),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  child: Image.network(
-                                    'https://blog.feedspot.com/wp-content/uploads/2018/04/Doctor-Blogs.jpg',
-                                    height: 95.h,
-                                    width: 179.w,
-                                    fit: BoxFit.cover,
-                                  )),
-                              SizedBox(
-                                height: 16.h,
-                              ),
-                              Text(
-                                'What We Know So Far About COVID-19 Transmission ?',
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12.sp,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 8.h,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                // mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10.r),
-                                          child: Image.asset(
-                                            'images/doctorw.jpg',
-                                            height: 20.h,
-                                            width: 20.w,
-                                            fit: BoxFit.cover,
-                                          )),
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Text(
-                                        'Dr. Linda toben',
-                                        style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 10.sp,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Spacer(),
-                                  Row(
-                                    // crossAxisAlignment: CrossAxisAlignment.end,
-                                    // mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Icon(
-                                        Icons.watch_later_outlined,
-                                        size: 10,
-                                        color: Colors.grey,
-                                      ),
-                                      SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Text(
-                                        '3. Jan .2023',
-                                        style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 10.sp,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 12.h,
-                              ),
-                              SizedBox(
-                                width: 183.w,
-                                height: 70.h,
-                                child: Text(
-                                  overflow: TextOverflow.fade,
-                                  'Many of us woke up today to the shocking news that the President Donald Trump and first ',
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12.sp,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 14.h,
-                              ),
-                              viewProfileButton(
-                                text: AppLocalizations.of(context)!.read_more,
-                                onPressed: () {},
-                              ),
-                            ],
-                          ),
+                FutureBuilder(
+                  future: GetBlogsApiController().getBlogs(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: Constant.primaryColor,
                         ),
                       );
-                    },
-                  ),
+                    } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                      return ConstrainedBox(
+                        constraints: BoxConstraints(maxHeight: 340.h),
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            String trimmedString =
+                                snapshot.data![index].createdDate.trim();
+                            DateTime dateTime = DateTime.parse(trimmedString);
+
+                            return Container(
+                              margin: EdgeInsets.only(right: 12.w),
+                              width: 218.w,
+                              height: 320.h,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  border: Border.all(
+                                      color: Colors.grey.shade400,
+                                      width: .5.w)),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    right: 16.w,
+                                    top: 16.h,
+                                    left: 16.w,
+                                    bottom: 16.h),
+                                // padding: EdgeInsets.all(14.r),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                        child: Image.network(
+                                          'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].blogImage}',
+                                          height: 95.h,
+                                          width: 185.w,
+                                          fit: BoxFit.cover,
+                                        )),
+                                    SizedBox(
+                                      height: 16.h,
+                                    ),
+                                    Text(
+                                      '${snapshot.data![index].title}',
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12.sp,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8.h,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      // mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
+                                                child: Image.network(
+                                                  'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].doctorImage}',
+                                                  height: 20.h,
+                                                  width: 20.w,
+                                                  fit: BoxFit.cover,
+                                                )),
+                                            SizedBox(
+                                              width: 5.w,
+                                            ),
+                                            Text(
+                                              'Dr.${snapshot.data![index].name}',
+                                              style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 10.sp,
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Row(
+                                          // crossAxisAlignment: CrossAxisAlignment.end,
+                                          // mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Icon(
+                                              Icons.watch_later_outlined,
+                                              size: 10,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(
+                                              width: 5.w,
+                                            ),
+                                            Text(
+                                              '${DateFormat('dd-MM-yyyy').format(dateTime)}',
+                                              style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 10.sp,
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 12.h,
+                                    ),
+                                    SizedBox(
+                                      width: 183.w,
+                                      height: 50.h,
+                                      child: Text(
+                                        overflow: TextOverflow.fade,
+                                        '${snapshot.data![index].content}',
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 12.sp,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20.h,
+                                    ),
+                                    viewProfileButton(
+                                      text: AppLocalizations.of(context)!
+                                          .read_more,
+                                      onPressed: () {},
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    } else {
+                      return Center(
+                        child: Text('NO DATA'),
+                      );
+                    }
+                  },
                 ),
+
+                // ConstrainedBox(
+                //   constraints: BoxConstraints(maxHeight: 340.h),
+                //   child: ListView.builder(
+                //     itemCount: 4,
+                //     scrollDirection: Axis.horizontal,
+                //     itemBuilder: (context, index) {
+                //       return Container(
+                //         margin: EdgeInsets.only(right: 12.w),
+                //         width: 211,
+                //         height: 326,
+                //         decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(12.r),
+                //             border: Border.all(
+                //                 color: Colors.grey.shade400, width: .5.w)),
+                //         child: Padding(
+                //           padding: EdgeInsets.only(
+                //               right: 16.w, top: 16.h, left: 16.w, bottom: 16.h),
+                //           // padding: EdgeInsets.all(14.r),
+                //           child: Column(
+                //             mainAxisAlignment: MainAxisAlignment.start,
+                //             crossAxisAlignment: CrossAxisAlignment.start,
+                //             children: [
+                //               ClipRRect(
+                //                   borderRadius: BorderRadius.circular(10.r),
+                //                   child: Image.network(
+                //                     'https://blog.feedspot.com/wp-content/uploads/2018/04/Doctor-Blogs.jpg',
+                //                     height: 95.h,
+                //                     width: 179.w,
+                //                     fit: BoxFit.cover,
+                //                   )),
+                //               SizedBox(
+                //                 height: 16.h,
+                //               ),
+                //               Text(
+                //                 'What We Know So Far About COVID-19 Transmission ?',
+                //                 style: GoogleFonts.poppins(
+                //                   fontWeight: FontWeight.w600,
+                //                   fontSize: 12.sp,
+                //                   color: Colors.black,
+                //                 ),
+                //               ),
+                //               SizedBox(
+                //                 height: 8.h,
+                //               ),
+                //               Row(
+                //                 crossAxisAlignment: CrossAxisAlignment.end,
+                //                 // mainAxisAlignment: MainAxisAlignment.end,
+                //                 children: [
+                //                   Row(
+                //                     crossAxisAlignment: CrossAxisAlignment.end,
+                //                     children: [
+                //                       ClipRRect(
+                //                           borderRadius:
+                //                               BorderRadius.circular(10.r),
+                //                           child: Image.asset(
+                //                             'images/doctorw.jpg',
+                //                             height: 20.h,
+                //                             width: 20.w,
+                //                             fit: BoxFit.cover,
+                //                           )),
+                //                       SizedBox(
+                //                         width: 5.w,
+                //                       ),
+                //                       Text(
+                //                         'Dr. Linda toben',
+                //                         style: GoogleFonts.poppins(
+                //                           fontWeight: FontWeight.w400,
+                //                           fontSize: 10.sp,
+                //                           color: Colors.grey,
+                //                         ),
+                //                       ),
+                //                     ],
+                //                   ),
+                //                   Spacer(),
+                //                   Row(
+                //                     // crossAxisAlignment: CrossAxisAlignment.end,
+                //                     // mainAxisAlignment: MainAxisAlignment.end,
+                //                     children: [
+                //                       Icon(
+                //                         Icons.watch_later_outlined,
+                //                         size: 10,
+                //                         color: Colors.grey,
+                //                       ),
+                //                       SizedBox(
+                //                         width: 5.w,
+                //                       ),
+                //                       Text(
+                //                         '3. Jan .2023',
+                //                         style: GoogleFonts.poppins(
+                //                           fontWeight: FontWeight.w400,
+                //                           fontSize: 10.sp,
+                //                           color: Colors.grey,
+                //                         ),
+                //                       ),
+                //                     ],
+                //                   ),
+                //                 ],
+                //               ),
+                //               SizedBox(
+                //                 height: 12.h,
+                //               ),
+                //               SizedBox(
+                //                 width: 183.w,
+                //                 height: 70.h,
+                //                 child: Text(
+                //                   overflow: TextOverflow.fade,
+                //                   'Many of us woke up today to the shocking news that the President Donald Trump and first ',
+                //                   style: GoogleFonts.poppins(
+                //                     fontWeight: FontWeight.w400,
+                //                     fontSize: 12.sp,
+                //                     color: Colors.black,
+                //                   ),
+                //                 ),
+                //               ),
+                //               SizedBox(
+                //                 height: 14.h,
+                //               ),
+                //               viewProfileButton(
+                //                 text: AppLocalizations.of(context)!.read_more,
+                //                 onPressed: () {},
+                //               ),
+                //             ],
+                //           ),
+                //         ),
+                //       );
+                //     },
+                //   ),
+                // ),
                 SizedBox(
                   height: 16.h,
                 ),

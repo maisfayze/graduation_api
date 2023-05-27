@@ -213,8 +213,8 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
                   insets:
                       EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 10.h)),
               indicatorColor: Constant.primaryColor,
-              labelStyle:
-                  TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+              labelStyle: GoogleFonts.poppins(
+                  fontSize: 18.sp, fontWeight: FontWeight.bold),
               labelColor: Constant.primaryColor,
               tabs: [
                 Tab(

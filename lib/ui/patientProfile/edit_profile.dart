@@ -300,26 +300,7 @@ class _EditProfileState extends State<EditProfile> {
                 SizedBox(
                   height: 16.h,
                 ),
-                //Mobile
-                Text(
-                  'Phone Number',
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18.sp,
-                    color: Colors.black,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                MobileTextFiled(
-                  type: TextInputType.phone,
-                  controller: _mobile,
-                  counter: 10,
-                ),
-                SizedBox(
-                  height: 16.h,
-                ),
+
                 //Address
                 Text(
                   'Address',
@@ -333,69 +314,13 @@ class _EditProfileState extends State<EditProfile> {
                   height: 10.h,
                 ),
                 CustomTextFiled(
-                  controller: _fname,
+                  controller: _address,
                   type: TextInputType.text,
                 ),
                 SizedBox(
                   height: 16.h,
                 ),
-                //City
-                Text(
-                  'City',
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18.sp,
-                    color: Colors.black,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                CustomTextFiled(
-                  controller: _city,
-                  type: TextInputType.text,
-                ),
-                SizedBox(
-                  height: 16.h,
-                ),
-                //State
-                Text(
-                  'State',
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18.sp,
-                    color: Colors.black,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                CustomTextFiled(
-                  controller: _state,
-                  type: TextInputType.text,
-                ),
-                SizedBox(
-                  height: 16.h,
-                ),
-                //Country
-                Text(
-                  'Country',
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18.sp,
-                    color: Colors.black,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                CustomTextFiled(
-                  controller: _country,
-                  type: TextInputType.text,
-                ),
-                SizedBox(
-                  height: 16.h,
-                ),
+
                 CustomPrimaryButton(text: 'Update', onPressed: () {}),
               ],
             ),

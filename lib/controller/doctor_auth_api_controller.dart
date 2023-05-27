@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 import '../models/LogedUser.dart';
 import '../models/api_response.dart';
-import '../models/user_model.dart';
+import '../models/login_user_model.dart';
 import '../prefs/prefs.dart';
 import '../utiles/helpers.dart';
 
@@ -15,23 +15,21 @@ class DoctorAuthApiController with Helpers {
     Uri uri = Uri.parse(ApiSetting.DoctorLogin);
     http.Response response = await http
         .post(uri, body: {'Email': user.email, 'Password': user.password});
-    print('before if');
-    var json = jsonDecode(response.body);
 
     if (response.statusCode == 200 || response.statusCode == 400) {
-      // var json = jsonDecode(response.body);
+      var json = jsonDecode(response.body);
+      print('$json');
+      var decodedJson = json['data'];
       if (response.statusCode == 200) {
         print('after if');
-
-        UserModel user = UserModel.fromJson(json);
-        SharedPrefController().saveData(user);
+        if (decodedJson != null) {
+          LogedUserModel user = LogedUserModel.fromJson(decodedJson);
+          SharedPrefController().saveData(user);
+        }
       }
-      return ApiResponse('Login successfully', true);
-
-      // return ApiResponse(json['message'], json['isValid']);
+      return ApiResponse(json['message'], json['isSuccess']);
     } else {
-      print('from api $json');
-      return ApiResponse('something went wrong', false);
+      return ApiResponse('Something went wrong', false);
     }
   }
 
@@ -55,9 +53,11 @@ class DoctorAuthApiController with Helpers {
       print('${response.statusCode}');
       // var json = jsonDecode(response.body);
       print(json);
-      // Doctor doctor = Doctor.fromJson(json);
-      return ApiResponse('Signup Successfully', true);
-      // return ApiResponse(json['message'], json['isValid']);
+      var decodedJson = json['data'];
+
+      LogedUserModel user = LogedUserModel.fromJson(decodedJson);
+      SharedPrefController().saveData(user);
+      return ApiResponse(json['message'], json['isSuccess']);
     }
     return ApiResponse('something went wrong', false);
   }

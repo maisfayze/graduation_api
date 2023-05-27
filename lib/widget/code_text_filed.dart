@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,7 @@ class CodeTextFiled extends StatelessWidget {
           controller: controller,
           autofocus: true,
           obscureText: true,
-          style: TextStyle(fontSize: 16),
+          style: GoogleFonts.poppins(fontSize: 16),
           keyboardType: TextInputType.number,
           textAlign: TextAlign.center,
           decoration: InputDecoration(

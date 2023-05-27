@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:graduation/models/doctor.dart';
+import 'package:graduation/models/top_doctors.dart';
 
 class FavouriteProvider with ChangeNotifier {
-  List<DoctorModel> _list = [];
-  List<DoctorModel> get FavList => _list;
+  List<TopDoctorsModel> _list = [];
+  List<TopDoctorsModel> get FavList => _list;
   int get listLength => _list.length;
-  void addDoc(DoctorModel doc) {
+  void addDoc(TopDoctorsModel doc) {
     _list.add(doc);
     notifyListeners();
   }
@@ -14,20 +15,20 @@ class FavouriteProvider with ChangeNotifier {
   //   final isExist = list.contains(doc);
   //   return isExist;
   // }
-  void RemoveDoc(DoctorModel doc) {
+  void RemoveDoc(TopDoctorsModel doc) {
     _list.remove(doc);
     notifyListeners();
   }
-
-  void toggleFavorite(DoctorModel doc) {
-    final isExist = _list.contains(doc);
-    if (isExist) {
-      _list.remove(doc);
-    } else {
-      _list.add(doc);
-    }
-    notifyListeners();
-  }
+  //
+  // void toggleFavorite(TopDoctorsModel doc) {
+  //   final isExist = _list.contains(doc);
+  //   if (isExist) {
+  //     _list.remove(doc);
+  //   } else {
+  //     _list.add(doc);
+  //   }
+  //   notifyListeners();
+  // }
 
   void removeDoc({required int index}) {
     _list.removeAt(index);
@@ -35,18 +36,18 @@ class FavouriteProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void remove(DoctorModel doc) {
+  void remove(TopDoctorsModel doc) {
     _list.remove(doc);
     // list.remove(removed);
     notifyListeners();
   }
 
-  DoctorModel getData({required int id}) {
+  TopDoctorsModel getData({required int id}) {
     return _list.elementAt(id);
   }
 
-  void toggle(DoctorModel doc) {
-    doc.toggle();
-    notifyListeners();
-  }
+  // void toggle(DoctorModel doc) {
+  //   doc.toggle();
+  //   notifyListeners();
+  // }
 }

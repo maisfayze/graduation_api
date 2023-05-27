@@ -5,6 +5,7 @@ import 'package:graduation/constant/constant.dart';
 import 'package:graduation/ui/auth/code.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/localization_provider.dart';
@@ -12,6 +13,7 @@ import '../../utiles/helpers.dart';
 import '../../widget/customPrimaryButton.dart';
 import '../../widget/custom_text_filed.dart';
 import '../../widget/mobile_text_filed.dart';
+import '../booking/success.dart';
 
 class ResetScreen extends StatefulWidget {
   const ResetScreen({Key? key}) : super(key: key);
@@ -241,6 +243,59 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
   }
 
   void login() {
-    Navigator.pushNamed(context, '');
+    buildShowDialog(context);
+  }
+
+  Future<dynamic> buildShowDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // titlePadding: EdgeInsets.symmetric(horizontal: 34),
+            title: Column(
+              children: [
+                Center(
+                  child: Lottie.asset('images/succes.json',
+                      width: 200.w, height: 200.h),
+                ),
+                Text(
+                  'Your password has been changed successfully',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                    fontSize: 20.sp,
+                    color: Color(0xff272B41),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                SizedBox(
+                  height: 39.h,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, Success.id);
+                  },
+                  child: Text(
+                    'Go to Home ',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      shadowColor: Colors.transparent,
+                      minimumSize: Size(155.w, 44.h),
+                      backgroundColor: Constant.primaryColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.r),
+                      )),
+                ),
+              ],
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0.r)),
+            // actionsPadding: EdgeInsets.only(bottom: 34),
+          );
+        });
   }
 }

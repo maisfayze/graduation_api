@@ -8,12 +8,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/constant/constant.dart';
 import 'package:graduation/models/LogedUser.dart';
 import 'package:graduation/models/blood.dart';
+import 'package:graduation/ui/Doctor/DocBtn/btn_doc.dart';
 import 'package:graduation/ui/auth/patient_sign_up.dart';
 import 'package:graduation/utiles/context_extention.dart';
 import 'package:provider/provider.dart';
 
 import '../../controller/doctor_auth_api_controller.dart';
-import '../../controller/login_api_controller.dart';
 import '../../models/api_response.dart';
 import '../../provider/localization_provider.dart';
 import '../../utiles/helpers.dart';
@@ -42,7 +42,7 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> with Helpers {
   late TextEditingController _pass;
   bool loading = false;
 
-  String? _MobileErorr;
+  String? _EmailErorr;
   String? _passwordErorr;
   bool _obsecure = true;
   late TextEditingController _email;
@@ -133,6 +133,7 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> with Helpers {
                       height: 10.h,
                     ),
                     CustomTextFiled(
+                      errorText: _EmailErorr,
                       hint: AppLocalizations.of(context)!.enter_email,
                       prefixIcon: Icon(
                         Icons.email_outlined,
@@ -299,13 +300,9 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> with Helpers {
   void _controlErrorValue() {
     setState(
       () {
-        if (_email.text.isEmpty) {
-          _MobileErorr = AppLocalizations.of(context)!.enter_mobile;
-        } else if (_email.text.isNotEmpty && _mobile.text.length < 9) {
-          _MobileErorr = AppLocalizations.of(context)!.valid_mobile;
-        } else {
-          _MobileErorr = null;
-        }
+        _EmailErorr = _email.text.isEmpty
+            ? AppLocalizations.of(context)!.enter_email
+            : null;
 
         _passwordErorr = _pass.text.isEmpty
             ? AppLocalizations.of(context)!.enter_pass
@@ -322,7 +319,7 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> with Helpers {
       // ignore: use_build_context_synchronously
       print('mais');
 
-      Navigator.pushNamed(context, BtnPatient.id);
+      Navigator.pushNamed(context, BtnDoc.id);
     }
     // ignore: use_build_context_synchronously
     context.showSnakBar(

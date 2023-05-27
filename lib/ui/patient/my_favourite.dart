@@ -108,11 +108,8 @@ class _FavouritesState extends State<Favourites> {
                               borderRadius: BorderRadius.circular(10.r),
                               child: Stack(
                                 children: [
-                                  Image.asset(
-                                    Provider.of<FavouriteProvider>(context,
-                                            listen: false)
-                                        .FavList[index]
-                                        .img,
+                                  Image.network(
+                                    "http://ac7a1ae098-001-site1.etempurl.com${Provider.of<FavouriteProvider>(context, listen: false).FavList[index].doctorImage}",
                                     height: 138.h,
                                     width: 141.w,
                                     fit: BoxFit.cover,
@@ -156,7 +153,7 @@ class _FavouritesState extends State<Favourites> {
                                   Provider.of<FavouriteProvider>(context,
                                           listen: false)
                                       .getData(id: index)
-                                      .name,
+                                      .doctorName,
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 18.sp,
@@ -170,7 +167,7 @@ class _FavouritesState extends State<Favourites> {
                                   Provider.of<FavouriteProvider>(context,
                                           listen: false)
                                       .getData(id: index)
-                                      .spec,
+                                      .specialityName,
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w400,
                                     fontSize: 12.sp,
@@ -181,11 +178,7 @@ class _FavouritesState extends State<Favourites> {
                                   height: 10.h,
                                 ),
                                 RatingBar.builder(
-                                  initialRating: Provider.of<FavouriteProvider>(
-                                          context,
-                                          listen: false)
-                                      .getData(id: index)
-                                      .rate,
+                                  initialRating: 4.5,
                                   minRating: 1,
                                   itemSize: 14,
                                   direction: Axis.horizontal,
@@ -217,7 +210,7 @@ class _FavouritesState extends State<Favourites> {
                                       Provider.of<FavouriteProvider>(context,
                                               listen: false)
                                           .getData(id: index)
-                                          .country,
+                                          .clinicAddress,
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 10.sp,

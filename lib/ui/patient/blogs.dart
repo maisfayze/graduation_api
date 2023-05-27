@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:graduation/controller/get_blogs_api_controllers.dart';
+import 'package:intl/intl.dart';
 
 import '../../constant/constant.dart';
 import '../../widget/bookButton.dart';
@@ -78,129 +80,159 @@ class _BlogsState extends State<Blogs> {
                   )),
             ),
             Expanded(
-                child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12.h),
-                  child: Container(
-                    height: 206.h,
-                    width: 366.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.r),
-                      border: Border.all(color: Colors.grey, width: .5),
-                    ),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 21.w, bottom: 38.h, top: 16.h, right: 0),
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.r),
-                              child: Image.asset(
-                                'images/blogs2.jpg',
-                                height: 146.h,
-                                width: 111.w,
-                                fit: BoxFit.cover,
-                              )),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 18.w, bottom: 16.h, top: 16.h, right: 0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: 204.w,
-                                child: Text(
-                                  'What We Know So Far About COVID-19 Transmission ?',
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12.sp,
-                                    color: Colors.black,
-                                  ),
+              child: FutureBuilder(
+                future: GetBlogsApiController().getBlogs(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Constant.primaryColor,
+                      ),
+                    );
+                  } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        String trimmedString =
+                            snapshot.data![index].createdDate.trim();
+                        DateTime dateTime = DateTime.parse(trimmedString);
+                        return Padding(
+                          padding: EdgeInsets.symmetric(vertical: 12.h),
+                          child: Container(
+                            height: 206.h,
+                            width: 366.w,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.r),
+                              border: Border.all(color: Colors.grey, width: .5),
+                            ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 21.w,
+                                      bottom: 38.h,
+                                      top: 16.h,
+                                      right: 0),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10.r),
+                                      child: Image.network(
+                                        'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].blogImage}',
+                                        height: 146.h,
+                                        width: 111.w,
+                                        fit: BoxFit.cover,
+                                      )),
                                 ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 18.w,
+                                      bottom: 16.h,
+                                      top: 16.h,
+                                      right: 0),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10.r),
-                                          child: Image.asset(
-                                            'images/doctorw.jpg',
-                                            height: 20.h,
-                                            width: 20.w,
-                                            fit: BoxFit.cover,
-                                          )),
                                       SizedBox(
-                                        width: 5.w,
-                                      ),
-                                      Text(
-                                        'Dr. Linda toben',
-                                        style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 10.sp,
-                                          color: Colors.grey,
+                                        width: 204.w,
+                                        child: Text(
+                                          '${snapshot.data![index].title}',
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12.sp,
+                                            color: Colors.black,
+                                          ),
                                         ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.r),
+                                                  child: Image.network(
+                                                    'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].doctorImage}',
+                                                    height: 20.h,
+                                                    width: 20.w,
+                                                    fit: BoxFit.cover,
+                                                  )),
+                                              SizedBox(
+                                                width: 5.w,
+                                              ),
+                                              Text(
+                                                '${snapshot.data![index].name}',
+                                                style: GoogleFonts.poppins(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 10.sp,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 28.w,
+                                          ),
+                                          Text(
+                                            '${DateFormat('dd-MM-yyyy').format(dateTime)}',
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 10.sp,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
+                                      SizedBox(
+                                        width: 183.w,
+                                        height: 80.h,
+                                        child: Text(
+                                          overflow: TextOverflow.clip,
+                                          '${snapshot.data![index].content}',
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 12.sp,
+                                            color: Colors.black45,
+                                          ),
+                                        ),
+                                      ),
+                                      Row(
+                                        // mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          SizedBox(
+                                            width: 120.w,
+                                          ),
+                                          viewProfileButton(
+                                            text: AppLocalizations.of(context)!
+                                                .read_more,
+                                            onPressed: () {},
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    width: 28.w,
-                                  ),
-                                  Text(
-                                    '3. Jan .2023',
-                                    style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 10.sp,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              SizedBox(
-                                width: 183.w,
-                                height: 80.h,
-                                child: Text(
-                                  overflow: TextOverflow.clip,
-                                  'Many of us woke up today to the shocking news that the President Donald Trump and first ',
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12.sp,
-                                    color: Colors.black45,
-                                  ),
                                 ),
-                              ),
-                              Row(
-                                // mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  SizedBox(
-                                    width: 120.w,
-                                  ),
-                                  viewProfileButton(
-                                    text:
-                                        AppLocalizations.of(context)!.read_more,
-                                    onPressed: () {},
-                                  ),
-                                ],
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            )),
+                        );
+                      },
+                    );
+                  } else {
+                    return Center(
+                      child: Text('NO DATA'),
+                    );
+                  }
+                },
+              ),
+            ),
           ],
         ),
       ),

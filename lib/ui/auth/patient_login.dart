@@ -6,13 +6,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/constant/constant.dart';
+import 'package:graduation/controller/patient_auth_api_controller.dart';
 import 'package:graduation/models/LogedUser.dart';
 import 'package:graduation/models/blood.dart';
 import 'package:graduation/ui/auth/patient_sign_up.dart';
 import 'package:graduation/utiles/context_extention.dart';
 import 'package:provider/provider.dart';
 
-import '../../controller/login_api_controller.dart';
 import '../../models/api_response.dart';
 import '../../provider/localization_provider.dart';
 import '../../utiles/helpers.dart';
@@ -41,7 +41,7 @@ class _PatientLoginPageState extends State<PatientLoginPage> with Helpers {
   late TextEditingController _pass;
   bool loading = false;
 
-  String? _MobileErorr;
+  String? _EmailErorr;
   String? _passwordErorr;
   bool _obsecure = true;
   late TextEditingController _email;
@@ -136,6 +136,7 @@ class _PatientLoginPageState extends State<PatientLoginPage> with Helpers {
                       prefixIcon: Icon(
                         Icons.email_outlined,
                       ),
+                      errorText: _EmailErorr,
                       controller: _email,
                       type: TextInputType.text,
                     ),
@@ -298,13 +299,9 @@ class _PatientLoginPageState extends State<PatientLoginPage> with Helpers {
   void _controlErrorValue() {
     setState(
       () {
-        if (_email.text.isEmpty) {
-          _MobileErorr = AppLocalizations.of(context)!.enter_mobile;
-        } else if (_email.text.isNotEmpty && _mobile.text.length < 9) {
-          _MobileErorr = AppLocalizations.of(context)!.valid_mobile;
-        } else {
-          _MobileErorr = null;
-        }
+        _EmailErorr = _email.text.isEmpty
+            ? AppLocalizations.of(context)!.enter_email
+            : null;
 
         _passwordErorr = _pass.text.isEmpty
             ? AppLocalizations.of(context)!.enter_pass
@@ -314,26 +311,27 @@ class _PatientLoginPageState extends State<PatientLoginPage> with Helpers {
   }
 
   void login() async {
-    //   ApiResponse processResponse = await LoginApiController().login(user: user);
-    //
-    //   if (processResponse.sucess) {
-    //     // ignore: use_build_context_synchronously
-    //     print('mais');
-    //
-    //     Navigator.pushNamed(context, BtnPatient.id);
-    //   }
-    //   // ignore: use_build_context_synchronously
-    //   context.showSnakBar(
-    //     message: processResponse.msg,
-    //     error: !processResponse.sucess,
-    //   );
-    // }
-    //
-    // LogedUser get user {
-    //   LogedUser user = LogedUser();
-    //   user.email = _email.text;
-    //   user.password = _pass.text;
-    //
-    //   return user;
+    ApiResponse processResponse =
+        await PatientAuthApiController().PatLogin(user: user);
+
+    if (processResponse.sucess) {
+      // ignore: use_build_context_synchronously
+      print('mais');
+
+      Navigator.pushNamed(context, BtnPatient.id);
+    }
+    // ignore: use_build_context_synchronously
+    context.showSnakBar(
+      message: processResponse.msg,
+      error: !processResponse.sucess,
+    );
+  }
+
+  LogedUser get user {
+    LogedUser user = LogedUser();
+    user.email = _email.text;
+    user.password = _pass.text;
+
+    return user;
   }
 }

@@ -1,74 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
-import 'package:graduation/controller/get_top_doctors_controller.dart';
-import 'package:graduation/models/doctor.dart';
-import 'package:graduation/models/top_doctors.dart';
-import 'package:graduation/provider/fav_provider.dart';
-import 'package:graduation/widget/bookButton.dart';
-import 'package:graduation/widget/viewProfileButton.dart';
+import 'package:graduation/models/filtered_result.dart';
+import 'package:graduation/ui/patient/PatientBtn/btn_patient.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class TopDoctors extends StatefulWidget {
-  TopDoctors({Key? key}) : super(key: key);
-  static const id = 'TopDoctors';
+import '../controller/filter_api_controller.dart';
+import '../prefs/prefs.dart';
+import '../provider/search_filter_provider.dart';
+import '../widget/bookButton.dart';
+import '../widget/viewProfileButton.dart';
+import 'Doctor/DocBtn/btn_doc.dart';
+import 'filter.dart';
 
+class SearchPage extends StatefulWidget {
+  const SearchPage({Key? key}) : super(key: key);
+  static const id = 'SearchPage';
   @override
-  State<TopDoctors> createState() => _TopDoctorsState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _TopDoctorsState extends State<TopDoctors> {
-  final List<DoctorModel> _doctors = <DoctorModel>[
-    DoctorModel(
-        img: 'images/doctorw.jpg',
-        spec: 'Dentist',
-        rate: 4.5,
-        name: 'meme',
-        country: 'Gaza'),
-    DoctorModel(
-      img: 'images/blogs.jpg',
-      spec: 'Cardiology',
-      rate: 2,
-      name: 'meme',
-      country: 'Rafah',
-    ),
-    DoctorModel(
-        img: 'images/doctorw.jpg',
-        spec: 'Dermatology',
-        rate: 3,
-        name: 'meme',
-        country: 'Rafah'),
-    DoctorModel(
-        img: 'images/blogs.jpg',
-        spec: 'Hematology',
-        rate: 3.5,
-        name: 'meme',
-        country: 'Nesiratee'),
-    DoctorModel(
-        img: 'images/doctorw.jpg',
-        spec: 'Obstetrics',
-        rate: 2.5,
-        name: 'meme',
-        country: 'MASER'),
-    DoctorModel(
-        img: 'images/blogs.jpg',
-        spec: 'Orthopedics',
-        rate: 4.5,
-        name: 'meme',
-        country: 'Germany'),
-    DoctorModel(
-        img: 'images/doctorw.jpg',
-        spec: 'Urology',
-        rate: 4.5,
-        name: 'meme',
-        country: 'ALzhra'),
-  ];
-
-  bool _fav = false;
-
+class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,12 +36,18 @@ class _TopDoctorsState extends State<TopDoctors> {
             size: 24,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            if (SharedPrefController().getValueFor('userType') == 'Doctor') {
+              String rout = BtnDoc.id;
+              Navigator.pushNamed(context, rout);
+            } else {
+              String rout = BtnPatient.id;
+              Navigator.pushNamed(context, rout);
+            }
           },
         ),
         centerTitle: true,
         title: Text(
-          AppLocalizations.of(context)!.top,
+          'Search Doctors',
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
@@ -96,15 +57,38 @@ class _TopDoctorsState extends State<TopDoctors> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, FilterScreen.id);
+              },
+              icon: Icon(
+                Icons.filter_list_alt,
+                size: 24,
+                color: Constant.primaryColor,
+              ))
+        ],
       ),
-      body: FutureBuilder<List<TopDoctorsModel>>(
-        future: GetTopDoctors().getTops(),
+      body: FutureBuilder<List<ResultModel>>(
+        future: FilterApiController().getDataFromFilter(
+            gender: Provider.of<FilterProvider>(context, listen: true).gender,
+            spec: Provider.of<FilterProvider>(context, listen: true).spec),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(
-                color: Constant.primaryColor,
-              ),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 50.w),
+                  child: Image.asset(
+                    'images/search-doctor.gif',
+                    width: 300.w,
+                    height: 500.h,
+                  ),
+                ),
+                Spacer(),
+              ],
             );
           } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
             return Padding(
@@ -126,59 +110,11 @@ class _TopDoctorsState extends State<TopDoctors> {
                           children: [
                             ClipRRect(
                                 borderRadius: BorderRadius.circular(20.r),
-                                child: Stack(
-                                  children: [
-                                    Image.network(
-                                      "http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].doctorImage}",
-                                      height: 138.h,
-                                      width: 130.w,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    IconButton(
-                                        onPressed: () {
-                                          if (Provider.of<FavouriteProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .FavList
-                                              .contains(
-                                                  snapshot.data![index])) {
-                                            Provider.of<FavouriteProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .RemoveDoc(
-                                                    snapshot.data![index]);
-                                          } else {
-                                            Provider.of<FavouriteProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .addDoc(snapshot.data![index]);
-                                          }
-                                        },
-                                        icon: Container(
-                                          width: 21.w,
-                                          height: 21.h,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(3.r),
-                                            color: Colors.white,
-                                          ),
-                                          child: Provider.of<FavouriteProvider>(
-                                                      context)
-                                                  .FavList
-                                                  .contains(
-                                                      snapshot.data![index])
-                                              ? Icon(
-                                                  Icons.bookmark,
-                                                  size: 16,
-                                                  color: Color(0xffF4C150),
-                                                )
-                                              : Icon(
-                                                  Icons.bookmark_border,
-                                                  size: 16,
-                                                  color: Colors.grey,
-                                                ),
-                                        )),
-                                  ],
+                                child: Image.network(
+                                  "http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].doctorImage}",
+                                  height: 138.h,
+                                  width: 130.w,
+                                  fit: BoxFit.cover,
                                 )),
                             Padding(
                               padding: EdgeInsets.only(
@@ -302,8 +238,20 @@ class _TopDoctorsState extends State<TopDoctors> {
               ),
             );
           } else {
-            return Center(
-              child: Text('NO DATA'),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 50.w),
+                  child: Image.asset(
+                    'images/search-doctor.gif',
+                    width: 300.w,
+                    height: 500.h,
+                  ),
+                ),
+                Spacer(),
+              ],
             );
           }
         },

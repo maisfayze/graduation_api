@@ -11,6 +11,7 @@ class SearchBarWidget extends StatelessWidget {
   SearchBarWidget(
       {super.key,
       this.counter,
+        this.onPressed,
       this.prefixIcon,
       this.suffixIcon,
       required this.type,
@@ -21,12 +22,14 @@ class SearchBarWidget extends StatelessWidget {
   Widget? prefixIcon;
   Widget? suffixIcon;
   String? hint;
+  Function()? onPressed;
 
   final TextInputType type;
   final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onTap: onPressed,
       controller: controller,
       keyboardType: type,
       minLines: 1,
