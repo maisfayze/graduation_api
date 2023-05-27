@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/widget/customPrimaryButton.dart';
 
 import '../../../constant/constant.dart';
+import '../booking.dart';
 
 class OverViewTab extends StatefulWidget {
   const OverViewTab({Key? key}) : super(key: key);
@@ -154,7 +155,9 @@ class _OverViewTabState extends State<OverViewTab> {
             height: 20.h,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, Booking.id);
+            },
             child: Text(
               'Book Appointment',
               textAlign: TextAlign.center,
@@ -165,10 +168,10 @@ class _OverViewTabState extends State<OverViewTab> {
             ),
             style: ElevatedButton.styleFrom(
                 shadowColor: Colors.transparent,
-                minimumSize: Size(double.infinity, 59.h),
+                minimumSize: Size(100.w, 59.h),
                 backgroundColor: Constant.primaryColor,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.r),
+                  borderRadius: BorderRadius.circular(25.r),
                 )),
           ),
           SizedBox(
