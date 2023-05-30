@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/view_profile_model.dart';
 import '../../provider/fav_provider.dart';
+import 'Tabs/bussiness_hours.dart';
 import 'Tabs/overview.dart';
 
 class ViewDoctorProfile extends StatefulWidget {
@@ -22,7 +23,7 @@ class ViewDoctorProfile extends StatefulWidget {
 
 class _ViewDoctorProfileState extends State<ViewDoctorProfile>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -269,7 +270,9 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
                     data: data,
                   ),
                   Text('two'),
-                  Text('three')
+                  BusinessHoursTabs(
+                    data: data,
+                  ),
                 ],
               ),
             ),

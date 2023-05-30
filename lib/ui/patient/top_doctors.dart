@@ -72,10 +72,11 @@ class _TopDoctorsState extends State<TopDoctors> {
                   return Padding(
                     padding: EdgeInsets.symmetric(vertical: 12.h),
                     child: Container(
-                      height: 168.h,
+                      height: 180.h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.r),
-                        border: Border.all(color: Colors.grey, width: .5),
+                        border:
+                            Border.all(color: Colors.grey.shade400, width: .5),
                       ),
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -165,7 +166,7 @@ class _TopDoctorsState extends State<TopDoctors> {
                                     snapshot.data![index].specialityName,
                                     style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 12.sp,
+                                      fontSize: 14.sp,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -175,8 +176,8 @@ class _TopDoctorsState extends State<TopDoctors> {
                                   Row(
                                     children: [
                                       Container(
-                                        height: 13.5.h,
-                                        width: 33.w,
+                                        height: 23.5.h,
+                                        width: 43.w,
                                         decoration: BoxDecoration(
                                             color: Constant.primaryColor
                                                 .withOpacity(0.2),
@@ -188,14 +189,14 @@ class _TopDoctorsState extends State<TopDoctors> {
                                           children: [
                                             Icon(
                                               Icons.star,
-                                              size: 8,
+                                              size: 12,
                                               color: Color(0xffF4C150),
                                             ),
                                             Text(
-                                              " 4.5",
+                                              '4.5',
                                               style: GoogleFonts.poppins(
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: 8.sp,
+                                                fontSize: 12.sp,
                                                 color: Constant.primaryColor,
                                               ),
                                             ),
@@ -211,14 +212,14 @@ class _TopDoctorsState extends State<TopDoctors> {
                                         children: [
                                           Icon(
                                             Icons.location_on,
-                                            size: 10,
+                                            size: 12,
                                             color: Colors.grey.shade400,
                                           ),
                                           Text(
-                                            snapshot.data![index].clinicAddress,
+                                            '${snapshot.data![index].clinicAddress}',
                                             style: GoogleFonts.poppins(
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 10.sp,
+                                              fontSize: 12.sp,
                                               color: Colors.grey.shade400,
                                             ),
                                           ),

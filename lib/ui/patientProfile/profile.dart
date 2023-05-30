@@ -232,6 +232,8 @@ class PatientProfile extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
+                      SharedPrefController().clear();
+
                       SystemNavigator.pop();
                     },
                     child: Text(

@@ -95,7 +95,7 @@ class _SearchPageState extends State<SearchPage> {
             );
           } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
             return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
@@ -108,9 +108,9 @@ class _SearchPageState extends State<SearchPage> {
                   return Padding(
                     padding: EdgeInsets.symmetric(vertical: 12.h),
                     child: Container(
-                      height: 168.h,
+                      height: 180.h,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.r),
+                        borderRadius: BorderRadius.circular(8.r),
                         border: Border.all(color: Colors.grey, width: .5),
                       ),
                       child: Padding(
@@ -118,7 +118,7 @@ class _SearchPageState extends State<SearchPage> {
                         child: Row(
                           children: [
                             ClipRRect(
-                                borderRadius: BorderRadius.circular(20.r),
+                                borderRadius: BorderRadius.circular(8.r),
                                 child: Image.network(
                                   "http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].doctorImage}",
                                   height: 138.h,
@@ -127,10 +127,7 @@ class _SearchPageState extends State<SearchPage> {
                                 )),
                             Padding(
                               padding: EdgeInsets.only(
-                                  left: 18.w,
-                                  bottom: 15.h,
-                                  top: 30.h,
-                                  right: 0),
+                                  left: 18.w, top: 24.h, right: 0),
                               // padding:
                               //     EdgeInsets.symmetric(horizontal: 18, vertical: 30),
                               child: Column(
@@ -142,7 +139,7 @@ class _SearchPageState extends State<SearchPage> {
                                     snapshot.data![index].doctorName,
                                     style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 14.sp,
+                                      fontSize: 16.sp,
                                       color: Colors.black,
                                     ),
                                   ),
@@ -153,7 +150,7 @@ class _SearchPageState extends State<SearchPage> {
                                     snapshot.data![index].specialityName,
                                     style: GoogleFonts.poppins(
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 12.sp,
+                                      fontSize: 16.sp,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -163,8 +160,8 @@ class _SearchPageState extends State<SearchPage> {
                                   Row(
                                     children: [
                                       Container(
-                                        height: 13.5.h,
-                                        width: 33.w,
+                                        height: 23.5.h,
+                                        width: 36.w,
                                         decoration: BoxDecoration(
                                             color: Constant.primaryColor
                                                 .withOpacity(0.2),
@@ -176,14 +173,14 @@ class _SearchPageState extends State<SearchPage> {
                                           children: [
                                             Icon(
                                               Icons.star,
-                                              size: 8,
+                                              size: 12,
                                               color: Color(0xffF4C150),
                                             ),
                                             Text(
                                               " 4.5",
                                               style: GoogleFonts.poppins(
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: 8.sp,
+                                                fontSize: 12.sp,
                                                 color: Constant.primaryColor,
                                               ),
                                             ),
@@ -191,7 +188,7 @@ class _SearchPageState extends State<SearchPage> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 30.w,
+                                        width: 16.w,
                                       ),
                                       Row(
                                         mainAxisAlignment:
@@ -199,14 +196,14 @@ class _SearchPageState extends State<SearchPage> {
                                         children: [
                                           Icon(
                                             Icons.location_on,
-                                            size: 10,
+                                            size: 12,
                                             color: Colors.grey.shade400,
                                           ),
                                           Text(
                                             snapshot.data![index].clinicAddress,
                                             style: GoogleFonts.poppins(
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 10.sp,
+                                              fontSize: 12.sp,
                                               color: Colors.grey.shade400,
                                             ),
                                           ),
@@ -215,7 +212,7 @@ class _SearchPageState extends State<SearchPage> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 14.h,
+                                    height: 16.h,
                                   ),
                                   Row(
                                     crossAxisAlignment:

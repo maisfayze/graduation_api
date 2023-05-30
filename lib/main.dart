@@ -29,6 +29,7 @@ import 'package:graduation/ui/filter.dart';
 import 'package:graduation/ui/onBoarding/onboarding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/ui/patient/PatientBtn/btn_patient.dart';
+import 'package:graduation/ui/patient/PatientBtn/my_appoitment_for_patient.dart';
 import 'package:graduation/ui/patient/blogs.dart';
 import 'package:graduation/ui/Doctor/schedule%20_timings.dart';
 import 'package:graduation/ui/patient/my_favourite.dart';
@@ -127,7 +128,7 @@ class MyApp extends StatelessWidget {
                 PatientSignUp.id: (context) => PatientSignUp(),
                 DocSignUp.id: (context) => DocSignUp(),
                 ForgotScreen.id: (context) => ForgotScreen(),
-                ResetScreen.id: (context) => ResetScreen(),
+                // ResetScreen.id: (context) => ResetScreen(),
                 BtnPatient.id: (context) => BtnPatient(),
                 Specialities.id: (context) => Specialities(),
                 TopDoctors.id: (context) => TopDoctors(),
@@ -139,7 +140,7 @@ class MyApp extends StatelessWidget {
                 Blogs.id: (context) => Blogs(),
                 BtnDoc.id: (context) => BtnDoc(),
                 DoctorProfile.id: (context) => DoctorProfile(),
-                MyAppointments.id: (context) => MyAppointments(),
+                MyPatientAppointments.id: (context) => MyPatientAppointments(),
                 MyPatients.id: (context) => MyPatients(),
                 EditDocProfile.id: (context) => EditDocProfile(),
                 ScheduleTimings.id: (context) => ScheduleTimings(),
@@ -147,6 +148,7 @@ class MyApp extends StatelessWidget {
                 ViewDoctorProfile.id: (context) => ViewDoctorProfile(),
                 Booking.id: (context) => Booking(),
                 Success.id: (context) => Success(),
+                MyAppointment.id: (context) => MyAppointment(),
               },
             );
           },

@@ -10,7 +10,9 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../controller/get_ScheduletimingsForDocto_controller.dart';
 import '../../main.dart';
+import '../../models/scheduletimingsForDocto_model.dart';
 import '../../models/top_doctors.dart';
 
 class Booking extends StatefulWidget {
@@ -23,7 +25,7 @@ class Booking extends StatefulWidget {
 
 class _BookingState extends State<Booking> {
   DateTime? selectedDate;
-  String? selectedDay;
+  String selectedDay = DateFormat.EEEE().format(DateTime.now());
   int tapped_index = 0;
 
   List<String> event = [
@@ -49,7 +51,7 @@ class _BookingState extends State<Booking> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        selectedDay = DateFormat('EEEE')
+        selectedDay = DateFormat.EEEE()
             .format(picked); // Format the date to get the day of the week
       });
     }
@@ -58,6 +60,8 @@ class _BookingState extends State<Booking> {
   @override
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)!.settings.arguments as TopDoctorsModel;
+    print(selectedDay);
+    print(data.doctorId);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -154,7 +158,7 @@ class _BookingState extends State<Booking> {
                               children: [
                                 Icon(
                                   Icons.location_on,
-                                  size: 10,
+                                  size: 12,
                                   color: Colors.grey.shade400,
                                 ),
                                 Text(
@@ -228,7 +232,7 @@ class _BookingState extends State<Booking> {
                         : ' $selectedDay',
                     style: GoogleFonts.poppins(
                         color: Color(0xff757575),
-                        fontSize: 18.sp,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w600),
                   ),
                 ],
@@ -237,62 +241,88 @@ class _BookingState extends State<Booking> {
             SizedBox(
               height: 16.h,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: Container(
-                width: 398.w,
-                height: 200.h,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300, width: 1.w),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12.r)),
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-                  child: GridView.builder(
-                    itemCount: event.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3, childAspectRatio: 2.5),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        splashColor: Colors.transparent,
-                        onTap: () {
-                          setState(() {
-                            _currentIndex = index;
-                            _timeSelected = true;
-                          });
-                        },
-                        child: Container(
-                          width: 120.w,
-                          height: 33.h,
-                          margin: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            // border: Border.all(
-                            //   color: _currentIndex == index
-                            //       ? Color(0xffE9E9E9)
-                            //       : Colors.black,
-                            // ),
-                            borderRadius: BorderRadius.circular(5.r),
-                            color: _currentIndex == index
-                                ? Constant.primaryColor
-                                : Color(0xffE9E9E9),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            '${event[index]}',
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.normal,
-                                color: _currentIndex == index
-                                    ? Colors.white
-                                    : null,
-                                fontSize: 12.sp),
-                          ),
+            FutureBuilder(
+              future: GetScheduletimingsForDoctor().getScheduletimingsForDoctor(
+                  id: data.doctorId, day: selectedDay),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: Constant.primaryColor,
+                    ),
+                  );
+                } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                  List<ScheduletimingsForDoctor> time = [];
+                  for (int i = 0; i < snapshot.data!.length; i++) {
+                    if (snapshot.data![i].item2 == 0) {
+                      time.add((snapshot.data![i]));
+                    }
+                  }
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    child: Container(
+                      width: 398.w,
+                      height: 300.h,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.grey.shade300, width: 1.w),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12.r)),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 10.h),
+                        child: GridView.builder(
+                          itemCount: time.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2, childAspectRatio: 3),
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              splashColor: Colors.transparent,
+                              onTap: () {
+                                setState(() {
+                                  _currentIndex = index;
+                                  _timeSelected = true;
+                                });
+                              },
+                              child: Container(
+                                width: 120.w,
+                                height: 33.h,
+                                margin: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  // border: Border.all(
+                                  //   color: _currentIndex == index
+                                  //       ? Color(0xffE9E9E9)
+                                  //       : Colors.black,
+                                  // ),
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  color: _currentIndex == index
+                                      ? Constant.primaryColor
+                                      : Color(0xffE9E9E9),
+                                ),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  '${time[index].item1}',
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.normal,
+                                      color: _currentIndex == index
+                                          ? Colors.white
+                                          : null,
+                                      fontSize: 12.sp),
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                ),
-              ),
+                      ),
+                    ),
+                  );
+                } else {
+                  return Center(
+                    child: Text('NO DATA'),
+                  );
+                }
+              },
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),

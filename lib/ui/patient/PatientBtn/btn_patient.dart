@@ -9,7 +9,7 @@ import '../../../models/btn.dart';
 import '../../Doctor/DocBtn/chat.dart';
 import '../../patientProfile/profile.dart';
 import '../../Doctor/DocBtn/doctor_chat.dart';
-import 'my_appoitment.dart';
+import 'my_appoitment_for_patient.dart';
 
 class BtnPatient extends StatefulWidget {
   BtnPatient({Key? key}) : super(key: key);
@@ -22,11 +22,11 @@ class BtnPatient extends StatefulWidget {
 class _BtnPatientState extends State<BtnPatient> {
   int _selectedItem = 0;
 
-  final List<BtnScreen> _screens = <BtnScreen>[
-    const BtnScreen(title: 'Home', widget: PatientHome()),
-    const BtnScreen(title: 'Appointment', widget: MyAppointment()),
-    const BtnScreen(title: 'Chat', widget: ChatScreen()),
-    const BtnScreen(title: 'Profile', widget: PatientProfile()),
+  List<BtnScreen> _screens = <BtnScreen>[
+    BtnScreen(title: 'Home', widget: PatientHome()),
+    BtnScreen(title: 'Appointment', widget: MyAppointment()),
+    BtnScreen(title: 'Chat', widget: ChatScreen()),
+    BtnScreen(title: 'Profile', widget: PatientProfile()),
   ];
 
   @override
@@ -58,7 +58,7 @@ class _BtnPatientState extends State<BtnPatient> {
             fontWeight: FontWeight.bold,
           ),
           iconSize: 25,
-          items: const [
+          items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.event_note_sharp),

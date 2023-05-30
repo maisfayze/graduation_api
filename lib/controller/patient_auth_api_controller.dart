@@ -32,10 +32,10 @@ class PatientAuthApiController {
       // var json = jsonDecode(response.body);
       // print(json);
       // Doctor doctor = Doctor.fromJson(json);
-      return ApiResponse('Signup Successfully', true);
+      return ApiResponse(msg: json['message'], sucess: json['isSuccess']);
       // return ApiResponse(json['message'], json['isValid']);
     }
-    return ApiResponse('something went wrong', false);
+    return ApiResponse(msg: 'Something went wrong', sucess: false);
   }
 
   Future<ApiResponse> PatLogin({required LogedUser user}) async {
@@ -54,9 +54,9 @@ class PatientAuthApiController {
           SharedPrefController().saveData(user);
         }
       }
-      return ApiResponse(json['message'], json['isSuccess']);
+      return ApiResponse(msg: json['message'], sucess: json['isSuccess']);
     } else {
-      return ApiResponse('Something went wrong', false);
+      return ApiResponse(msg: 'Something went wrong', sucess: false);
     }
   }
 }

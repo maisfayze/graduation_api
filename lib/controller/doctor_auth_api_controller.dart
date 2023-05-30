@@ -20,15 +20,15 @@ class DoctorAuthApiController with Helpers {
       // print('$json');
       var decodedJson = json['data'];
       if (response.statusCode == 200) {
-        print('after if');
+        // print('after if');
         if (decodedJson != null) {
           LogedUserModel user = LogedUserModel.fromJson(decodedJson);
           SharedPrefController().saveData(user);
         }
       }
-      return ApiResponse(json['message'], json['isSuccess']);
+      return ApiResponse(msg: json['message'], sucess: json['isSuccess']);
     } else {
-      return ApiResponse('Something went wrong', false);
+      return ApiResponse(msg: 'Something went wrong', sucess: false);
     }
   }
 
@@ -49,16 +49,16 @@ class DoctorAuthApiController with Helpers {
     // print(json);
 
     if (response.statusCode == 200 || response.statusCode == 400) {
-      print('${response.statusCode}');
+      // print('${response.statusCode}');
       // var json = jsonDecode(response.body);
       // print(json);
       var decodedJson = json['data'];
 
       LogedUserModel user = LogedUserModel.fromJson(decodedJson);
       SharedPrefController().saveData(user);
-      return ApiResponse(json['message'], json['isSuccess']);
+      return ApiResponse(msg: json['message'], sucess: json['isSuccess']);
     }
-    return ApiResponse('something went wrong', false);
+    return ApiResponse(msg: 'Something went wrong', sucess: false);
   }
   // Future<bool> docSignUp({
   //   required String firstName,

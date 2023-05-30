@@ -99,11 +99,12 @@ class _BlogsState extends State<Blogs> {
                         return Padding(
                           padding: EdgeInsets.symmetric(vertical: 12.h),
                           child: Container(
-                            height: 206.h,
+                            height: 220.h,
                             width: 366.w,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20.r),
-                              border: Border.all(color: Colors.grey, width: .5),
+                              border: Border.all(
+                                  color: Colors.grey.shade400, width: .5),
                             ),
                             child: Row(
                               children: [
@@ -117,7 +118,7 @@ class _BlogsState extends State<Blogs> {
                                       borderRadius: BorderRadius.circular(10.r),
                                       child: Image.network(
                                         'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].blogImage}',
-                                        height: 146.h,
+                                        height: 160.h,
                                         width: 111.w,
                                         fit: BoxFit.cover,
                                       )),
@@ -207,7 +208,7 @@ class _BlogsState extends State<Blogs> {
                                         // mainAxisAlignment: MainAxisAlignment.end,
                                         children: [
                                           SizedBox(
-                                            width: 120.w,
+                                            width: 104.w,
                                           ),
                                           viewProfileButton(
                                             text: AppLocalizations.of(context)!

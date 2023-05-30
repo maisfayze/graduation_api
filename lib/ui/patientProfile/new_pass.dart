@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:graduation/utiles/context_extention.dart';
 
+import '../../constant/constant.dart';
+import '../../controller/new_pass_api_controller.dart';
+import '../../models/api_response.dart';
 import '../../utiles/helpers.dart';
 import '../../widget/customPrimaryButton.dart';
 import '../../widget/custom_text_filed.dart';
@@ -27,6 +31,7 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
   String? _NewErorr;
   String? _ConfNewErorr;
   String? _oldErorr;
+  bool loading = false;
 
   @override
   void initState() {
@@ -69,11 +74,11 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
         elevation: 0,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 46.w),
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: ListView(
           children: [
             SizedBox(
-              height: 46.h,
+              height: 24.h,
             ),
             //create new pass
             Text(
@@ -81,7 +86,7 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w500,
-                fontSize: 25.sp,
+                fontSize: 24.sp,
                 color: Colors.black,
               ),
             ),
@@ -113,7 +118,7 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
               ),
             ),
             SizedBox(
-              height: 10.h,
+              height: 16.h,
             ),
             CustomTextFiled(
               controller: _oldpass,
@@ -134,7 +139,7 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
               obscureText: _oldpassobsecure,
             ),
             SizedBox(
-              height: 16.h,
+              height: 24.h,
             ),
             //new
             Text(
@@ -146,7 +151,7 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
               ),
             ),
             SizedBox(
-              height: 10.h,
+              height: 16.h,
             ),
             CustomTextFiled(
               controller: _pass,
@@ -166,7 +171,7 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
               obscureText: _passobsecure,
             ),
             SizedBox(
-              height: 16.h,
+              height: 24.h,
             ),
             //confirm
             Text(
@@ -178,7 +183,7 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
               ),
             ),
             SizedBox(
-              height: 10.h,
+              height: 16.h,
             ),
             CustomTextFiled(
               controller: _confirmpass,
@@ -199,13 +204,19 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
               obscureText: _copassobsecure,
             ),
             SizedBox(
-              height: 21.h,
+              height: 24.h,
             ),
-            CustomPrimaryButton(
-                text: AppLocalizations.of(context)!.submit,
-                onPressed: () {
-                  performSubmit();
-                }),
+            loading
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Constant.primaryColor,
+                    ),
+                  )
+                : CustomPrimaryButton(
+                    text: AppLocalizations.of(context)!.submit,
+                    onPressed: () {
+                      performSubmit();
+                    }),
             SizedBox(
               height: 66.h,
             ),
@@ -217,6 +228,9 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
 
   void performSubmit() {
     if (checkData()) {
+      setState(() {
+        loading = true;
+      });
       login();
     }
   }
@@ -258,7 +272,15 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
     );
   }
 
-  void login() {
-    Navigator.pushNamed(context, '');
+  void login() async {
+    ApiResponse processResponse = await NewPassApiController().NewPass(
+        old: _oldpass.text, newPass: _pass.text, confirmNew: _confirmpass.text);
+    if (processResponse.sucess) {
+      Navigator.pop(context);
+    }
+    context.showSnakBar(
+      message: processResponse.msg,
+      error: !processResponse.sucess,
+    );
   }
 }

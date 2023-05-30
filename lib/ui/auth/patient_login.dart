@@ -115,7 +115,7 @@ class _PatientLoginPageState extends State<PatientLoginPage> with Helpers {
               ),
             )
           : Padding(
-              padding: EdgeInsets.symmetric(horizontal: 46.w, vertical: 48.h),
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
               child: FadeInLeft(
                 child: ListView(
                   key: _formKey,
@@ -181,12 +181,18 @@ class _PatientLoginPageState extends State<PatientLoginPage> with Helpers {
                           : Alignment.topLeft,
                       child: TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, ForgotScreen.id);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                settings: RouteSettings(arguments: 2),
+                                builder: (context) => ForgotScreen(data: 2),
+                              ),
+                            );
                           },
                           child: Text(
                             AppLocalizations.of(context)!.forgot,
                             style: GoogleFonts.poppins(
-                              fontSize: 15,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w400,
                               color: Constant.primaryColor,
                             ),
@@ -207,8 +213,7 @@ class _PatientLoginPageState extends State<PatientLoginPage> with Helpers {
                             text: AppLocalizations.of(context)!
                                 .dont_have_an_account,
                             style: GoogleFonts.poppins(
-                              color: Colors.black87,
-                            ),
+                                color: Colors.black87, fontSize: 16.sp),
                             children: [
                               TextSpan(text: '  '),
                               TextSpan(

@@ -6,6 +6,7 @@ import 'package:graduation/constant/constant.dart';
 import 'package:graduation/ui/patient/PatientBtn/patient_home.dart';
 
 import '../../../models/btn.dart';
+import '../doctorProfile/my_appointment.dart';
 import 'doctor_chat.dart';
 import '../../patientProfile/profile.dart';
 import '../doctorProfile/doctor_profile.dart';
@@ -26,7 +27,7 @@ class _BtnDocState extends State<BtnDoc> {
 
   final List<BtnScreen> _screens = <BtnScreen>[
     const BtnScreen(title: 'Home', widget: DoctorHome()),
-    const BtnScreen(title: 'Appointment', widget: MyAppointmentBtn()),
+    const BtnScreen(title: 'Appointment', widget: MyPatientAppointments()),
     const BtnScreen(title: 'Chat', widget: DocChatScreen()),
     const BtnScreen(title: 'Profile', widget: DoctorProfile()),
   ];

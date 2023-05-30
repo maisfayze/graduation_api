@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/ui/auth/reset.dart';
+import 'package:graduation/utiles/context_extention.dart';
 import 'package:graduation/widget/code_text_filed.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/constant.dart';
+import '../../controller/forget_pass_controller.dart';
+import '../../models/api_response.dart';
 import '../../provider/localization_provider.dart';
 import '../../utiles/helpers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -13,10 +16,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../widget/customPrimaryButton.dart';
 
 class CodeScreen extends StatefulWidget {
-  CodeScreen({Key? key}) : super(key: key);
-  // String? phoneNumber;
+  CodeScreen({Key? key, required this.email, this.data}) : super(key: key);
+  final String email;
+  int? data;
+
   @override
-  State<CodeScreen> createState() => _CodeScreenState();
+  State<CodeScreen> createState() => _CodeScreenState(data);
 }
 
 class _CodeScreenState extends State<CodeScreen> with Helpers {
@@ -24,12 +29,14 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
   late TextEditingController _two;
   late TextEditingController _three;
   late TextEditingController _four;
-
+  String? _code;
+  bool loading = false;
+  int? data;
+  _CodeScreenState(this.data);
   String? _oneErorr;
   String? _twoErorr;
   String? _threeErorr;
   String? _fourErorr;
-
   @override
   void initState() {
     super.initState();
@@ -57,7 +64,8 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
 
   @override
   Widget build(BuildContext context) {
-    final data = ModalRoute.of(context)!.settings.arguments as String;
+    final data = ModalRoute.of(context)!.settings.arguments as int;
+    final email = ModalRoute.of(context)!.settings.arguments as int;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -130,7 +138,7 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
                   children: [
                     TextSpan(text: '  '),
                     TextSpan(
-                      text: data,
+                      text: widget.email,
                       style: GoogleFonts.poppins(
                         color: Constant.primaryColor,
                         fontWeight: FontWeight.bold,
@@ -155,30 +163,36 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
           SizedBox(
             height: 73.h,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.w),
-            child: CustomPrimaryButton(
-                text: AppLocalizations.of(context)!.submit,
-                onPressed: () {
-                  performLogin();
-                }),
-          ),
+          loading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: Constant.primaryColor,
+                  ),
+                )
+              : Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w),
+                  child: CustomPrimaryButton(
+                      text: AppLocalizations.of(context)!.submit,
+                      onPressed: () {
+                        performSubmit();
+                      }),
+                ),
         ]),
       ),
     );
   }
 
-  void performLogin() {
+  void performSubmit() {
     if (checkData()) {
-      login();
+      setState(() {
+        loading = true;
+      });
+      Submit();
     }
   }
 
   bool checkData() {
-    if (_one.text.isNotEmpty &&
-        _two.text.isNotEmpty &&
-        _three.text.isNotEmpty &&
-        _four.text.isNotEmpty) {
+    if (code != null && _code!.length == 4) {
       _controlErrorValue();
       return true;
     }
@@ -199,7 +213,31 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
     );
   }
 
-  void login() {
-    Navigator.pushReplacementNamed(context, ResetScreen.id);
+  String? get code {
+    return _code = _one.text + _two.text + _three.text + _four.text;
+  }
+
+  // void getCode() {
+  //   _code = _one.text + _two.text + _three.text + _four.text;
+  // }
+  void Submit() async {
+    ApiResponse processResponse =
+        await ForgetPassApiController().Code(email: widget.email, code: _code);
+    if (processResponse!.sucess) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          settings: RouteSettings(arguments: widget.data),
+          builder: (context) => ResetScreen(
+            email: widget.email,
+          ),
+        ),
+      );
+      // Navigator.pushReplacementNamed(context, ResetScreen.id);
+    }
+    context.showSnakBar(
+      message: processResponse.msg,
+      error: !processResponse.sucess,
+    );
   }
 }

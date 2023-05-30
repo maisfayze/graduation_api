@@ -1,15 +1,14 @@
 import 'dart:convert';
 
+import '../api/api_setting.dart';
+import '../models/my_patient_model.dart';
+import '../prefs/prefs.dart';
 import 'package:http/http.dart' as http;
 
-import '../api/api_setting.dart';
-import '../models/blogs_model.dart';
-import '../prefs/prefs.dart';
-
-class GetBlogsApiController {
-  Future<List<BlogsModel>> getBlogs() async {
+class GetMyPatient {
+  Future<List<MyPatientModel>> getMyPatient() async {
     String token = SharedPrefController().getValueFor('token');
-    Uri uri = Uri.parse(ApiSetting.GetBlogs);
+    Uri uri = Uri.parse(ApiSetting.GetMyPatient);
     http.Response response = await http.get(uri, headers: {
       'Accept': 'application/json',
       'Authorization': token,
@@ -18,9 +17,9 @@ class GetBlogsApiController {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       var DecodedData = data['data'] as List;
-      List<BlogsModel> blogs =
-          DecodedData.map((obj) => BlogsModel.fromJson(obj)).toList();
-      return blogs;
+      List<MyPatientModel> myPatient =
+          DecodedData.map((obj) => MyPatientModel.fromJson(obj)).toList();
+      return myPatient;
     }
     return [];
   }

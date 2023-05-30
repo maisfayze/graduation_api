@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 
 import '../../../controller/get_specialities.dart';
 import '../../../models/specialities_model.dart';
+import '../../../prefs/prefs.dart';
 import '../../../provider/localization_provider.dart';
 import '../../../widget/bookButton.dart';
 import '../../../widget/drawer_widget.dart';
@@ -236,14 +237,14 @@ class _DoctorHomeState extends State<DoctorHome> {
                       );
                     } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                       return ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: 260.h),
+                        constraints: BoxConstraints(maxHeight: 280.h),
                         child: ListView.builder(
                           itemCount: snapshot.data!.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return Container(
                               margin: EdgeInsets.only(right: 12),
-                              width: 163.w,
+                              width: 210.w,
                               height: 250.h,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12.r),
@@ -266,7 +267,7 @@ class _DoctorHomeState extends State<DoctorHome> {
                                         child: Image.network(
                                           'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].doctorImage}',
                                           height: 95.h,
-                                          width: 131.w,
+                                          width: 185.w,
                                           fit: BoxFit.fill,
                                         )),
                                     SizedBox(
@@ -285,7 +286,7 @@ class _DoctorHomeState extends State<DoctorHome> {
                                       '${snapshot.data![index].specialityName}',
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w400,
-                                        fontSize: 12.sp,
+                                        fontSize: 14.sp,
                                         color: Colors.grey,
                                       ),
                                     ),
@@ -295,8 +296,8 @@ class _DoctorHomeState extends State<DoctorHome> {
                                     Row(
                                       children: [
                                         Container(
-                                          height: 13.5.h,
-                                          width: 33.w,
+                                          height: 23.5.h,
+                                          width: 43.w,
                                           decoration: BoxDecoration(
                                               color: Constant.primaryColor
                                                   .withOpacity(0.2),
@@ -308,14 +309,14 @@ class _DoctorHomeState extends State<DoctorHome> {
                                             children: [
                                               Icon(
                                                 Icons.star,
-                                                size: 8,
+                                                size: 12,
                                                 color: Color(0xffF4C150),
                                               ),
                                               Text(
                                                 '4.5',
                                                 style: GoogleFonts.poppins(
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 8.sp,
+                                                  fontSize: 12.sp,
                                                   color: Constant.primaryColor,
                                                 ),
                                               ),
@@ -331,14 +332,14 @@ class _DoctorHomeState extends State<DoctorHome> {
                                           children: [
                                             Icon(
                                               Icons.location_on,
-                                              size: 10,
+                                              size: 12,
                                               color: Colors.grey.shade400,
                                             ),
                                             Text(
                                               '${snapshot.data![index].clinicAddress}',
                                               style: GoogleFonts.poppins(
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: 10.sp,
+                                                fontSize: 12.sp,
                                                 color: Colors.grey.shade400,
                                               ),
                                             ),
@@ -689,6 +690,8 @@ class _DoctorHomeState extends State<DoctorHome> {
                   ),
                   InkWell(
                     onTap: () {
+                      SharedPrefController().clear();
+
                       SystemNavigator.pop();
                     },
                     child: Text(

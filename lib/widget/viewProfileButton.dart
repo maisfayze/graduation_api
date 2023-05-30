@@ -19,7 +19,7 @@ class viewProfileButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 24.h,
-      width: 60.w,
+      width: 90.w,
       child: ElevatedButton(
         onPressed: onPressed,
         child: Text(
@@ -27,7 +27,7 @@ class viewProfileButton extends StatelessWidget {
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
               color: Constant.primaryColor,
-              fontSize: 9.sp,
+              fontSize: 12.sp,
               fontWeight: FontWeight.w600),
         ),
         style: ElevatedButton.styleFrom(
@@ -57,7 +57,7 @@ class viewProfileButton extends StatelessWidget {
             backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               side: BorderSide(
-                width: 1.5,
+                width: 1,
                 color: Constant.primaryColor,
               ),
               borderRadius: BorderRadius.circular(4.r),

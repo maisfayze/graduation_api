@@ -22,15 +22,17 @@ class BookButton extends StatelessWidget {
       width:
           Provider.of<LocalizationProvider>(context, listen: true).languages ==
                   'en'
-              ? 60.w
-              : 66.w,
+              ? 80.w
+              : 90.w,
       child: ElevatedButton(
         onPressed: onPressed,
         child: Text(
           '$text',
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
-              color: Colors.white, fontSize: 9.sp, fontWeight: FontWeight.w600),
+              color: Colors.white,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w600),
         ),
         style: ElevatedButton.styleFrom(
             padding: EdgeInsets.zero,

@@ -7,6 +7,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../../controller/forget_pass_controller.dart';
 import '../../provider/localization_provider.dart';
 import '../../utiles/helpers.dart';
 import '../../widget/customPrimaryButton.dart';
@@ -14,18 +15,21 @@ import '../../widget/custom_text_filed.dart';
 import '../../widget/mobile_text_filed.dart';
 
 class ForgotScreen extends StatefulWidget {
-  const ForgotScreen({Key? key}) : super(key: key);
+  ForgotScreen({Key? key, this.data}) : super(key: key);
   static const id = 'ForgotScreen';
+  int? data;
 
   @override
-  State<ForgotScreen> createState() => _ForgotScreenState();
+  State<ForgotScreen> createState() => _ForgotScreenState(data);
 }
 
 class _ForgotScreenState extends State<ForgotScreen> with Helpers {
   late TextEditingController _email;
   GlobalKey<FormState> _formKey = GlobalKey();
-
+  int? data;
+  _ForgotScreenState(this.data);
   String? _EmailErorr;
+  bool loading = false;
 
   @override
   void initState() {
@@ -41,6 +45,8 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
   }
 
   Widget build(BuildContext context) {
+    final data = ModalRoute.of(context)!.settings.arguments as int;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -69,7 +75,7 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: 46.w,
+          horizontal: 24.w,
         ),
         child: ListView(key: _formKey, children: [
           Padding(
@@ -126,14 +132,20 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
           SizedBox(
             height: 16.h,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.h),
-            child: CustomPrimaryButton(
-                text: AppLocalizations.of(context)!.submit,
-                onPressed: () {
-                  performSubmit();
-                }),
-          ),
+          loading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: Constant.primaryColor,
+                  ),
+                )
+              : Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.h),
+                  child: CustomPrimaryButton(
+                      text: AppLocalizations.of(context)!.submit,
+                      onPressed: () {
+                        performSubmit();
+                      }),
+                ),
           SizedBox(
             height: 50.h,
           ),
@@ -144,6 +156,9 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
 
   void performSubmit() {
     if (checkData()) {
+      setState(() {
+        loading = true;
+      });
       submit();
     }
   }
@@ -172,13 +187,19 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
     );
   }
 
-  void submit() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        settings: RouteSettings(arguments: _email.text),
-        builder: (context) => CodeScreen(),
-      ),
-    );
+  Future<void> submit() async {
+    bool status =
+        await ForgetPassApiController().forgetPass(email: _email.text);
+    if (status) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          settings: RouteSettings(arguments: data),
+          builder: (context) => CodeScreen(
+            email: _email.text,
+          ),
+        ),
+      );
+    }
   }
 }

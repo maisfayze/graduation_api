@@ -66,7 +66,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                           color: Color(0xff8B8989),
-                          fontSize: 17.sp,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.w500),
                     ),
                   ),
@@ -77,7 +77,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                           color: Color(0xff8B8989),
-                          fontSize: 17.sp,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.w500),
                     ),
                   ),

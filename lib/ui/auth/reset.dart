@@ -3,29 +3,37 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
 import 'package:graduation/ui/auth/code.dart';
+import 'package:graduation/ui/auth/patient_login.dart';
+import 'package:graduation/utiles/context_extention.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
+import '../../controller/forget_pass_controller.dart';
+import '../../models/api_response.dart';
 import '../../provider/localization_provider.dart';
 import '../../utiles/helpers.dart';
 import '../../widget/customPrimaryButton.dart';
 import '../../widget/custom_text_filed.dart';
 import '../../widget/mobile_text_filed.dart';
 import '../booking/success.dart';
+import 'doctor_login.dart';
 
 class ResetScreen extends StatefulWidget {
-  const ResetScreen({Key? key}) : super(key: key);
+  ResetScreen({Key? key, required this.email, this.data}) : super(key: key);
   static const id = 'ResetScreen';
+  final String email;
+  int? data;
 
   @override
-  State<ResetScreen> createState() => _ResetScreenState();
+  State<ResetScreen> createState() => _ResetScreenState(data);
 }
 
 class _ResetScreenState extends State<ResetScreen> with Helpers {
   late TextEditingController _pass;
-
+  int? data;
+  _ResetScreenState(this.data);
   late TextEditingController _confirmpass;
   bool _passobsecure = true;
   bool _copassobsecure = true;
@@ -42,6 +50,7 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
   }
 
   bool agree = false;
+  bool loading = false;
 
   @override
   void dispose() {
@@ -85,11 +94,11 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: 46.w,
+          horizontal: 24.w,
         ),
         child: ListView(children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 34, vertical: 22),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 22.h),
             child: Image.asset(
               'images/reset.png',
               height: 257.9.h,
@@ -190,14 +199,20 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
           SizedBox(
             height: 18.h,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: CustomPrimaryButton(
-                text: AppLocalizations.of(context)!.submit,
-                onPressed: () {
-                  performSubmit();
-                }),
-          ),
+          loading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: Constant.primaryColor,
+                  ),
+                )
+              : Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: CustomPrimaryButton(
+                      text: AppLocalizations.of(context)!.submit,
+                      onPressed: () {
+                        performSubmit();
+                      }),
+                ),
           SizedBox(
             height: 66.h,
           ),
@@ -208,6 +223,9 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
 
   void performSubmit() {
     if (checkData()) {
+      setState(() {
+        loading = true;
+      });
       login();
     }
   }
@@ -242,8 +260,18 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
     );
   }
 
-  void login() {
-    buildShowDialog(context);
+  void login() async {
+    ApiResponse processResponse = await ForgetPassApiController().ResetPass(
+        email: widget.email,
+        newpass: _pass.text,
+        confirmpass: _confirmpass.text);
+    if (processResponse!.sucess) {
+      buildShowDialog(context);
+    }
+    context.showSnakBar(
+      message: processResponse.msg,
+      error: !processResponse.sucess,
+    );
   }
 
   Future<dynamic> buildShowDialog(BuildContext context) {
@@ -272,10 +300,26 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, Success.id);
+                    if (data == 1) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          settings: RouteSettings(arguments: 1),
+                          builder: (context) => DoctorLoginPage(data: 1),
+                        ),
+                      );
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          settings: RouteSettings(arguments: 2),
+                          builder: (context) => PatientLoginPage(data: 2),
+                        ),
+                      );
+                    }
                   },
                   child: Text(
-                    'Go to Home ',
+                    'LOGIN ',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
                         color: Colors.white,

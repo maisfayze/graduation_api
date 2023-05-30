@@ -112,7 +112,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
               ),
             )
           : Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 48.h),
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.h),
               child: FadeInLeft(
                 child: ListView(
                   children: [
@@ -136,7 +136,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                       type: TextInputType.text,
                     ),
                     SizedBox(
-                      height: 16.h,
+                      height: 24.h,
                     ),
                     Text(
                       AppLocalizations.of(context)!.last_name,
@@ -158,7 +158,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                       type: TextInputType.text,
                     ),
                     SizedBox(
-                      height: 16.h,
+                      height: 24.h,
                     ),
                     Text(
                       AppLocalizations.of(context)!.email,
@@ -180,7 +180,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                       type: TextInputType.emailAddress,
                     ),
                     SizedBox(
-                      height: 16.h,
+                      height: 24.h,
                     ),
                     // Text(
                     //   AppLocalizations.of(context)!.phone_number,
@@ -228,7 +228,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                       obscureText: _passobsecure,
                     ),
                     SizedBox(
-                      height: 16.h,
+                      height: 24.h,
                     ),
                     Text(
                       AppLocalizations.of(context)!.confirm,
@@ -258,7 +258,9 @@ class _PatientSignUpState extends State<PatientSignUp> {
                               : Icons.visibility)),
                       obscureText: _copassobsecure,
                     ),
-
+                    SizedBox(
+                      height: 12.h,
+                    ),
                     Align(
                       alignment: Provider.of<LocalizationProvider>(context,
                                       listen: true)

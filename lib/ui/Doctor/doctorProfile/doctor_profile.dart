@@ -54,7 +54,7 @@ class DoctorProfile extends StatelessWidget {
                   // sub_title: AppLocalizations.of(context)!
                   //     .see_your_paid_pending,
                   onPresseed: () {
-                    Navigator.pushNamed(context, MyAppointments.id);
+                    Navigator.pushNamed(context, MyPatientAppointments.id);
                   },
                 ),
                 Padding(
