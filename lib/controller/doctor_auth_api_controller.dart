@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:graduation/api/api_setting.dart';
-import 'package:graduation/models/doctor_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/LogedUser.dart';
@@ -18,7 +17,7 @@ class DoctorAuthApiController with Helpers {
 
     if (response.statusCode == 200 || response.statusCode == 400) {
       var json = jsonDecode(response.body);
-      print('$json');
+      // print('$json');
       var decodedJson = json['data'];
       if (response.statusCode == 200) {
         print('after if');
@@ -47,12 +46,12 @@ class DoctorAuthApiController with Helpers {
       "password": pass
     });
     var json = jsonDecode(response.body);
-    print(json);
+    // print(json);
 
     if (response.statusCode == 200 || response.statusCode == 400) {
       print('${response.statusCode}');
       // var json = jsonDecode(response.body);
-      print(json);
+      // print(json);
       var decodedJson = json['data'];
 
       LogedUserModel user = LogedUserModel.fromJson(decodedJson);

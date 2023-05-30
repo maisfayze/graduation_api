@@ -5,7 +5,11 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
+import 'package:graduation/models/top_doctors.dart';
+import 'package:provider/provider.dart';
 
+import '../../models/view_profile_model.dart';
+import '../../provider/fav_provider.dart';
 import 'Tabs/overview.dart';
 
 class ViewDoctorProfile extends StatefulWidget {
@@ -28,6 +32,8 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
 
   @override
   Widget build(BuildContext context) {
+    final data = ModalRoute.of(context)!.settings.arguments as TopDoctorsModel;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -76,13 +82,26 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
                           child: Stack(
                             children: [
                               Image.network(
-                                'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                                'http://ac7a1ae098-001-site1.etempurl.com${data.doctorImage}',
                                 height: 138.h,
                                 width: 141.w,
                                 fit: BoxFit.cover,
                               ),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (Provider.of<FavouriteProvider>(context,
+                                            listen: false)
+                                        .FavList
+                                        .contains(data)) {
+                                      Provider.of<FavouriteProvider>(context,
+                                              listen: false)
+                                          .RemoveDoc(data);
+                                    } else {
+                                      Provider.of<FavouriteProvider>(context,
+                                              listen: false)
+                                          .addDoc(data);
+                                    }
+                                  },
                                   icon: Container(
                                     width: 21.w,
                                     height: 21.h,
@@ -90,11 +109,20 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
                                       borderRadius: BorderRadius.circular(3.r),
                                       color: Colors.white,
                                     ),
-                                    child: Icon(
-                                      Icons.bookmark_border,
-                                      size: 16,
-                                      color: Colors.black45,
-                                    ),
+                                    child:
+                                        Provider.of<FavouriteProvider>(context)
+                                                .FavList
+                                                .contains(data)
+                                            ? Icon(
+                                                Icons.bookmark,
+                                                size: 16,
+                                                color: Color(0xffF4C150),
+                                              )
+                                            : Icon(
+                                                Icons.bookmark_border,
+                                                size: 16,
+                                                color: Colors.grey,
+                                              ),
                                   )),
                             ],
                           )),
@@ -107,19 +135,22 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'mais',
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18.sp,
-                                color: Colors.black,
+                            SizedBox(
+                              width: 150.w,
+                              child: Text(
+                                'Dr.${data.doctorName}',
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16.sp,
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
                             SizedBox(
                               height: 8.h,
                             ),
                             Text(
-                              'Dentist',
+                              '${data.specialityName}',
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 16.sp,
@@ -127,7 +158,7 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
                               ),
                             ),
                             SizedBox(
-                              height: 10.h,
+                              height: 8.h,
                             ),
                             RatingBar.builder(
                               initialRating: 3.5,
@@ -147,7 +178,7 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
                               },
                             ),
                             SizedBox(
-                              height: 16.h,
+                              height: 8.h,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -158,7 +189,7 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
                                   color: Colors.grey.shade400,
                                 ),
                                 Text(
-                                  'Gaza',
+                                  '${data.clinicAddress}',
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 10.sp,
@@ -233,7 +264,13 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: [OverViewTab(), Text('two'), Text('three')],
+                children: [
+                  OverViewTab(
+                    data: data,
+                  ),
+                  Text('two'),
+                  Text('three')
+                ],
               ),
             ),
           ],

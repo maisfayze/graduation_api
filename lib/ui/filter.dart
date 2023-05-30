@@ -23,13 +23,6 @@ class FilterScreen extends StatefulWidget {
 class _FilterScreenState extends State<FilterScreen> {
   // bool checked = true;
   bool value = false;
-  bool male = false;
-  bool female = false;
-  bool Urology = false;
-  bool Cardiologist = false;
-  bool Neurology = false;
-  bool Orthopedic = false;
-  bool Dentist = false;
   String? _gender;
   int? _spec;
 

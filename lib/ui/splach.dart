@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation/constant/constant.dart';
-import 'package:graduation/models/doctor_model.dart';
 import 'package:graduation/ui/Doctor/DocBtn/btn_doc.dart';
 import 'package:graduation/ui/onBoarding/onboarding.dart';
 import 'package:graduation/ui/patient/PatientBtn/btn_patient.dart';

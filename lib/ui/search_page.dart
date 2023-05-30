@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
 import 'package:graduation/models/filtered_result.dart';
+import 'package:graduation/models/top_doctors.dart';
 import 'package:graduation/ui/patient/PatientBtn/btn_patient.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,6 +15,8 @@ import '../provider/search_filter_provider.dart';
 import '../widget/bookButton.dart';
 import '../widget/viewProfileButton.dart';
 import 'Doctor/DocBtn/btn_doc.dart';
+import 'booking/booking.dart';
+import 'booking/view_doc_profile.dart';
 import 'filter.dart';
 
 class SearchPage extends StatefulWidget {
@@ -96,6 +99,12 @@ class _SearchPageState extends State<SearchPage> {
               child: ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
+                  TopDoctorsModel tops = TopDoctorsModel(
+                      doctorImage: snapshot.data![index].doctorImage,
+                      doctorName: snapshot.data![index].doctorName,
+                      specialityName: snapshot.data![index].specialityName,
+                      doctorId: snapshot.data![index].idDoctor,
+                      clinicAddress: snapshot.data![index].clinicAddress);
                   return Padding(
                     padding: EdgeInsets.symmetric(vertical: 12.h),
                     child: Container(
@@ -215,7 +224,17 @@ class _SearchPageState extends State<SearchPage> {
                                       viewProfileButton(
                                         text: AppLocalizations.of(context)!
                                             .view_profile,
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              settings: RouteSettings(
+                                                  arguments: tops),
+                                              builder: (context) =>
+                                                  ViewDoctorProfile(),
+                                            ),
+                                          );
+                                        },
                                       ),
                                       SizedBox(
                                         width: 5.w,
@@ -223,7 +242,16 @@ class _SearchPageState extends State<SearchPage> {
                                       BookButton(
                                           text: AppLocalizations.of(context)!
                                               .book,
-                                          onPressed: () {}),
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                settings: RouteSettings(
+                                                    arguments: tops),
+                                                builder: (context) => Booking(),
+                                              ),
+                                            );
+                                          }),
                                     ],
                                   )
                                 ],

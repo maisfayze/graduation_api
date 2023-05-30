@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../constant/constant.dart';
+import '../../prefs/prefs.dart';
 import '../../provider/localization_provider.dart';
 import '../../widget/profile_sett.dart';
 import '../../widget/profile_widget.dart';
@@ -108,18 +109,40 @@ class ProfileSetting extends StatelessWidget {
           ),
           // ProfileSetting image
           Positioned(
-            top: 42.0, // (background container size) - (circle height / 2)
+            top: 42.0.h, // (background container size) - (circle height / 2)
             child: Container(
-              height: 110.0.h,
+              alignment: Alignment.center,
               width: 110.0.w,
-              child: CircleAvatar(
-                radius: 55.r,
-                backgroundImage: AssetImage('images/profile.jpg'),
+              height: 110.0.h,
+              decoration: BoxDecoration(
+                image: SharedPrefController().getValueFor('image') == ''
+                    ? DecorationImage(
+                        image: NetworkImage(
+                            'http://painrehabproducts.com/wp-content/uploads/2014/10/facebook-default-no-profile-pic.jpg'),
+                        fit: BoxFit.cover)
+                    : DecorationImage(
+                        image: NetworkImage(
+                            'http://ac7a1ae098-001-site1.etempurl.com${SharedPrefController().getValueFor('image')}'),
+                        fit: BoxFit.cover),
+                color: Colors.blue,
+                borderRadius: BorderRadius.all(Radius.circular(100.r)),
               ),
-              decoration:
-                  BoxDecoration(shape: BoxShape.circle, color: Colors.white),
             ),
           )
+
+          // Positioned(
+          //   top: 42.0, // (background container size) - (circle height / 2)
+          //   child: Container(
+          //     height: 110.0.h,
+          //     width: 110.0.w,
+          //     child: CircleAvatar(
+          //       radius: 55.r,
+          //       backgroundImage: AssetImage('images/profile.jpg'),
+          //     ),
+          //     decoration:
+          //         BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+          //   ),
+          // )
         ],
       ),
     );

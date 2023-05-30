@@ -12,6 +12,9 @@ import 'package:graduation/widget/bookButton.dart';
 import 'package:graduation/widget/viewProfileButton.dart';
 import 'package:provider/provider.dart';
 
+import '../booking/booking.dart';
+import '../booking/view_doc_profile.dart';
+
 class TopDoctors extends StatefulWidget {
   TopDoctors({Key? key}) : super(key: key);
   static const id = 'TopDoctors';
@@ -21,52 +24,6 @@ class TopDoctors extends StatefulWidget {
 }
 
 class _TopDoctorsState extends State<TopDoctors> {
-  final List<DoctorModel> _doctors = <DoctorModel>[
-    DoctorModel(
-        img: 'images/doctorw.jpg',
-        spec: 'Dentist',
-        rate: 4.5,
-        name: 'meme',
-        country: 'Gaza'),
-    DoctorModel(
-      img: 'images/blogs.jpg',
-      spec: 'Cardiology',
-      rate: 2,
-      name: 'meme',
-      country: 'Rafah',
-    ),
-    DoctorModel(
-        img: 'images/doctorw.jpg',
-        spec: 'Dermatology',
-        rate: 3,
-        name: 'meme',
-        country: 'Rafah'),
-    DoctorModel(
-        img: 'images/blogs.jpg',
-        spec: 'Hematology',
-        rate: 3.5,
-        name: 'meme',
-        country: 'Nesiratee'),
-    DoctorModel(
-        img: 'images/doctorw.jpg',
-        spec: 'Obstetrics',
-        rate: 2.5,
-        name: 'meme',
-        country: 'MASER'),
-    DoctorModel(
-        img: 'images/blogs.jpg',
-        spec: 'Orthopedics',
-        rate: 4.5,
-        name: 'meme',
-        country: 'Germany'),
-    DoctorModel(
-        img: 'images/doctorw.jpg',
-        spec: 'Urology',
-        rate: 4.5,
-        name: 'meme',
-        country: 'ALzhra'),
-  ];
-
   bool _fav = false;
 
   @override
@@ -279,7 +236,18 @@ class _TopDoctorsState extends State<TopDoctors> {
                                       viewProfileButton(
                                         text: AppLocalizations.of(context)!
                                             .view_profile,
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              settings: RouteSettings(
+                                                  arguments:
+                                                      snapshot.data![index]),
+                                              builder: (context) =>
+                                                  ViewDoctorProfile(),
+                                            ),
+                                          );
+                                        },
                                       ),
                                       SizedBox(
                                         width: 5.w,
@@ -287,7 +255,17 @@ class _TopDoctorsState extends State<TopDoctors> {
                                       BookButton(
                                           text: AppLocalizations.of(context)!
                                               .book,
-                                          onPressed: () {}),
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                settings: RouteSettings(
+                                                    arguments:
+                                                        snapshot.data![index]),
+                                                builder: (context) => Booking(),
+                                              ),
+                                            );
+                                          }),
                                     ],
                                   )
                                 ],

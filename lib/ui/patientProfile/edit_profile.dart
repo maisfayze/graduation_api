@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 
 import '../../constant/constant.dart';
 import '../../models/blood.dart';
+import '../../prefs/prefs.dart';
 import '../../widget/customPrimaryButton.dart';
 import '../../widget/custom_text_filed.dart';
 import '../../provider/localization_provider.dart';
@@ -332,13 +333,13 @@ class _EditProfileState extends State<EditProfile> {
             child: Center(
               child: _imageFile == null
                   ? Container(
-                      width: 110.0.w,
+                      width: 100.0.w,
                       height: 110.0.h,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(
-                                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
-                            fit: BoxFit.contain),
+                                'http://ac7a1ae098-001-site1.etempurl.com${SharedPrefController().getValueFor('image')}'),
+                            fit: BoxFit.cover),
                         color: Colors.blue,
                         borderRadius: BorderRadius.all(Radius.circular(70.r)),
                       ),

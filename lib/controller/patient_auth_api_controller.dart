@@ -30,7 +30,7 @@ class PatientAuthApiController {
     if (response.statusCode == 200 || response.statusCode == 400) {
       print('${response.statusCode}');
       // var json = jsonDecode(response.body);
-      print(json);
+      // print(json);
       // Doctor doctor = Doctor.fromJson(json);
       return ApiResponse('Signup Successfully', true);
       // return ApiResponse(json['message'], json['isValid']);

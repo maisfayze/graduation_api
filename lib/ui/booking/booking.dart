@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../main.dart';
+import '../../models/top_doctors.dart';
 
 class Booking extends StatefulWidget {
   const Booking({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ class _BookingState extends State<Booking> {
   DateTime? selectedDate;
   String? selectedDay;
   int tapped_index = 0;
+
   List<String> event = [
     '9:00 AM',
     '9:00 AM',
@@ -55,6 +57,8 @@ class _BookingState extends State<Booking> {
 
   @override
   Widget build(BuildContext context) {
+    final data = ModalRoute.of(context)!.settings.arguments as TopDoctorsModel;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -100,7 +104,7 @@ class _BookingState extends State<Booking> {
                       ClipRRect(
                           borderRadius: BorderRadius.circular(10.r),
                           child: Image.network(
-                            'https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                            'http://ac7a1ae098-001-site1.etempurl.com${data.doctorImage}',
                             height: 80.h,
                             width: 80.w,
                             fit: BoxFit.cover,
@@ -115,7 +119,7 @@ class _BookingState extends State<Booking> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'mais',
+                              '${data.doctorName}',
                               style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16.sp,
@@ -154,7 +158,7 @@ class _BookingState extends State<Booking> {
                                   color: Colors.grey.shade400,
                                 ),
                                 Text(
-                                  'Gaza',
+                                  '${data.clinicAddress}',
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 14.sp,

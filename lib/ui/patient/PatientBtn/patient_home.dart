@@ -19,6 +19,8 @@ import '../../../widget/drawer_widget.dart';
 import '../../../widget/search_bar.dart';
 import '../../../widget/see_all_row.dart';
 import '../../../widget/viewProfileButton.dart';
+import '../../booking/booking.dart';
+import '../../booking/view_doc_profile.dart';
 import '../../search_page.dart';
 import '../blogs.dart';
 import '../specialities.dart';
@@ -354,7 +356,18 @@ class _PatientHomeState extends State<PatientHome> {
                                         viewProfileButton(
                                           text: AppLocalizations.of(context)!
                                               .view_profile,
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                settings: RouteSettings(
+                                                    arguments:
+                                                        snapshot.data![index]),
+                                                builder: (context) =>
+                                                    ViewDoctorProfile(),
+                                              ),
+                                            );
+                                          },
                                         ),
                                         SizedBox(
                                           width: 5.w,
@@ -362,7 +375,18 @@ class _PatientHomeState extends State<PatientHome> {
                                         BookButton(
                                             text: AppLocalizations.of(context)!
                                                 .book,
-                                            onPressed: () {}),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  settings: RouteSettings(
+                                                      arguments: snapshot
+                                                          .data![index]),
+                                                  builder: (context) =>
+                                                      Booking(),
+                                                ),
+                                              );
+                                            }),
                                       ],
                                     )
                                   ],
@@ -547,134 +571,6 @@ class _PatientHomeState extends State<PatientHome> {
                   },
                 ),
 
-                // ConstrainedBox(
-                //   constraints: BoxConstraints(maxHeight: 340.h),
-                //   child: ListView.builder(
-                //     itemCount: 4,
-                //     scrollDirection: Axis.horizontal,
-                //     itemBuilder: (context, index) {
-                //       return Container(
-                //         margin: EdgeInsets.only(right: 12.w),
-                //         width: 211,
-                //         height: 326,
-                //         decoration: BoxDecoration(
-                //             borderRadius: BorderRadius.circular(12.r),
-                //             border: Border.all(
-                //                 color: Colors.grey.shade400, width: .5.w)),
-                //         child: Padding(
-                //           padding: EdgeInsets.only(
-                //               right: 16.w, top: 16.h, left: 16.w, bottom: 16.h),
-                //           // padding: EdgeInsets.all(14.r),
-                //           child: Column(
-                //             mainAxisAlignment: MainAxisAlignment.start,
-                //             crossAxisAlignment: CrossAxisAlignment.start,
-                //             children: [
-                //               ClipRRect(
-                //                   borderRadius: BorderRadius.circular(10.r),
-                //                   child: Image.network(
-                //                     'https://blog.feedspot.com/wp-content/uploads/2018/04/Doctor-Blogs.jpg',
-                //                     height: 95.h,
-                //                     width: 179.w,
-                //                     fit: BoxFit.cover,
-                //                   )),
-                //               SizedBox(
-                //                 height: 16.h,
-                //               ),
-                //               Text(
-                //                 'What We Know So Far About COVID-19 Transmission ?',
-                //                 style: GoogleFonts.poppins(
-                //                   fontWeight: FontWeight.w600,
-                //                   fontSize: 12.sp,
-                //                   color: Colors.black,
-                //                 ),
-                //               ),
-                //               SizedBox(
-                //                 height: 8.h,
-                //               ),
-                //               Row(
-                //                 crossAxisAlignment: CrossAxisAlignment.end,
-                //                 // mainAxisAlignment: MainAxisAlignment.end,
-                //                 children: [
-                //                   Row(
-                //                     crossAxisAlignment: CrossAxisAlignment.end,
-                //                     children: [
-                //                       ClipRRect(
-                //                           borderRadius:
-                //                               BorderRadius.circular(10.r),
-                //                           child: Image.asset(
-                //                             'images/doctorw.jpg',
-                //                             height: 20.h,
-                //                             width: 20.w,
-                //                             fit: BoxFit.cover,
-                //                           )),
-                //                       SizedBox(
-                //                         width: 5.w,
-                //                       ),
-                //                       Text(
-                //                         'Dr. Linda toben',
-                //                         style: GoogleFonts.poppins(
-                //                           fontWeight: FontWeight.w400,
-                //                           fontSize: 10.sp,
-                //                           color: Colors.grey,
-                //                         ),
-                //                       ),
-                //                     ],
-                //                   ),
-                //                   Spacer(),
-                //                   Row(
-                //                     // crossAxisAlignment: CrossAxisAlignment.end,
-                //                     // mainAxisAlignment: MainAxisAlignment.end,
-                //                     children: [
-                //                       Icon(
-                //                         Icons.watch_later_outlined,
-                //                         size: 10,
-                //                         color: Colors.grey,
-                //                       ),
-                //                       SizedBox(
-                //                         width: 5.w,
-                //                       ),
-                //                       Text(
-                //                         '3. Jan .2023',
-                //                         style: GoogleFonts.poppins(
-                //                           fontWeight: FontWeight.w400,
-                //                           fontSize: 10.sp,
-                //                           color: Colors.grey,
-                //                         ),
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ],
-                //               ),
-                //               SizedBox(
-                //                 height: 12.h,
-                //               ),
-                //               SizedBox(
-                //                 width: 183.w,
-                //                 height: 70.h,
-                //                 child: Text(
-                //                   overflow: TextOverflow.fade,
-                //                   'Many of us woke up today to the shocking news that the President Donald Trump and first ',
-                //                   style: GoogleFonts.poppins(
-                //                     fontWeight: FontWeight.w400,
-                //                     fontSize: 12.sp,
-                //                     color: Colors.black,
-                //                   ),
-                //                 ),
-                //               ),
-                //               SizedBox(
-                //                 height: 14.h,
-                //               ),
-                //               viewProfileButton(
-                //                 text: AppLocalizations.of(context)!.read_more,
-                //                 onPressed: () {},
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       );
-                //     },
-                //   ),
-                // ),
                 SizedBox(
                   height: 16.h,
                 ),

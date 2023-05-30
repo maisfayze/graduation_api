@@ -19,6 +19,8 @@ import '../../../widget/drawer_widget.dart';
 import '../../../widget/search_bar.dart';
 import '../../../widget/see_all_row.dart';
 import '../../../widget/viewProfileButton.dart';
+import '../../booking/booking.dart';
+import '../../booking/view_doc_profile.dart';
 import '../../patient/blogs.dart';
 import '../../patient/specialities.dart';
 import '../../patient/top_doctors.dart';
@@ -354,7 +356,18 @@ class _DoctorHomeState extends State<DoctorHome> {
                                         viewProfileButton(
                                           text: AppLocalizations.of(context)!
                                               .view_profile,
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                settings: RouteSettings(
+                                                    arguments:
+                                                        snapshot.data![index]),
+                                                builder: (context) =>
+                                                    ViewDoctorProfile(),
+                                              ),
+                                            );
+                                          },
                                         ),
                                         SizedBox(
                                           width: 5.w,
@@ -362,7 +375,18 @@ class _DoctorHomeState extends State<DoctorHome> {
                                         BookButton(
                                             text: AppLocalizations.of(context)!
                                                 .book,
-                                            onPressed: () {}),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  settings: RouteSettings(
+                                                      arguments: snapshot
+                                                          .data![index]),
+                                                  builder: (context) =>
+                                                      Booking(),
+                                                ),
+                                              );
+                                            }),
                                       ],
                                     )
                                   ],
@@ -412,8 +436,8 @@ class _DoctorHomeState extends State<DoctorHome> {
 
                             return Container(
                               margin: EdgeInsets.only(right: 12.w),
-                              width: 211,
-                              height: 326,
+                              width: 218.w,
+                              height: 320.h,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12.r),
                                   border: Border.all(
@@ -436,7 +460,7 @@ class _DoctorHomeState extends State<DoctorHome> {
                                         child: Image.network(
                                           'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].blogImage}',
                                           height: 95.h,
-                                          width: 179.w,
+                                          width: 185.w,
                                           fit: BoxFit.cover,
                                         )),
                                     SizedBox(
@@ -514,7 +538,7 @@ class _DoctorHomeState extends State<DoctorHome> {
                                     ),
                                     SizedBox(
                                       width: 183.w,
-                                      height: 70.h,
+                                      height: 50.h,
                                       child: Text(
                                         overflow: TextOverflow.fade,
                                         '${snapshot.data![index].content}',
@@ -526,7 +550,7 @@ class _DoctorHomeState extends State<DoctorHome> {
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 14.h,
+                                      height: 20.h,
                                     ),
                                     viewProfileButton(
                                       text: AppLocalizations.of(context)!
