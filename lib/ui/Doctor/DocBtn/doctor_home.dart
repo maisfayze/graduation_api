@@ -25,6 +25,7 @@ import '../../booking/view_doc_profile.dart';
 import '../../patient/blogs.dart';
 import '../../patient/specialities.dart';
 import '../../patient/top_doctors.dart';
+import '../../search_page.dart';
 
 class DoctorHome extends StatefulWidget {
   const DoctorHome({Key? key}) : super(key: key);
@@ -97,7 +98,9 @@ class _DoctorHomeState extends State<DoctorHome> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 16.h),
+        padding: EdgeInsets.symmetric(
+          horizontal: 32.w,
+        ),
         child: SingleChildScrollView(
           child: FadeInLeft(
             child: Column(
@@ -120,6 +123,9 @@ class _DoctorHomeState extends State<DoctorHome> {
                   height: 16.h,
                 ),
                 SearchBarWidget(
+                    onPressed: () {
+                      Navigator.pushNamed(context, SearchPage.id);
+                    },
                     type: TextInputType.text,
                     controller: _searchController,
                     hint: AppLocalizations.of(context)!.search_clinic_doctor,
@@ -148,7 +154,7 @@ class _DoctorHomeState extends State<DoctorHome> {
                     } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                       return ConstrainedBox(
                         constraints:
-                            BoxConstraints(maxHeight: 108.h, minWidth: 108.h),
+                            BoxConstraints(maxHeight: 108.h, minWidth: 108.w),
                         child: ListView.builder(
                           itemCount: snapshot.data!.length,
                           scrollDirection: Axis.horizontal,
@@ -215,7 +221,6 @@ class _DoctorHomeState extends State<DoctorHome> {
                     }
                   },
                 ),
-
                 SizedBox(
                   height: 20.h,
                 ),
@@ -383,8 +388,10 @@ class _DoctorHomeState extends State<DoctorHome> {
                                                   settings: RouteSettings(
                                                       arguments: snapshot
                                                           .data![index]),
-                                                  builder: (context) =>
-                                                      Booking(),
+                                                  builder: (context) => Booking(
+                                                      data: snapshot
+                                                          .data![index]
+                                                          .doctorId),
                                                 ),
                                               );
                                             }),
@@ -404,7 +411,6 @@ class _DoctorHomeState extends State<DoctorHome> {
                     }
                   },
                 ),
-
                 SizedBox(
                   height: 20.h,
                 ),
@@ -572,6 +578,7 @@ class _DoctorHomeState extends State<DoctorHome> {
                     }
                   },
                 ),
+
                 SizedBox(
                   height: 16.h,
                 ),

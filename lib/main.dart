@@ -37,6 +37,7 @@ import 'package:graduation/ui/patient/specialities.dart';
 import 'package:graduation/ui/patient/top_doctors.dart';
 import 'package:graduation/ui/patientProfile/edit_profile.dart';
 import 'package:graduation/ui/patientProfile/new_pass.dart';
+import 'package:graduation/ui/patientProfile/patient_dashboard.dart';
 import 'package:graduation/ui/patientProfile/profile.dart';
 import 'package:graduation/ui/patientProfile/profile_setting.dart';
 import 'package:graduation/ui/search_page.dart';
@@ -115,9 +116,9 @@ class MyApp extends StatelessWidget {
                   Provider.of<LocalizationProvider>(context, listen: true)
                       .languages),
               title: 'Flutter Demo',
-              initialRoute: SplachScreen.id,
+              initialRoute: SplashScreen.id,
               routes: {
-                SplachScreen.id: (context) => SplachScreen(),
+                SplashScreen.id: (context) => SplashScreen(),
                 OnBoarding.id: (context) => OnBoarding(),
                 SearchPage.id: (context) => SearchPage(),
                 FilterScreen.id: (context) => FilterScreen(),
@@ -149,6 +150,7 @@ class MyApp extends StatelessWidget {
                 Booking.id: (context) => Booking(),
                 Success.id: (context) => Success(),
                 MyAppointment.id: (context) => MyAppointment(),
+                PatientDashboard.id: (context) => PatientDashboard(),
               },
             );
           },

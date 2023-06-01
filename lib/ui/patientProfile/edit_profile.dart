@@ -143,6 +143,7 @@ class _EditProfileState extends State<EditProfile> {
                   height: 10.h,
                 ),
                 CustomTextFiled(
+                  hint: SharedPrefController().getValueFor('doctorName'),
                   controller: _fname,
                   type: TextInputType.text,
                 ),

@@ -32,8 +32,8 @@ class ProfileWidget extends StatelessWidget {
                   children: [
                     Image.asset(
                       'images/$img.png',
-                      width: 24.w,
-                      height: 20.h,
+                      width: 26.w,
+                      height: 26.h,
                     ),
                     SizedBox(
                       width: 16.w,

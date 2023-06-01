@@ -14,7 +14,6 @@ class GetBlogsApiController {
       'Accept': 'application/json',
       'Authorization': token,
     });
-    // print(response.body);
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       var DecodedData = data['data'] as List;

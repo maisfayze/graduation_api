@@ -79,6 +79,9 @@ class _BlogsState extends State<Blogs> {
                     color: Colors.grey,
                   )),
             ),
+            SizedBox(
+              height: 20.h,
+            ),
             Expanded(
               child: FutureBuilder(
                 future: GetBlogsApiController().getBlogs(),
@@ -104,7 +107,7 @@ class _BlogsState extends State<Blogs> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20.r),
                               border: Border.all(
-                                  color: Colors.grey.shade400, width: .5),
+                                  color: Colors.grey.shade300, width: .6),
                             ),
                             child: Row(
                               children: [

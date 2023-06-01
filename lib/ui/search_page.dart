@@ -114,7 +114,7 @@ class _SearchPageState extends State<SearchPage> {
                         border: Border.all(color: Colors.grey, width: .5),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        padding: EdgeInsets.symmetric(horizontal: 14.w),
                         child: Row(
                           children: [
                             ClipRRect(
@@ -122,12 +122,12 @@ class _SearchPageState extends State<SearchPage> {
                                 child: Image.network(
                                   "http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].doctorImage}",
                                   height: 138.h,
-                                  width: 130.w,
+                                  width: 128.w,
                                   fit: BoxFit.cover,
                                 )),
                             Padding(
                               padding: EdgeInsets.only(
-                                  left: 18.w, top: 24.h, right: 0),
+                                  left: 16.w, top: 24.h, right: 3.w),
                               // padding:
                               //     EdgeInsets.symmetric(horizontal: 18, vertical: 30),
                               child: Column(
@@ -234,7 +234,7 @@ class _SearchPageState extends State<SearchPage> {
                                         },
                                       ),
                                       SizedBox(
-                                        width: 5.w,
+                                        width: 4.w,
                                       ),
                                       BookButton(
                                           text: AppLocalizations.of(context)!
@@ -244,8 +244,11 @@ class _SearchPageState extends State<SearchPage> {
                                               context,
                                               MaterialPageRoute(
                                                 settings: RouteSettings(
-                                                    arguments: tops),
-                                                builder: (context) => Booking(),
+                                                    arguments:
+                                                        snapshot.data![index]),
+                                                builder: (context) => Booking(
+                                                    data: snapshot
+                                                        .data![index].idDoctor),
                                               ),
                                             );
                                           }),

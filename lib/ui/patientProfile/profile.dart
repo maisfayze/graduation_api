@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/prefs/prefs.dart';
+import 'package:graduation/ui/patientProfile/patient_dashboard.dart';
 
 import 'package:provider/provider.dart';
 
@@ -71,11 +72,14 @@ class PatientProfile extends StatelessWidget {
                         child: Column(
                           children: [
                             ProfileWidget(
-                              img: 'bill',
-                              title: AppLocalizations.of(context)!.invoices,
+                              img: 'dashboard',
+                              title: 'Dashboard',
                               // sub_title: AppLocalizations.of(context)!
                               //     .see_your_paid_pending,
-                              onPresseed: () {},
+                              onPresseed: () {
+                                Navigator.pushNamed(
+                                    context, PatientDashboard.id);
+                              },
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(vertical: 12.h),

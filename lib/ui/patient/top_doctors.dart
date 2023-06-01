@@ -263,7 +263,9 @@ class _TopDoctorsState extends State<TopDoctors> {
                                                 settings: RouteSettings(
                                                     arguments:
                                                         snapshot.data![index]),
-                                                builder: (context) => Booking(),
+                                                builder: (context) => Booking(
+                                                    data: snapshot
+                                                        .data![index].doctorId),
                                               ),
                                             );
                                           }),

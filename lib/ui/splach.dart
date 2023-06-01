@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,20 +9,20 @@ import 'package:graduation/ui/patient/PatientBtn/btn_patient.dart';
 
 import '../prefs/prefs.dart';
 
-class SplachScreen extends StatefulWidget {
+class SplashScreen extends StatefulWidget {
   static const String id = 'SplachScreen';
 
-  const SplachScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<SplachScreen> createState() => _SplachScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplachScreenState extends State<SplachScreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(
-      Duration(seconds: 3),
+      Duration(seconds: 4),
       () {
         if (SharedPrefController().getValueFor('userType') == 'Doctor') {
           String rout =
@@ -39,35 +40,24 @@ class _SplachScreenState extends State<SplachScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(SharedPrefController().getValueFor('userType'));
+    print('${SharedPrefController().getValueFor('doctorId')}');
 
     return Scaffold(
       body: Container(
         color: Constant.primaryColor,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 292.h,
-            ),
-            Center(
-              child: Image.network(
-                'https://t3.ftcdn.net/jpg/01/01/10/44/360_F_101104446_ng7NrzPCRCN6yb5O7QVE050Vn5YWZnbC.jpg',
-                width: 300.w,
-                height: 300.h,
+            FadeInLeftBig(
+              child: Center(
+                child: Image.asset(
+                  'images/test_Splach.gif',
+                  width: 500.w,
+                  height: 800.h,
+                ),
               ),
             ),
-            SizedBox(
-              height: 30.h,
-            ),
-            // Center(
-            //     child: Text(
-            //   'ديوان رئيس الوزراء',
-            //   style: TextStyle(
-            //     color: Colors.white,
-            //     fontSize: 31.sp,
-            //     fontWeight: FontWeight.w400,
-            //   ),
-            // )),
           ],
         ),
       ),

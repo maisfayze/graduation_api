@@ -7,6 +7,7 @@ import 'package:graduation/widget/customPrimaryButton.dart';
 
 import '../../../constant/constant.dart';
 import '../booking.dart';
+import '../booking2.dart';
 
 class OverViewTab extends StatefulWidget {
   OverViewTab({Key? key, required this.data}) : super(key: key);
@@ -187,10 +188,12 @@ class _OverViewTabState extends State<OverViewTab> {
                   context,
                   MaterialPageRoute(
                     settings: RouteSettings(arguments: receivedData),
-                    builder: (context) => Booking(),
+                    builder: (context) => Booking(
+                      data: receivedData.doctorId,
+                    ),
                   ),
                 );
-                // Navigator.pushNamed(context, Booking.id);
+                // Navigator.pushNamed(context, Colors.grey.id);
               },
               child: Text(
                 'Book Appointment',

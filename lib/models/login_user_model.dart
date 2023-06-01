@@ -8,6 +8,7 @@ class LogedUserModel {
     this.image,
     required this.token,
     required this.isValid,
+    required this.doctorId,
   });
   late final String doctorName;
   late final String email;
@@ -16,6 +17,7 @@ class LogedUserModel {
   late final String id;
   late final String userType;
   late final bool isValid;
+  late final int doctorId;
 
   LogedUserModel.fromJson(Map<String, dynamic> json) {
     doctorName = json['doctorName'];
@@ -25,6 +27,7 @@ class LogedUserModel {
     id = json['id'];
     userType = json['userType'];
     isValid = json['isValid'];
+    doctorId = json['doctorId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -35,6 +38,7 @@ class LogedUserModel {
     _data['token'] = token;
     _data['isValid'] = isValid;
     _data['id'] = id;
+    _data['doctorId'] = doctorId;
 
     return _data;
   }

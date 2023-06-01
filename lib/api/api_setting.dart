@@ -19,4 +19,7 @@ class ApiSetting {
 
   static const String GetBusinessHours =
       '${_baseUrl}scheduletiming/getBusinessHoursForDoctor?doctorId=';
+
+  static const String CreateAppointments =
+      '${_baseUrl}appoitment/CreateAppointments';
 }

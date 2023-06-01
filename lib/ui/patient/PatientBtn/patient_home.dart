@@ -96,7 +96,7 @@ class _PatientHomeState extends State<PatientHome> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: 24.w,
+          horizontal: 32.w,
         ),
         child: SingleChildScrollView(
           child: FadeInLeft(
@@ -151,7 +151,7 @@ class _PatientHomeState extends State<PatientHome> {
                     } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                       return ConstrainedBox(
                         constraints:
-                            BoxConstraints(maxHeight: 108.h, minWidth: 108.w),
+                            BoxConstraints(maxHeight: 112.h, minWidth: 112.w),
                         child: ListView.builder(
                           itemCount: snapshot.data!.length,
                           scrollDirection: Axis.horizontal,
@@ -385,8 +385,10 @@ class _PatientHomeState extends State<PatientHome> {
                                                   settings: RouteSettings(
                                                       arguments: snapshot
                                                           .data![index]),
-                                                  builder: (context) =>
-                                                      Booking(),
+                                                  builder: (context) => Booking(
+                                                      data: snapshot
+                                                          .data![index]
+                                                          .doctorId),
                                                 ),
                                               );
                                             }),
