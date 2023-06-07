@@ -26,6 +26,7 @@ class GetStarted extends StatelessWidget {
         child: Scaffold(
       backgroundColor: Colors.white,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: EdgeInsets.only(top: 28.h, left: 28.w, right: 28.w),
@@ -63,6 +64,16 @@ class GetStarted extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                FadeInLeft(
+                  child: Image.asset(
+                    'images/logo.png',
+                    width: 300.w,
+                    height: 90.h,
+                  ),
+                ),
+                SizedBox(
+                  height: 32.h,
+                ),
                 FadeInUp(
                   child: Text(
                     AppLocalizations.of(context)!.lets_get_started,

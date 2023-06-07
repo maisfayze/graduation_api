@@ -20,7 +20,7 @@ class DoctorProfile extends StatelessWidget {
   static const id = "DoctorProfile";
   @override
   Widget build(BuildContext context) {
-    String name = '${SharedPrefController().getValueFor('doctorName')}';
+    String name = '${SharedPrefController().getValueFor('fullName')}';
     String image = '${SharedPrefController().getValueFor('image')}';
     print('imageData $image');
     return Scaffold(

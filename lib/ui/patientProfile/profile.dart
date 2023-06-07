@@ -22,7 +22,7 @@ class PatientProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String name = '${SharedPrefController().getValueFor('doctorName')}';
+    String name = '${SharedPrefController().getValueFor('fullName')}';
 
     return Scaffold(
       backgroundColor: Colors.white,

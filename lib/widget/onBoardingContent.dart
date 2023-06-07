@@ -28,7 +28,7 @@ class OnBoardingContent extends StatelessWidget {
           child: Image.asset(
             img,
             height: 300.h,
-            matchTextDirection: true,
+            matchTextDirection: false,
           ),
         ),
         Padding(
@@ -47,12 +47,15 @@ class OnBoardingContent extends StatelessWidget {
               SizedBox(
                 height: 12.h,
               ),
-              FadeInUp(
-                child: Text(
-                  '$subTitle',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(
-                      fontSize: 16.sp, fontWeight: FontWeight.w400),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: FadeInUp(
+                  child: Text(
+                    '$subTitle',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                        fontSize: 16.sp, fontWeight: FontWeight.w400),
+                  ),
                 ),
               ),
             ],

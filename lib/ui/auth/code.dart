@@ -94,7 +94,7 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: 46.w,
+          horizontal: 20.w,
         ),
         child: ListView(children: [
           Padding(

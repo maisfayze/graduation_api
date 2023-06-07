@@ -94,12 +94,12 @@ class _OnBoardingState extends State<OnBoarding> {
                 },
                 children: [
                   OnBoardingContent(
-                    img: 'images/1.gif',
+                    img: 'images/ezgif.com-crop.gif',
                     title: AppLocalizations.of(context)!.on1_title,
                     subTitle: AppLocalizations.of(context)!.on1_Subtitle,
                   ),
                   OnBoardingContent(
-                    img: 'images/2.gif',
+                    img: 'images/o2.gif',
                     title: AppLocalizations.of(context)!.on2_title,
                     subTitle: AppLocalizations.of(context)!.on2_Subtitle,
                   ),
@@ -112,7 +112,7 @@ class _OnBoardingState extends State<OnBoarding> {
               ),
             ),
             SizedBox(
-              height: 82.h,
+              height: 62.h,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -147,7 +147,7 @@ class _OnBoardingState extends State<OnBoarding> {
               ),
             ),
             SizedBox(
-              height: 66.h,
+              height: 70.h,
             ),
           ],
         ),

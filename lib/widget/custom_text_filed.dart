@@ -45,7 +45,7 @@ class CustomTextFiled extends StatelessWidget {
                       .languages ==
                   'en'
               ? Padding(
-                  padding: EdgeInsets.only(left: 37, right: 12),
+                  padding: EdgeInsets.only(left: 30, right: 12),
                   child: prefixIcon,
                 )
               : Padding(
@@ -62,11 +62,10 @@ class CustomTextFiled extends StatelessWidget {
           ),
           contentPadding: EdgeInsets.zero,
           constraints: BoxConstraints(
-            maxHeight: errorText == null ? 60 : 85,
+            maxHeight: errorText == null ? 60.h : 85.h,
             minHeight: 60.h,
           ),
-
-          // contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 34),
+          // contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
           hintStyle: GoogleFonts.poppins(
               fontSize: 16.sp,
               fontWeight: FontWeight.normal,

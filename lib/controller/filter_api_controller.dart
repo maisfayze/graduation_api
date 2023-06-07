@@ -11,7 +11,7 @@ class FilterApiController {
     String token = SharedPrefController().getValueFor('token');
 
     Uri uri = Uri.parse(
-        'http://ac7a1ae098-001-site1.etempurl.com/api/doctor/SearchDoctors?gender=$gender&Specialty=$spec');
+        'http://ac7a1ae098-001-site1.etempurl.com/api/doctor/SearchDoctorsByGender&Specialty?gender=$gender&Specialty=$spec');
     http.Response response = await http.get(uri, headers: {
       'Accept': 'application/json',
       'Authorization': token,

@@ -186,14 +186,14 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
                               children: [
                                 Icon(
                                   Icons.location_on,
-                                  size: 10,
+                                  size: 12,
                                   color: Colors.grey.shade400,
                                 ),
                                 Text(
                                   '${data.clinicAddress}',
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 10.sp,
+                                    fontSize: 14.sp,
                                     color: Colors.grey.shade400,
                                   ),
                                 ),

@@ -431,6 +431,7 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
+                        setState(() {});
                         performLogin();
                       },
                       child: Text(
@@ -486,7 +487,7 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                   } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                     return Container(
                       width: 398.w,
-                      height: 270.h,
+                      height: 350.h,
                       decoration: BoxDecoration(
                         color: Colors.white,
                       ),
@@ -529,10 +530,19 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                     );
                   } else {
                     return Center(
-                      child: Text('NO DATA'),
+                      child: Text(
+                        'No Time Schedule yet',
+                        style: GoogleFonts.poppins(
+                            color: Colors.black,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500),
+                      ),
                     );
                   }
                 },
+              ),
+              SizedBox(
+                height: 20.h,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(

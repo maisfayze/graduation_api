@@ -287,6 +287,18 @@ class _BookingState extends State<Booking> {
                                   ),
                                 ),
                                 Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 24.0.w),
+                                  child: Text(
+                                    'Start time',
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18.sp,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 10.w, vertical: 10.h),
                                   child: Expanded(
@@ -351,6 +363,18 @@ class _BookingState extends State<Booking> {
                                         errorStyle: GoogleFonts.poppins(
                                             fontSize: 12.sp)),
                                   )),
+                                ),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 24.0.w),
+                                  child: Text(
+                                    'End time',
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18.sp,
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.symmetric(

@@ -47,109 +47,112 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)!.settings.arguments as int;
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios_sharp,
-            color: Colors.black,
-            size: 24,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        resizeToAvoidBottomInset: true,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios_sharp,
+              color: Colors.black,
+              size: 24,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        centerTitle: true,
-        title: Text(
-          AppLocalizations.of(context)!.forgot_title,
-          textAlign: TextAlign.center,
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w600,
-            fontSize: 18.sp,
-            color: Colors.black,
-          ),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 24.w,
-        ),
-        child: ListView(key: _formKey, children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 34.w, vertical: 22.h),
-            child: Image.asset(
-              'images/forgot.png',
-              height: 257.9.h,
-              width: 251.36.w,
-              matchTextDirection: true,
+          centerTitle: true,
+          title: Text(
+            AppLocalizations.of(context)!.forgot_title,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.poppins(
+              fontWeight: FontWeight.w600,
+              fontSize: 18.sp,
+              color: Colors.black,
             ),
           ),
-          Padding(
-            padding: Provider.of<LocalizationProvider>(context, listen: true)
-                        .languages ==
-                    'en'
-                ? EdgeInsets.only(left: 12.w, right: 50.w)
-                : EdgeInsets.only(left: 120.w, right: 20.w),
-            child: Text(
-              AppLocalizations.of(context)!.forgot,
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w600,
-                fontSize: 30.sp,
-                color: Colors.black,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 20.w,
+          ),
+          child: ListView(key: _formKey, children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 34.w, vertical: 22.h),
+              child: Image.asset(
+                'images/forgot.png',
+                height: 257.9.h,
+                width: 251.36.w,
+                matchTextDirection: true,
               ),
             ),
-          ),
-          Padding(
-            padding: Provider.of<LocalizationProvider>(context, listen: true)
-                        .languages ==
-                    'en'
-                ? EdgeInsets.symmetric(horizontal: 12.w, vertical: 25.h)
-                : EdgeInsets.symmetric(horizontal: 12.w, vertical: 25.h),
-            child: Text(
-              AppLocalizations.of(context)!.forgot_sub,
-              style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w400,
-                fontSize: 16.sp,
-                color: Colors.grey,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.h),
-            child: CustomTextFiled(
-              hint: AppLocalizations.of(context)!.enter_email,
-              prefixIcon: Icon(
-                Icons.email_outlined,
-              ),
-              controller: _email,
-              type: TextInputType.emailAddress,
-              errorText: _EmailErorr,
-            ),
-          ),
-          SizedBox(
-            height: 16.h,
-          ),
-          loading
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: Constant.primaryColor,
-                  ),
-                )
-              : Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.h),
-                  child: CustomPrimaryButton(
-                      text: AppLocalizations.of(context)!.submit,
-                      onPressed: () {
-                        performSubmit();
-                      }),
+            Padding(
+              padding: Provider.of<LocalizationProvider>(context, listen: true)
+                          .languages ==
+                      'en'
+                  ? EdgeInsets.only(left: 12.w, right: 100.w)
+                  : EdgeInsets.only(left: 120.w, right: 20.w),
+              child: Text(
+                AppLocalizations.of(context)!.forgot,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 30.sp,
+                  color: Colors.black,
                 ),
-          SizedBox(
-            height: 50.h,
-          ),
-        ]),
+              ),
+            ),
+            Padding(
+              padding: Provider.of<LocalizationProvider>(context, listen: true)
+                          .languages ==
+                      'en'
+                  ? EdgeInsets.symmetric(horizontal: 20.w, vertical: 25.h)
+                  : EdgeInsets.symmetric(horizontal: 12.w, vertical: 25.h),
+              child: Text(
+                AppLocalizations.of(context)!.forgot_sub,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16.sp,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.h),
+              child: CustomTextFiled(
+                hint: 'email@example.com',
+                // prefixIcon: Icon(
+                //   Icons.email_outlined,
+                // ),
+                controller: _email,
+                type: TextInputType.emailAddress,
+                errorText: _EmailErorr,
+              ),
+            ),
+            SizedBox(
+              height: 16.h,
+            ),
+            loading
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: Constant.primaryColor,
+                    ),
+                  )
+                : Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12.h),
+                    child: CustomPrimaryButton(
+                        text: AppLocalizations.of(context)!.submit,
+                        onPressed: () {
+                          performSubmit();
+                        }),
+                  ),
+            SizedBox(
+              height: 50.h,
+            ),
+          ]),
+        ),
       ),
     );
   }

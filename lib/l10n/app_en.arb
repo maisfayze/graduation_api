@@ -30,13 +30,13 @@
   "and" : "and",
   "privacy": "Privacy Policy",
   "email": "Email",
-  "enter_email": "Enter your Email",
+  "enter_email": "email@example.com",
   "error_message": "Error,enter required data",
   "enter_mobile": "Enter Mobile number",
   "enter_pass": "Enter password",
   "valid_mobile": "Enter valid Mobile number",
   "forgot_title": "Forgot Password",
-  "forgot_sub": "Don’t worry ! it happens , please enter your phone number",
+  "forgot_sub": "Don’t worry ! it happens , please enter your email",
   "code": "Enter Code",
   "submit": "Submit",
   "sent_code": "An 4 digit code has been sent to",
@@ -98,10 +98,6 @@
   "schedule_timings": "Schedule Timings",
   "reviews": "Reviews",
   "social_media": "Social Media",
-  "search_patient": " Search patient"
-
-
-
-
-
+  "search_patient": " Search patient",
+  "search_doctor": " Search Doctor "
 }

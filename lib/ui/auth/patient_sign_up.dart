@@ -173,9 +173,6 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     ),
                     CustomTextFiled(
                       hint: AppLocalizations.of(context)!.enter_email,
-                      prefixIcon: Icon(
-                        Icons.email_outlined,
-                      ),
                       controller: _email,
                       type: TextInputType.emailAddress,
                     ),
@@ -213,9 +210,7 @@ class _PatientSignUpState extends State<PatientSignUp> {
                     CustomTextFiled(
                       controller: _pass,
                       type: TextInputType.text,
-                      prefixIcon: Icon(
-                        Icons.lock_outlined,
-                      ),
+                      hint: '● ● ● ● ● ●',
                       suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {

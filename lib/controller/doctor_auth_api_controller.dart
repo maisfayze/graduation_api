@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import '../models/LogedUser.dart';
 import '../models/api_response.dart';
 import '../models/login_user_model.dart';
+import '../models/signup_doc_model.dart';
 import '../prefs/prefs.dart';
 import '../utiles/helpers.dart';
 
@@ -54,8 +55,8 @@ class DoctorAuthApiController with Helpers {
       // print(json);
       var decodedJson = json['data'];
 
-      LogedUserModel user = LogedUserModel.fromJson(decodedJson);
-      SharedPrefController().saveData(user);
+      SignupDocModel user = SignupDocModel.fromJson(decodedJson);
+      SharedPrefController().saveSignup(user);
       return ApiResponse(msg: json['message'], sucess: json['isSuccess']);
     }
     return ApiResponse(msg: 'Something went wrong', sucess: false);

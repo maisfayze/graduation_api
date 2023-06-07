@@ -9,6 +9,7 @@ import 'package:graduation/prefs/prefs.dart';
 import 'package:graduation/provider/fav_provider.dart';
 import 'package:graduation/provider/localization_provider.dart';
 import 'package:graduation/provider/search_filter_provider.dart';
+import 'package:graduation/search_home.dart';
 import 'package:graduation/ui/Doctor/DocBtn/btn_doc.dart';
 import 'package:graduation/ui/Doctor/doctorProfile/my_patient.dart';
 import 'package:graduation/ui/Doctor/doctorProfile/doctor_profile.dart';
@@ -151,6 +152,7 @@ class MyApp extends StatelessWidget {
                 Success.id: (context) => Success(),
                 MyAppointment.id: (context) => MyAppointment(),
                 PatientDashboard.id: (context) => PatientDashboard(),
+                SearchHome.id: (context) => SearchHome(),
               },
             );
           },

@@ -104,182 +104,175 @@ class _DocSignUpState extends State<DocSignUp> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: loading
-          ? Center(
-              child: CircularProgressIndicator(
-                color: Constant.primaryColor,
-              ),
-            )
-          : Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 48.h),
-              child: FadeInLeft(
-                child: ListView(
-                  children: [
-                    //fname
-                    Text(
-                      AppLocalizations.of(context)!.first_name,
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18.sp,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    CustomTextFiled(
-                      hint: AppLocalizations.of(context)!.enter_first_name,
-                      // prefixIcon: Icon(
-                      //   Icons.person_2_outlined,
-                      // ),
-                      controller: _fname,
-                      type: TextInputType.name,
-                    ),
-                    //lsname
-                    SizedBox(
-                      height: 16.h,
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.last_name,
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18.sp,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    CustomTextFiled(
-                      hint: AppLocalizations.of(context)!.enter_last_name,
-                      // prefixIcon: Icon(
-                      //   Icons.person_2_outlined,
-                      // ),
-                      controller: _Lname,
-                      type: TextInputType.name,
-                    ),
-                    SizedBox(
-                      height: 16.h,
-                    ),
-                    //email
-                    Text(
-                      AppLocalizations.of(context)!.email,
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18.sp,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    CustomTextFiled(
-                      hint: AppLocalizations.of(context)!.enter_email,
-                      prefixIcon: Icon(
-                        Icons.email_outlined,
-                      ),
-                      controller: _email,
-                      type: TextInputType.emailAddress,
-                    ),
-                    SizedBox(
-                      height: 16.h,
-                    ),
-                    // Text(
-                    //   AppLocalizations.of(context)!.phone_number,
-                    //   style: GoogleFonts.poppins(
-                    //     fontWeight: FontWeight.w600,
-                    //     fontSize: 18.sp,
-                    //     color: Colors.black,
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: 10.h,
-                    // ),
-                    // MobileTextFiled(
-                    //   type: TextInputType.phone,
-                    //   controller: _mobile,
-                    //   // errorText: _MobileErorr,
-                    //   counter: 10,
-                    // ),
-                    //pass
-                    Text(
-                      AppLocalizations.of(context)!.password,
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18.sp,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    CustomTextFiled(
-                      controller: _pass,
-                      type: TextInputType.text,
-                      prefixIcon: Icon(
-                        Icons.lock_outlined,
-                      ),
-                      suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _passobsecure = !_passobsecure;
-                            });
-                          },
-                          icon: Icon(_passobsecure
-                              ? Icons.visibility_off
-                              : Icons.visibility)),
-                      obscureText: _passobsecure,
-                    ),
-                    SizedBox(
-                      height: 16.h,
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.confirm,
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18.sp,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    CustomTextFiled(
-                      controller: _confirmpass,
-                      type: TextInputType.text,
-                      prefixIcon: Icon(
-                        Icons.lock_outlined,
-                      ),
-                      suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _copassobsecure = !_copassobsecure;
-                            });
-                          },
-                          icon: Icon(_copassobsecure
-                              ? Icons.visibility_off
-                              : Icons.visibility)),
-                      obscureText: _copassobsecure,
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    CustomPrimaryButton(
-                        text: AppLocalizations.of(context)!.submit,
-                        onPressed: () async {
-                          await performSignUp();
-                        }),
-                    SizedBox(height: 8.h),
-                    Container(
-                      height: MediaQuery.of(context).viewInsets.bottom,
-                    ),
-                    SizedBox(
-                      height: 73.h,
-                    ),
-                  ],
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 48.h),
+        child: FadeInLeft(
+          child: ListView(
+            children: [
+              //fname
+              Text(
+                AppLocalizations.of(context)!.first_name,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
+                  color: Colors.black,
                 ),
               ),
-            ),
+              SizedBox(
+                height: 10.h,
+              ),
+              CustomTextFiled(
+                hint: AppLocalizations.of(context)!.enter_first_name,
+                // prefixIcon: Icon(
+                //   Icons.person_2_outlined,
+                // ),
+                controller: _fname,
+                type: TextInputType.name,
+              ),
+              //lsname
+              SizedBox(
+                height: 16.h,
+              ),
+              Text(
+                AppLocalizations.of(context)!.last_name,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              CustomTextFiled(
+                hint: AppLocalizations.of(context)!.enter_last_name,
+                // prefixIcon: Icon(
+                //   Icons.person_2_outlined,
+                // ),
+                controller: _Lname,
+                type: TextInputType.name,
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              //email
+              Text(
+                AppLocalizations.of(context)!.email,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              CustomTextFiled(
+                hint: AppLocalizations.of(context)!.enter_email,
+                controller: _email,
+                type: TextInputType.emailAddress,
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              // Text(
+              //   AppLocalizations.of(context)!.phone_number,
+              //   style: GoogleFonts.poppins(
+              //     fontWeight: FontWeight.w600,
+              //     fontSize: 18.sp,
+              //     color: Colors.black,
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 10.h,
+              // ),
+              // MobileTextFiled(
+              //   type: TextInputType.phone,
+              //   controller: _mobile,
+              //   // errorText: _MobileErorr,
+              //   counter: 10,
+              // ),
+              //pass
+              Text(
+                AppLocalizations.of(context)!.password,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              CustomTextFiled(
+                controller: _pass,
+                type: TextInputType.text,
+                hint: '● ● ● ● ● ●',
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _passobsecure = !_passobsecure;
+                      });
+                    },
+                    icon: Icon(_passobsecure
+                        ? Icons.visibility_off
+                        : Icons.visibility)),
+                obscureText: _passobsecure,
+              ),
+              SizedBox(
+                height: 16.h,
+              ),
+              Text(
+                AppLocalizations.of(context)!.confirm,
+                style: GoogleFonts.poppins(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              CustomTextFiled(
+                controller: _confirmpass,
+                type: TextInputType.text,
+                hint: '● ● ● ● ● ●',
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _copassobsecure = !_copassobsecure;
+                      });
+                    },
+                    icon: Icon(_copassobsecure
+                        ? Icons.visibility_off
+                        : Icons.visibility)),
+                obscureText: _copassobsecure,
+              ),
+              SizedBox(
+                height: 30.h,
+              ),
+              loading
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: Constant.primaryColor,
+                      ),
+                    )
+                  : CustomPrimaryButton(
+                      text: AppLocalizations.of(context)!.submit,
+                      onPressed: () async {
+                        await performSignUp();
+                      }),
+              SizedBox(height: 8.h),
+              Container(
+                height: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              SizedBox(
+                height: 73.h,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

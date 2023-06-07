@@ -94,7 +94,7 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: 24.w,
+          horizontal: 20.w,
         ),
         child: ListView(children: [
           Padding(
@@ -110,7 +110,7 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
             padding: Provider.of<LocalizationProvider>(context, listen: true)
                         .languages ==
                     'en'
-                ? EdgeInsets.only(left: 20.w, right: 55.w)
+                ? EdgeInsets.only(left: 20.w, right: 100.w)
                 : EdgeInsets.only(left: 55.w, right: 20.w),
             child: Text(
               AppLocalizations.of(context)!.reset,
@@ -144,9 +144,10 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
               controller: _pass,
               type: TextInputType.text,
               errorText: _NewErorr,
-              prefixIcon: Icon(
-                Icons.lock_outlined,
-              ),
+              hint: '● ● ● ● ● ●',
+              // prefixIcon: Icon(
+              //   Icons.lock_outlined,
+              // ),
               suffixIcon: IconButton(
                   onPressed: () {
                     setState(() {
@@ -181,9 +182,10 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
               controller: _confirmpass,
               type: TextInputType.text,
               errorText: _ConfNewErorr,
-              prefixIcon: Icon(
-                Icons.lock_outlined,
-              ),
+              hint: '● ● ● ● ● ●',
+              // prefixIcon: Icon(
+              //   Icons.lock_outlined,
+              // ),
               suffixIcon: IconButton(
                   onPressed: () {
                     setState(() {

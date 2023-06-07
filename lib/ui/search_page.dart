@@ -106,7 +106,7 @@ class _SearchPageState extends State<SearchPage> {
                       doctorId: snapshot.data![index].idDoctor,
                       clinicAddress: snapshot.data![index].clinicAddress);
                   return Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    padding: EdgeInsets.symmetric(vertical: 0.h),
                     child: Container(
                       height: 180.h,
                       decoration: BoxDecoration(
@@ -266,20 +266,22 @@ class _SearchPageState extends State<SearchPage> {
               ),
             );
           } else {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50.w),
-                  child: Image.asset(
-                    'images/search-doctor.gif',
-                    width: 300.w,
-                    height: 500.h,
+            return Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: 34.0.w, vertical: 130.h),
+              child: Column(
+                children: [
+                  Image.asset('images/search_e.gif'),
+                  Center(
+                    child: Text(
+                      'There are no search results , please select what you want to search for',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.poppins(
+                          fontSize: 14.sp, fontWeight: FontWeight.w600),
+                    ),
                   ),
-                ),
-                Spacer(),
-              ],
+                ],
+              ),
             );
           }
         },
