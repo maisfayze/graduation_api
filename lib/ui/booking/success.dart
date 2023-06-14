@@ -6,17 +6,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../constant/constant.dart';
+import '../../models/invoice_data.dart';
+import 'invoice.dart';
 
 class Success extends StatefulWidget {
-  const Success({Key? key}) : super(key: key);
+  Success({Key? key, this.invoice}) : super(key: key);
   static const id = 'Success';
+  Invoice? invoice;
 
   @override
-  State<Success> createState() => _SuccessState();
+  State<Success> createState() => _SuccessState(invoice);
 }
 
 class _SuccessState extends State<Success> {
-  String? _payment = 'Free';
+  String? _payment = 'Cash';
+  Invoice? invoice;
+
+  _SuccessState(this.invoice);
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +193,7 @@ class _SuccessState extends State<Success> {
                   height: 8.h,
                 ),
                 Text(
-                  'Appointment booked with Dr. Darren Elder on 11 Nov 2019 5:00PM to 6:00PM',
+                  'Appointment booked with Dr.${widget.invoice!.docName} on ${widget.invoice!.data} ${widget.invoice!.time}',
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                       fontSize: 15.sp,
@@ -199,7 +205,13 @@ class _SuccessState extends State<Success> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, Success.id);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        settings: RouteSettings(),
+                        builder: (context) => InvoiceScreen(invoice: invoice),
+                      ),
+                    );
                   },
                   child: Text(
                     'View Invoice ',
@@ -219,7 +231,7 @@ class _SuccessState extends State<Success> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, Success.id);
+                    // Navigator.pushNamed(context, Success.id);
                   },
                   child: Text(
                     'View Appointment',
@@ -234,6 +246,7 @@ class _SuccessState extends State<Success> {
                     minimumSize: Size(160.w, 44.h),
                     backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.r),
                       side: BorderSide(
                         width: 1,
                         color: Constant.primaryColor,

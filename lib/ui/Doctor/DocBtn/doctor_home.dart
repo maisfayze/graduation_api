@@ -15,6 +15,7 @@ import '../../../controller/get_specialities.dart';
 import '../../../models/specialities_model.dart';
 import '../../../prefs/prefs.dart';
 import '../../../provider/localization_provider.dart';
+import '../../../search_home.dart';
 import '../../../widget/bookButton.dart';
 import '../../../widget/drawer_widget.dart';
 import '../../../widget/search_bar.dart';
@@ -22,10 +23,13 @@ import '../../../widget/see_all_row.dart';
 import '../../../widget/viewProfileButton.dart';
 import '../../booking/booking.dart';
 import '../../booking/view_doc_profile.dart';
+import '../../drawerScreens/about_us.dart';
+import '../../drawerScreens/asked_questions.dart';
+import '../../drawerScreens/client_saying.dart';
 import '../../patient/blogs.dart';
 import '../../patient/specialities.dart';
 import '../../patient/top_doctors.dart';
-import '../../search_page.dart';
+import '../../drawerScreens/search_page.dart';
 
 class DoctorHome extends StatefulWidget {
   const DoctorHome({Key? key}) : super(key: key);
@@ -125,7 +129,7 @@ class _DoctorHomeState extends State<DoctorHome> {
                   ),
                   SearchBarWidget(
                       onPressed: () {
-                        Navigator.pushNamed(context, SearchPage.id);
+                        Navigator.pushNamed(context, SearchHome.id);
                       },
                       type: TextInputType.text,
                       controller: _searchController,
@@ -621,7 +625,9 @@ class _DoctorHomeState extends State<DoctorHome> {
                 ),
                 DrawerWidget(
                   img: 'images/about.png',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AboutUs.id);
+                  },
                   title: AppLocalizations.of(context)!.about_Us,
                 ),
                 DrawerWidget(
@@ -631,12 +637,16 @@ class _DoctorHomeState extends State<DoctorHome> {
                 ),
                 DrawerWidget(
                   img: 'images/faqs.png',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AskedQuestions.id);
+                  },
                   title: AppLocalizations.of(context)!.asked_questions,
                 ),
                 DrawerWidget(
                   img: 'images/client.png',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, ClientSaying.id);
+                  },
                   title: AppLocalizations.of(context)!.client_Sayings,
                 ),
                 DrawerWidget(

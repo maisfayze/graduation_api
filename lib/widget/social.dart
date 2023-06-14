@@ -22,27 +22,29 @@ class SocialMediaButton extends StatelessWidget {
       child: Provider.of<LocalizationProvider>(context, listen: true)
                   .languages ==
               'en'
-          ? Row(
-              children: [
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 28.w, vertical: 14.h),
-                  child: Image.asset(
-                    'images/$imgName.png',
-                    width: 25.w,
-                    height: 24.h,
+          ? Center(
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: 70.w, right: 10.w, top: 14.h, bottom: 14.h),
+                    child: Image.asset(
+                      'images/$imgName.png',
+                      width: 25.w,
+                      height: 24.h,
+                    ),
                   ),
-                ),
-                Text(
-                  text,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18.sp,
-                    color: Colors.black,
+                  Text(
+                    text,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18.sp,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )
           : Row(
               children: [

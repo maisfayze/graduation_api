@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/ui/booking/booking.dart';
 import 'package:graduation/ui/booking/view_doc_profile.dart';
-import 'package:graduation/ui/search_page.dart';
+import 'package:graduation/ui/drawerScreens/search_page.dart';
 import 'package:graduation/widget/bookButton.dart';
 import 'package:graduation/widget/search_bar.dart';
 import 'package:graduation/widget/viewProfileButton.dart';

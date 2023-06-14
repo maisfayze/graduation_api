@@ -195,6 +195,7 @@ class _MyAppointmentState extends State<MyAppointment> {
             );
           } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
             return ListView.builder(
+              reverse: true,
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 String trimmedString = snapshot.data![index].date.trim();

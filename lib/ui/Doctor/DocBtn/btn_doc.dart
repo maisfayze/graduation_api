@@ -6,7 +6,7 @@ import 'package:graduation/constant/constant.dart';
 import 'package:graduation/ui/patient/PatientBtn/patient_home.dart';
 
 import '../../../models/btn.dart';
-import '../doctorProfile/my_appointment.dart';
+import '../doctorProfile/my_patient_appointment.dart';
 import 'doctor_chat.dart';
 import '../../patientProfile/profile.dart';
 import '../doctorProfile/doctor_profile.dart';

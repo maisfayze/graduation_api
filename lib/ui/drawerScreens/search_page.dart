@@ -9,14 +9,14 @@ import 'package:graduation/ui/patient/PatientBtn/btn_patient.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../controller/filter_api_controller.dart';
-import '../prefs/prefs.dart';
-import '../provider/search_filter_provider.dart';
-import '../widget/bookButton.dart';
-import '../widget/viewProfileButton.dart';
-import 'Doctor/DocBtn/btn_doc.dart';
-import 'booking/booking.dart';
-import 'booking/view_doc_profile.dart';
+import '../../controller/filter_api_controller.dart';
+import '../../prefs/prefs.dart';
+import '../../provider/search_filter_provider.dart';
+import '../../widget/bookButton.dart';
+import '../../widget/viewProfileButton.dart';
+import '../Doctor/DocBtn/btn_doc.dart';
+import '../booking/booking.dart';
+import '../booking/view_doc_profile.dart';
 import 'filter.dart';
 
 class SearchPage extends StatefulWidget {

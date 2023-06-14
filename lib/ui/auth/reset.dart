@@ -16,6 +16,7 @@ import '../../provider/localization_provider.dart';
 import '../../utiles/helpers.dart';
 import '../../widget/customPrimaryButton.dart';
 import '../../widget/custom_text_filed.dart';
+import '../../widget/loading_custom_button.dart';
 import '../../widget/mobile_text_filed.dart';
 import '../booking/success.dart';
 import 'doctor_login.dart';
@@ -149,13 +150,15 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
               //   Icons.lock_outlined,
               // ),
               suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _passobsecure = !_passobsecure;
-                    });
-                  },
-                  icon: Icon(
-                      _passobsecure ? Icons.visibility_off : Icons.visibility)),
+                onPressed: () {
+                  setState(() {
+                    _passobsecure = !_passobsecure;
+                  });
+                },
+                icon: Icon(
+                    _passobsecure ? Icons.visibility_off : Icons.visibility),
+                color: Color(0xffb4b4b4),
+              ),
               obscureText: _passobsecure,
             ),
           ),
@@ -187,14 +190,15 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
               //   Icons.lock_outlined,
               // ),
               suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _copassobsecure = !_copassobsecure;
-                    });
-                  },
-                  icon: Icon(_copassobsecure
-                      ? Icons.visibility_off
-                      : Icons.visibility)),
+                onPressed: () {
+                  setState(() {
+                    _copassobsecure = !_copassobsecure;
+                  });
+                },
+                icon: Icon(
+                    _copassobsecure ? Icons.visibility_off : Icons.visibility),
+                color: Color(0xffb4b4b4),
+              ),
               obscureText: _copassobsecure,
             ),
           ),
@@ -202,11 +206,7 @@ class _ResetScreenState extends State<ResetScreen> with Helpers {
             height: 18.h,
           ),
           loading
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: Constant.primaryColor,
-                  ),
-                )
+              ? loadingCustomButton()
               : Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: CustomPrimaryButton(

@@ -11,6 +11,7 @@ import '../../models/api_response.dart';
 import '../../utiles/helpers.dart';
 import '../../widget/customPrimaryButton.dart';
 import '../../widget/custom_text_filed.dart';
+import '../../widget/loading_custom_button.dart';
 
 class NewPassword extends StatefulWidget {
   const NewPassword({Key? key}) : super(key: key);
@@ -124,18 +125,20 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
               controller: _oldpass,
               type: TextInputType.text,
               errorText: _oldErorr,
+              hint: '● ● ● ● ● ●',
               prefixIcon: const Icon(
                 Icons.lock_outlined,
               ),
               suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _oldpassobsecure = !_oldpassobsecure;
-                    });
-                  },
-                  icon: Icon(_oldpassobsecure
-                      ? Icons.visibility_off
-                      : Icons.visibility)),
+                onPressed: () {
+                  setState(() {
+                    _oldpassobsecure = !_oldpassobsecure;
+                  });
+                },
+                icon: Icon(
+                    _oldpassobsecure ? Icons.visibility_off : Icons.visibility),
+                color: Color(0xffb4b4b4),
+              ),
               obscureText: _oldpassobsecure,
             ),
             SizedBox(
@@ -154,6 +157,7 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
               height: 16.h,
             ),
             CustomTextFiled(
+              hint: '● ● ● ● ● ●',
               controller: _pass,
               type: TextInputType.text,
               errorText: _NewErorr,
@@ -161,13 +165,15 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
                 Icons.lock_outlined,
               ),
               suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _passobsecure = !_passobsecure;
-                    });
-                  },
-                  icon: Icon(
-                      _passobsecure ? Icons.visibility_off : Icons.visibility)),
+                onPressed: () {
+                  setState(() {
+                    _passobsecure = !_passobsecure;
+                  });
+                },
+                icon: Icon(
+                    _passobsecure ? Icons.visibility_off : Icons.visibility),
+                color: Color(0xffb4b4b4),
+              ),
               obscureText: _passobsecure,
             ),
             SizedBox(
@@ -186,32 +192,31 @@ class _NewPasswordState extends State<NewPassword> with Helpers {
               height: 16.h,
             ),
             CustomTextFiled(
+              hint: '● ● ● ● ● ●',
               controller: _confirmpass,
               type: TextInputType.text,
               errorText: _ConfNewErorr,
               prefixIcon: const Icon(
                 Icons.lock_outlined,
+                color: Color(0xffb4b4b4),
               ),
               suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _copassobsecure = !_copassobsecure;
-                    });
-                  },
-                  icon: Icon(_copassobsecure
-                      ? Icons.visibility_off
-                      : Icons.visibility)),
+                onPressed: () {
+                  setState(() {
+                    _copassobsecure = !_copassobsecure;
+                  });
+                },
+                icon: Icon(
+                    _copassobsecure ? Icons.visibility_off : Icons.visibility),
+                color: Color(0xffb4b4b4),
+              ),
               obscureText: _copassobsecure,
             ),
             SizedBox(
               height: 24.h,
             ),
             loading
-                ? Center(
-                    child: CircularProgressIndicator(
-                      color: Constant.primaryColor,
-                    ),
-                  )
+                ? loadingCustomButton()
                 : CustomPrimaryButton(
                     text: AppLocalizations.of(context)!.submit,
                     onPressed: () {

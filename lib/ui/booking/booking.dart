@@ -19,6 +19,7 @@ import '../../controller/get_ScheduletimingsForDocto_controller.dart';
 import '../../main.dart';
 import '../../models/api_response.dart';
 import '../../models/create_app_model.dart';
+import '../../models/invoice_data.dart';
 import '../../models/scheduletimingsForDocto_model.dart';
 import '../../models/top_doctors.dart';
 
@@ -531,10 +532,32 @@ class _BookingState extends State<Booking> {
         End:
             '${DateFormat('yyyy-MM-dd').format(selectedDate!)}T${DateFormat.Hm().format(DateTime(2021, 1, 1, selectedEndTime!.hour, selectedEndTime!.minute))}:00.875Z');
     if (processResponse?.doctorId == widget.data!) {
-      Navigator.pushNamed(context, Success.id);
+      Invoice invoice = Invoice();
+      invoice.docName = processResponse!.doctorName;
+      invoice.data = '${DateFormat('dd-MM-yyyy').format(selectedDate!)}';
+      invoice.day = processResponse!.day;
+
+      invoice.time =
+          '${DateFormat.Hm().format(DateTime(2021, 1, 1, selectedStartTime!.hour, selectedStartTime!.minute))} -'
+          '${DateFormat.Hm().format(DateTime(2021, 1, 1, selectedEndTime!.hour, selectedEndTime!.minute))}';
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          settings: RouteSettings(),
+          builder: (context) => Success(invoice: invoice),
+        ),
+      );
+
+      // Navigator.pushNamed(context, Success.id);
     }
   }
 
+  // Invoice get invoice {
+  //   Invoice invoice = Invoice();
+  //   invoice.docName=
+  //
+  //   return invoice;
+  // }
   Widget NameContainer(int index) {
     bool tapped = index == tapped_index;
     // String current_name = event[index];

@@ -1,28 +1,32 @@
 class MyPatientModel {
   MyPatientModel({
     required this.patientName,
-    required this.patientEmail,
-    required this.bloodGroup,
     required this.patientImage,
+    this.address,
+    required this.email,
+    this.bloodGroup,
   });
   late final String patientName;
-  late final String patientEmail;
+  late final String patientImage;
+  late final String? address;
+  late final String email;
   late final String? bloodGroup;
-  late final String? patientImage;
 
   MyPatientModel.fromJson(Map<String, dynamic> json) {
     patientName = json['patientName'];
-    patientEmail = json['patientEmail'];
-    bloodGroup = json['bloodGroup'];
     patientImage = json['patientImage'];
+    address = json['address'];
+    email = json['email'];
+    bloodGroup = json['bloodGroup'];
   }
 
   Map<String, dynamic> toJson() {
     final _MyPatient = <String, dynamic>{};
     _MyPatient['patientName'] = patientName;
-    _MyPatient['patientEmail'] = patientEmail;
-    _MyPatient['bloodGroup'] = bloodGroup;
     _MyPatient['patientImage'] = patientImage;
+    _MyPatient['address'] = address;
+    _MyPatient['email'] = email;
+    _MyPatient['bloodGroup'] = bloodGroup;
     return _MyPatient;
   }
 }

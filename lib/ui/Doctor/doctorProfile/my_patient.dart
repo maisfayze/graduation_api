@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/controller/get_my_patient_controller.dart';
 
 import '../../../constant/constant.dart';
+import '../../../models/my_patient_model.dart';
 import '../../../widget/search_bar.dart';
 
 class MyPatients extends StatefulWidget {
@@ -76,7 +77,7 @@ class _MyPatientsState extends State<MyPatients> {
           SizedBox(
             height: 16.h,
           ),
-          FutureBuilder(
+          FutureBuilder<List<MyPatientModel>>(
             future: GetMyPatient().getMyPatient(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -88,13 +89,13 @@ class _MyPatientsState extends State<MyPatients> {
               } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                 return Expanded(
                   child: ListView.builder(
-                    itemCount: 10,
+                    itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.symmetric(
                             vertical: 12.h, horizontal: 20.w),
                         child: Container(
-                          height: 176.h,
+                          height: 205.h,
                           width: 375.w,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.r),
@@ -106,14 +107,14 @@ class _MyPatientsState extends State<MyPatients> {
                               Padding(
                                 padding: EdgeInsets.only(
                                     left: 21.w,
-                                    bottom: 38.h,
+                                    bottom: 22.h,
                                     top: 21.h,
                                     right: 0.w),
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10.r),
                                     child: Image.network(
                                       'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].patientImage}',
-                                      height: 120.h,
+                                      height: 180.h,
                                       width: 120.w,
                                       fit: BoxFit.cover,
                                     )),
@@ -131,7 +132,7 @@ class _MyPatientsState extends State<MyPatients> {
                                       ' ${snapshot.data![index].patientName}',
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 12.sp,
+                                        fontSize: 16.sp,
                                         color: Colors.black,
                                       ),
                                     ),
@@ -158,7 +159,29 @@ class _MyPatientsState extends State<MyPatients> {
                                             SizedBox(
                                               width: 150.w,
                                               child: Text(
-                                                ' ${snapshot.data![index].patientEmail}',
+                                                ' ${snapshot.data![index].email}',
+                                                style: GoogleFonts.poppins(
+                                                    color: Colors.grey.shade500,
+                                                    fontSize: 12.sp),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Icon(
+                                              Icons.location_on,
+                                              color: Color(0xff757575),
+                                              size: 12,
+                                            ),
+                                            SizedBox(
+                                              width: 150.w,
+                                              child: Text(
+                                                ' ${snapshot.data![index].address}',
                                                 style: GoogleFonts.poppins(
                                                     color: Colors.grey.shade500,
                                                     fontSize: 12.sp),

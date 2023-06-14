@@ -14,7 +14,7 @@ import 'package:graduation/ui/Doctor/DocBtn/btn_doc.dart';
 import 'package:graduation/ui/Doctor/doctorProfile/my_patient.dart';
 import 'package:graduation/ui/Doctor/doctorProfile/doctor_profile.dart';
 import 'package:graduation/ui/Doctor/doctorProfile/edit_doctor_profile.dart';
-import 'package:graduation/ui/Doctor/doctorProfile/my_appointment.dart';
+import 'package:graduation/ui/Doctor/doctorProfile/my_patient_appointment.dart';
 import 'package:graduation/ui/auth/auth.dart';
 import 'package:graduation/ui/auth/doc_signup.dart';
 import 'package:graduation/ui/auth/forget_pass.dart';
@@ -26,7 +26,10 @@ import 'package:graduation/ui/auth/reset.dart';
 import 'package:graduation/ui/booking/booking.dart';
 import 'package:graduation/ui/booking/success.dart';
 import 'package:graduation/ui/booking/view_doc_profile.dart';
-import 'package:graduation/ui/filter.dart';
+import 'package:graduation/ui/drawerScreens/about_us.dart';
+import 'package:graduation/ui/drawerScreens/asked_questions.dart';
+import 'package:graduation/ui/drawerScreens/client_saying.dart';
+import 'package:graduation/ui/drawerScreens/filter.dart';
 import 'package:graduation/ui/onBoarding/onboarding.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graduation/ui/patient/PatientBtn/btn_patient.dart';
@@ -41,7 +44,7 @@ import 'package:graduation/ui/patientProfile/new_pass.dart';
 import 'package:graduation/ui/patientProfile/patient_dashboard.dart';
 import 'package:graduation/ui/patientProfile/profile.dart';
 import 'package:graduation/ui/patientProfile/profile_setting.dart';
-import 'package:graduation/ui/search_page.dart';
+import 'package:graduation/ui/drawerScreens/search_page.dart';
 import 'package:graduation/ui/splach.dart';
 import 'package:graduation/yarab.dart';
 
@@ -94,6 +97,7 @@ class MyApp extends StatelessWidget {
           builder: (context, child) {
             return MaterialApp(
               theme: ThemeData(
+                primarySwatch: Colors.teal,
                 radioTheme: RadioThemeData(
                   fillColor: MaterialStateColor.resolveWith(
                       (states) => Constant.primaryColor),
@@ -153,6 +157,9 @@ class MyApp extends StatelessWidget {
                 MyAppointment.id: (context) => MyAppointment(),
                 PatientDashboard.id: (context) => PatientDashboard(),
                 SearchHome.id: (context) => SearchHome(),
+                AskedQuestions.id: (context) => AskedQuestions(),
+                ClientSaying.id: (context) => ClientSaying(),
+                AboutUs.id: (context) => AboutUs(),
               },
             );
           },

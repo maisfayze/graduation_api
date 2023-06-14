@@ -5,12 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/controller/get_specialities.dart';
 import 'package:graduation/models/filtered_result.dart';
 import 'package:graduation/models/specialities_model.dart';
-import 'package:graduation/ui/search_page.dart';
+import 'package:graduation/ui/drawerScreens/search_page.dart';
 import 'package:provider/provider.dart';
 
-import '../constant/constant.dart';
-import '../controller/filter_api_controller.dart';
-import '../provider/search_filter_provider.dart';
+import '../../constant/constant.dart';
+import '../../controller/filter_api_controller.dart';
+import '../../provider/search_filter_provider.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({Key? key}) : super(key: key);

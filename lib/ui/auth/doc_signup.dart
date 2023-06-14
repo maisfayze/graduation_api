@@ -17,6 +17,7 @@ import 'package:provider/provider.dart';
 import '../../provider/localization_provider.dart';
 import '../../widget/customPrimaryButton.dart';
 import '../../widget/custom_text_filed.dart';
+import '../../widget/loading_custom_button.dart';
 import '../../widget/mobile_text_filed.dart';
 import '../../widget/social.dart';
 import '../Doctor/DocBtn/btn_doc.dart';
@@ -252,11 +253,7 @@ class _DocSignUpState extends State<DocSignUp> {
                 height: 30.h,
               ),
               loading
-                  ? Center(
-                      child: CircularProgressIndicator(
-                        color: Constant.primaryColor,
-                      ),
-                    )
+                  ? loadingCustomButton()
                   : CustomPrimaryButton(
                       text: AppLocalizations.of(context)!.submit,
                       onPressed: () async {

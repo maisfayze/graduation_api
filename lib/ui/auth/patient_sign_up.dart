@@ -212,14 +212,16 @@ class _PatientSignUpState extends State<PatientSignUp> {
                       type: TextInputType.text,
                       hint: '● ● ● ● ● ●',
                       suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _passobsecure = !_passobsecure;
-                            });
-                          },
-                          icon: Icon(_passobsecure
-                              ? Icons.visibility_off
-                              : Icons.visibility)),
+                        onPressed: () {
+                          setState(() {
+                            _passobsecure = !_passobsecure;
+                          });
+                        },
+                        icon: Icon(_passobsecure
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                        color: Color(0xffb4b4b4),
+                      ),
                       obscureText: _passobsecure,
                     ),
                     SizedBox(
@@ -243,14 +245,16 @@ class _PatientSignUpState extends State<PatientSignUp> {
                         Icons.lock_outlined,
                       ),
                       suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _copassobsecure = !_copassobsecure;
-                            });
-                          },
-                          icon: Icon(_copassobsecure
-                              ? Icons.visibility_off
-                              : Icons.visibility)),
+                        onPressed: () {
+                          setState(() {
+                            _copassobsecure = !_copassobsecure;
+                          });
+                        },
+                        icon: Icon(_copassobsecure
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                        color: Color(0xffb4b4b4),
+                      ),
                       obscureText: _copassobsecure,
                     ),
                     SizedBox(

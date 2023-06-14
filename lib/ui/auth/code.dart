@@ -14,6 +14,7 @@ import '../../utiles/helpers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../widget/customPrimaryButton.dart';
+import '../../widget/loading_custom_button.dart';
 
 class CodeScreen extends StatefulWidget {
   CodeScreen({Key? key, required this.email, this.data}) : super(key: key);
@@ -164,11 +165,7 @@ class _CodeScreenState extends State<CodeScreen> with Helpers {
             height: 73.h,
           ),
           loading
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: Constant.primaryColor,
-                  ),
-                )
+              ? loadingCustomButton()
               : Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.w),
                   child: CustomPrimaryButton(

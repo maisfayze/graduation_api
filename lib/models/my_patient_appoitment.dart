@@ -2,7 +2,7 @@ class MyPatientAppointmentModel {
   MyPatientAppointmentModel({
     required this.patientName,
     required this.patientImage,
-    required this.address,
+    this.address,
     required this.email,
     required this.day,
     required this.time,
@@ -11,7 +11,7 @@ class MyPatientAppointmentModel {
   });
   late final String patientName;
   late final String patientImage;
-  late final String address;
+  late final String? address;
   late final String email;
   late final String day;
   late final String time;

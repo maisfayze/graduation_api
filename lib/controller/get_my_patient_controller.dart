@@ -13,10 +13,11 @@ class GetMyPatient {
       'Accept': 'application/json',
       'Authorization': token,
     });
-    // print(response.body);
+    // print('mmmmmmmmmmmmmm${response.body}');
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       var DecodedData = data['data'] as List;
+      print('mmmmmmmmmmmmmm${DecodedData}');
       List<MyPatientModel> myPatient =
           DecodedData.map((obj) => MyPatientModel.fromJson(obj)).toList();
       return myPatient;

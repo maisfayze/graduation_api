@@ -23,7 +23,10 @@ import '../../../widget/see_all_row.dart';
 import '../../../widget/viewProfileButton.dart';
 import '../../booking/booking.dart';
 import '../../booking/view_doc_profile.dart';
-import '../../search_page.dart';
+import '../../drawerScreens/about_us.dart';
+import '../../drawerScreens/asked_questions.dart';
+import '../../drawerScreens/client_saying.dart';
+import '../../drawerScreens/search_page.dart';
 import '../blogs.dart';
 import '../specialities.dart';
 import '../top_doctors.dart';
@@ -619,7 +622,9 @@ class _PatientHomeState extends State<PatientHome> {
                 ),
                 DrawerWidget(
                   img: 'images/about.png',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AboutUs.id);
+                  },
                   title: AppLocalizations.of(context)!.about_Us,
                 ),
                 DrawerWidget(
@@ -629,12 +634,16 @@ class _PatientHomeState extends State<PatientHome> {
                 ),
                 DrawerWidget(
                   img: 'images/faqs.png',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AskedQuestions.id);
+                  },
                   title: AppLocalizations.of(context)!.asked_questions,
                 ),
                 DrawerWidget(
                   img: 'images/client.png',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, ClientSaying.id);
+                  },
                   title: AppLocalizations.of(context)!.client_Sayings,
                 ),
                 DrawerWidget(

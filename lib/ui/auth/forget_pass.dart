@@ -12,6 +12,7 @@ import '../../provider/localization_provider.dart';
 import '../../utiles/helpers.dart';
 import '../../widget/customPrimaryButton.dart';
 import '../../widget/custom_text_filed.dart';
+import '../../widget/loading_custom_button.dart';
 import '../../widget/mobile_text_filed.dart';
 
 class ForgotScreen extends StatefulWidget {
@@ -135,11 +136,7 @@ class _ForgotScreenState extends State<ForgotScreen> with Helpers {
               height: 16.h,
             ),
             loading
-                ? Center(
-                    child: CircularProgressIndicator(
-                      color: Constant.primaryColor,
-                    ),
-                  )
+                ? loadingCustomButton()
                 : Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.h),
                     child: CustomPrimaryButton(

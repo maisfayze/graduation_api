@@ -9,7 +9,7 @@ class ApiSetting {
       '${_baseUrl}specialties/GetAllSpecialties';
   static const String GetTops = '${_baseUrl}doctor/GetTopDoctors';
   static const String GetBlogs = '${_baseUrl}blog/getallblogs';
-  static const String GetMyPatient = '${_baseUrl}doctor/GetAllPatients';
+  static const String GetMyPatient = '${_baseUrl}doctor/GetMyPatient';
   static const String ChangePass = '${_baseUrl}doctor/changepassword';
   static const String getScheduletimingsForDoctor =
       '${_baseUrl}scheduletiming/getScheduletimingsForDoctor?';

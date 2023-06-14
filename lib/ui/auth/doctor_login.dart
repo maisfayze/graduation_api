@@ -19,6 +19,7 @@ import '../../provider/localization_provider.dart';
 import '../../utiles/helpers.dart';
 import '../../widget/customPrimaryButton.dart';
 import '../../widget/custom_text_filed.dart';
+import '../../widget/loading_custom_button.dart';
 import '../../widget/mobile_text_filed.dart';
 import '../../widget/social.dart';
 import '../patient/PatientBtn/btn_patient.dart';
@@ -158,13 +159,15 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> with Helpers {
                 // ),
                 hint: '● ● ● ● ● ●',
                 suffixIcon: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _obsecure = !_obsecure;
-                      });
-                    },
-                    icon: Icon(
-                        _obsecure ? Icons.visibility_off : Icons.visibility)),
+                  onPressed: () {
+                    setState(() {
+                      _obsecure = !_obsecure;
+                    });
+                  },
+                  icon:
+                      Icon(_obsecure ? Icons.visibility_off : Icons.visibility),
+                  color: Color(0xffb4b4b4),
+                ),
                 obscureText: _obsecure,
               ),
               Align(
@@ -197,11 +200,7 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> with Helpers {
                 height: 16.h,
               ),
               loading
-                  ? Center(
-                      child: CircularProgressIndicator(
-                        color: Constant.primaryColor,
-                      ),
-                    )
+                  ? loadingCustomButton()
                   : CustomPrimaryButton(
                       text: AppLocalizations.of(context)!.login,
                       onPressed: () {

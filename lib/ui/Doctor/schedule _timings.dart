@@ -17,7 +17,7 @@ import '../../prefs/prefs.dart';
 
 class ScheduleTimings extends StatefulWidget {
   ScheduleTimings({Key? key}) : super(key: key);
-  static const id = 'kkk';
+  static const id = 'ScheduleTimings';
   @override
   State<ScheduleTimings> createState() => _ScheduleTimingsState();
 }
@@ -65,6 +65,19 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
     super.initState();
     selectedStartTime = TimeOfDay.now();
     selectedEndTime = TimeOfDay.now();
+  }
+
+  void _showDatepicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2000),
+            lastDate: DateTime(2030))
+        .then((value) {
+      setState(() {
+        selectedDate = value!;
+      });
+    });
   }
 
   Future<void> _selectStartTime(BuildContext context) async {
@@ -145,74 +158,151 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
             children: [
               //day date
               Container(
-                height: 180.h,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 12.h,
+                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    //   child: Row(
+                    //     children: [
+                    //       Text(
+                    //         selectedDay == null
+                    //             ? '${DateFormat.EEEE().format(DateTime.now())}'
+                    //             : ' ${DateFormat.EEEE().format(selectedDate!)}',
+                    //         style: GoogleFonts.poppins(
+                    //           fontWeight: FontWeight.w500,
+                    //           fontSize: 18.sp,
+                    //         ),
+                    //       ),
+                    //       Spacer(),
+                    //       Text(
+                    //         selectedDate == null
+                    //             ? '${DateFormat('dd-MM-yyyy').format(selectedDate)!}'
+                    //             : ' ${DateFormat('dd-MM-yyyy').format(selectedDate!)}',
+                    //         style: GoogleFonts.poppins(
+                    //           fontWeight: FontWeight.w500,
+                    //           fontSize: 18.sp,
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: 10.h,
+                    // ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+                      child: Text(
+                        'Schedule Timings',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                          fontSize: 20.sp,
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       height: 14.h,
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24.w),
-                      child: Row(
-                        children: [
-                          Text(
-                            selectedDay == null
-                                ? '${DateFormat.EEEE().format(DateTime.now())}'
-                                : ' ${DateFormat.EEEE().format(selectedDate!)}',
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18.sp,
-                            ),
-                          ),
-                          Spacer(),
-                          Text(
-                            selectedDate == null
-                                ? '${DateFormat('dd-MM-yyyy').format(selectedDate)!}'
-                                : ' ${DateFormat('dd-MM-yyyy').format(selectedDate!)}',
-                            style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18.sp,
-                            ),
-                          ),
-                        ],
+                      child: Text(
+                        'Time and Date',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff6B7280),
+                          fontSize: 16.sp,
+                        ),
                       ),
                     ),
                     SizedBox(
-                      height: 10.h,
+                      height: 12.h,
                     ),
-                    Container(
-                      // margin: EdgeInsets.only(left: 24.w, right: 24.w),
-                      color: Constant.textFiledColor,
-                      child: DatePicker(
-                        DateTime.now(),
-
-                        width: 80.w,
-                        height: 110.h,
-                        controller: _controller,
-                        initialSelectedDate: DateTime.timestamp(),
-                        // initialSelectedDate: DateTime.now(),
-                        selectionColor: Constant.primaryColor,
-                        selectedTextColor: Colors.white,
-                        monthTextStyle: GoogleFonts.poppins(
-                            fontSize: 14.sp, fontWeight: FontWeight.w600),
-                        dateTextStyle: GoogleFonts.poppins(
-                            fontSize: 20.sp, fontWeight: FontWeight.w600),
-                        onDateChange: (date) {
-                          // New date selected
-                          setState(() {
-                            selectedDate = date;
-                          });
-                        },
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 24.w),
+                      child: Container(
+                        height: 60.h,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.grey.shade300, width: 1.w),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    selectedDay == null
+                                        ? '${DateFormat.EEEE().format(DateTime.now())}'
+                                        : ' ${DateFormat.EEEE().format(selectedDate!)}',
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18.sp,
+                                    ),
+                                  ),
+                                  Text(
+                                    selectedDate == null
+                                        ? '${DateFormat('dd-MM-yyyy').format(selectedDate)!}'
+                                        : ' ${DateFormat('dd-MM-yyyy').format(selectedDate!)}',
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18.sp,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              IconButton(
+                                  onPressed: _showDatepicker,
+                                  icon: Icon(
+                                    Icons.calendar_month_sharp,
+                                    color: Colors.black,
+                                  )),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
+                    // Container(
+                    //   // margin: EdgeInsets.only(left: 24.w, right: 24.w),
+                    //   color: Constant.textFiledColor,
+                    //   child: DatePicker(
+                    //     DateTime.now(),
+                    //
+                    //     width: 80.w,
+                    //     height: 110.h,
+                    //     controller: _controller,
+                    //     initialSelectedDate: DateTime.timestamp(),
+                    //     // initialSelectedDate: DateTime.now(),
+                    //     selectionColor: Constant.primaryColor,
+                    //     selectedTextColor: Colors.white,
+                    //     monthTextStyle: GoogleFonts.poppins(
+                    //         fontSize: 14.sp, fontWeight: FontWeight.w600),
+                    //     dateTextStyle: GoogleFonts.poppins(
+                    //         fontSize: 20.sp, fontWeight: FontWeight.w600),
+                    //     onDateChange: (date) {
+                    //       // New date selected
+                    //       setState(() {
+                    //         selectedDate = date;
+                    //       });
+                    //     },
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
-
-              Divider(color: Colors.grey.shade300, thickness: 1.w),
               SizedBox(
-                height: 14.h,
+                height: 30.h,
               ),
+              // Divider(color: Colors.grey.shade300, thickness: 1.w),
+
               //duration
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -221,7 +311,8 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                   textAlign: TextAlign.center,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w500,
-                    fontSize: 18.sp,
+                    color: Color(0xff6B7280),
+                    fontSize: 16.sp,
                   ),
                 ),
               ),
@@ -236,10 +327,11 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 35.w),
                       constraints: BoxConstraints(
-                          maxHeight: 60.h,
-                          minHeight: 60.h,
-                          maxWidth: 287.w,
-                          minWidth: 287.w),
+                        maxHeight: 60.h,
+                        minHeight: 60.h,
+                        maxWidth: double.infinity,
+                        minWidth: double.infinity,
+                      ),
 
                       // contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 34),
                       hintStyle: GoogleFonts.poppins(
@@ -260,14 +352,6 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                             BorderSide(color: Constant.primaryColor, width: 1),
                         borderRadius: BorderRadius.circular(10.r),
                       ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 1),
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 1),
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
                       errorStyle: GoogleFonts.poppins(fontSize: 12.sp)),
                   value: dropDownValue,
                   onChanged: (String? Value) {
@@ -282,21 +366,39 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                 ),
               ),
               SizedBox(
-                height: 21.h,
+                height: 30.h,
               ),
+              // Divider(color: Colors.grey.shade300, thickness: 1.w),
+              // SizedBox(
+              //   height: 14.h,
+              // ),
+              //start and end
               Divider(color: Colors.grey.shade300, thickness: 1.w),
               SizedBox(
                 height: 14.h,
               ),
-              //start and end
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.0.w),
                 child: Text(
-                  'Start time',
+                  'Create time slot',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w500,
-                    fontSize: 18.sp,
                     color: Colors.black,
+                    fontSize: 20.sp,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 14.h,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+                child: Text(
+                  'From',
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xff6B7280),
+                    fontSize: 16.sp,
                   ),
                 ),
               ),
@@ -361,11 +463,11 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.0.w),
                 child: Text(
-                  'End time',
+                  'To',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w500,
-                    fontSize: 18.sp,
-                    color: Colors.black,
+                    color: Color(0xff6B7280),
+                    fontSize: 16.sp,
                   ),
                 ),
               ),
@@ -435,7 +537,7 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                         performLogin();
                       },
                       child: Text(
-                        'confirm',
+                        'Add',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.poppins(
                             color: Colors.white,
@@ -461,15 +563,18 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
 
               //time slots
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.0.h),
+                padding: EdgeInsets.symmetric(horizontal: 24.0.w),
                 child: Text(
                   'Time Slots',
                   style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500,
                     color: Colors.black,
+                    fontSize: 20.sp,
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 14.h,
               ),
 
               FutureBuilder(
@@ -487,7 +592,7 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                   } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                     return Container(
                       width: 398.w,
-                      height: 350.h,
+                      height: 250.h,
                       decoration: BoxDecoration(
                         color: Colors.white,
                       ),

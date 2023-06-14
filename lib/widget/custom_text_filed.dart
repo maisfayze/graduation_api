@@ -41,35 +41,35 @@ class CustomTextFiled extends StatelessWidget {
               : TextDirection.rtl,
       decoration: InputDecoration(
           hintText: hint,
-          prefixIcon: Provider.of<LocalizationProvider>(context, listen: true)
-                      .languages ==
-                  'en'
-              ? Padding(
-                  padding: EdgeInsets.only(left: 30, right: 12),
-                  child: prefixIcon,
-                )
-              : Padding(
-                  padding: EdgeInsets.only(left: 12, right: 37),
-                  child: prefixIcon,
-                ),
+          // prefixIcon: Provider.of<LocalizationProvider>(context, listen: true)
+          //             .languages ==
+          //         'en'
+          //     ? Padding(
+          //         padding: EdgeInsets.only(left: 30, right: 12),
+          //         child: prefixIcon,
+          //       )
+          //     : Padding(
+          //         padding: EdgeInsets.only(left: 12, right: 37),
+          //         child: prefixIcon,
+          //       ),
           suffixIcon: Padding(
             padding: Provider.of<LocalizationProvider>(context, listen: true)
                         .languages ==
                     'en'
-                ? EdgeInsets.only(right: 34.w, top: 0, bottom: 0)
-                : EdgeInsets.only(left: 34.w, top: 0, bottom: 0),
+                ? EdgeInsets.only(right: 20.w, top: 0, bottom: 0)
+                : EdgeInsets.only(left: 20.w, top: 0, bottom: 0),
             child: suffixIcon,
           ),
-          contentPadding: EdgeInsets.zero,
+          contentPadding: EdgeInsets.symmetric(horizontal: 26.w),
           constraints: BoxConstraints(
             maxHeight: errorText == null ? 60.h : 85.h,
             minHeight: 60.h,
           ),
           // contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
           hintStyle: GoogleFonts.poppins(
-              fontSize: 16.sp,
+              fontSize: 12.sp,
               fontWeight: FontWeight.normal,
-              color: Colors.grey),
+              color: Color(0xffb4b4b4)),
           filled: false,
           errorText: errorText,
           // fillColor: Constant.textFiledColor,
