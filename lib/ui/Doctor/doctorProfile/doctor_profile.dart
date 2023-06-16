@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
+import 'package:graduation/ui/Doctor/doctorProfile/review.dart';
 import 'package:graduation/ui/Doctor/doctorProfile/social_media.dart';
 
 import '../../../prefs/prefs.dart';
@@ -117,7 +118,9 @@ class DoctorProfile extends StatelessWidget {
                   title: AppLocalizations.of(context)!.reviews,
                   // sub_title: AppLocalizations.of(context)!
                   //     .see_your_paid_pending,
-                  onPresseed: () {},
+                  onPresseed: () {
+                    Navigator.pushNamed(context, Review.id);
+                  },
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 12.h),
@@ -290,7 +293,7 @@ class DoctorProfile extends StatelessWidget {
           return AlertDialog(
             // titlePadding: EdgeInsets.symmetric(horizontal: 34),
             title: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40.w),
+              padding: EdgeInsets.symmetric(horizontal: 65.w),
               child: Center(
                 child: Text(
                   AppLocalizations.of(context)!.log_out_of_your_account,

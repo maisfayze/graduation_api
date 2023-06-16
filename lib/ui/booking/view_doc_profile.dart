@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../models/view_profile_model.dart';
 import '../../provider/fav_provider.dart';
+import 'Tabs/review_tab.dart';
 import 'Tabs/bussiness_hours.dart';
 import 'Tabs/overview.dart';
 
@@ -269,7 +270,9 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
                   OverViewTab(
                     data: data,
                   ),
-                  Text('two'),
+                  ReviewTab(
+                    data: data,
+                  ),
                   BusinessHoursTabs(
                     data: data,
                   ),

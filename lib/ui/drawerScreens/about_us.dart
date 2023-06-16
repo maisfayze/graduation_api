@@ -36,9 +36,7 @@ class AboutUs extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
         children: [
           SizedBox(
             height: 24.h,
@@ -63,7 +61,7 @@ class AboutUs extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
                   child: Text(
-                    'About Us',
+                    'About Our Platform',
                     style: GoogleFonts.poppins(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w600,
@@ -77,8 +75,9 @@ class AboutUs extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
                   child: Text(
-                    'We are an advanced platform designed to revolutionize the way doctors and patients communicate and manage appointments',
+                    'We are an advanced platform designed to revolutionize the way doctors and patients communicate and manage appointments. With our seamless online booking system, we aim to simplify the process of scheduling appointments, with a user-friendly interface that allows you to search for and book healthcare professionals based on various criteria while providing effective tools to physicians to streamline their processes and manage their practices efficiently.',
                     style: GoogleFonts.poppins(
+                      color: Color(0xff6B7280),
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w400,
                     ),
@@ -108,10 +107,12 @@ class AboutUs extends StatelessWidget {
                       Icon(
                         Icons.location_on,
                         size: 18,
+                        color: Color(0xff6B7280),
                       ),
                       Text(
                         '  Palestine,Gaza City Al-Quds Street ,12',
                         style: GoogleFonts.poppins(
+                          color: Color(0xff6B7280),
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w400,
                         ),
@@ -129,10 +130,12 @@ class AboutUs extends StatelessWidget {
                       Icon(
                         Icons.phone,
                         size: 18,
+                        color: Color(0xff6B7280),
                       ),
                       Text(
                         ' +1 315 369 5943',
                         style: GoogleFonts.poppins(
+                          color: Color(0xff6B7280),
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w400,
                         ),
@@ -150,16 +153,21 @@ class AboutUs extends StatelessWidget {
                       Icon(
                         Icons.email,
                         size: 18,
+                        color: Color(0xff6B7280),
                       ),
                       Text(
                         ' CliniPlus@example.com',
                         style: GoogleFonts.poppins(
+                          color: Color(0xff6B7280),
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: 50.h,
                 ),
               ],
             ),

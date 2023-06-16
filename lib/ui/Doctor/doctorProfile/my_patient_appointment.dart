@@ -12,7 +12,7 @@ import '../../../widget/viewProfileButton.dart';
 
 class MyPatientAppointments extends StatefulWidget {
   const MyPatientAppointments({Key? key}) : super(key: key);
-  static const id = 'MyAppointments';
+  static const id = 'MyPatientAppointments';
 
   @override
   State<MyPatientAppointments> createState() => _MyPatientAppointmentsState();
@@ -97,7 +97,7 @@ class _MyPatientAppointmentsState extends State<MyPatientAppointments> {
                         padding: EdgeInsets.symmetric(
                             vertical: 10.h, horizontal: 20.w),
                         child: Container(
-                          height: 193.h,
+                          height: 212.h,
                           width: 375.w,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.r),
@@ -109,7 +109,7 @@ class _MyPatientAppointmentsState extends State<MyPatientAppointments> {
                               Padding(
                                 padding: EdgeInsets.only(
                                     left: 21.w,
-                                    bottom: 38.h,
+                                    bottom: 21.h,
                                     top: 21.h,
                                     right: 0.w),
                                 child: ClipRRect(
@@ -203,7 +203,7 @@ class _MyPatientAppointmentsState extends State<MyPatientAppointments> {
                                               size: 12,
                                             ),
                                             SizedBox(
-                                              width: 180.w,
+                                              width: 160.w,
                                               child: Text(
                                                 ' ${snapshot.data![index].email}',
                                                 style: GoogleFonts.poppins(

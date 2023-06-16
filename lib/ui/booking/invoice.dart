@@ -71,42 +71,42 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
               height: 14.h,
             ),
             InvoiceWidget(
-              title: 'DoctorName',
+              title: 'Doctor Name:',
               data: '${invoice!.docName}',
             ),
             SizedBox(
               height: 14.h,
             ),
             InvoiceWidget(
-              title: 'Invoice',
-              data: '100 ',
+              title: 'Invoice Price:',
+              data: '100 ₪',
             ),
             SizedBox(
               height: 14.h,
             ),
             InvoiceWidget(
-              title: 'Date',
+              title: 'Booking Date:',
               data: '${invoice!.data}',
             ),
             SizedBox(
               height: 14.h,
             ),
             InvoiceWidget(
-              title: 'Day',
+              title: 'Booking Day:',
               data: '${invoice!.day}',
             ),
             SizedBox(
               height: 14.h,
             ),
             InvoiceWidget(
-              title: 'Time',
+              title: 'Booking Time:',
               data: '${invoice!.time}',
             ),
             SizedBox(
               height: 14.h,
             ),
             InvoiceWidget(
-              title: 'PaymentMethod',
+              title: 'Payment Method',
               data: 'Cash',
             ),
             SizedBox(

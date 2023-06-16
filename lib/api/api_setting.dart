@@ -24,4 +24,5 @@ class ApiSetting {
       '${_baseUrl}appoitment/CreateAppointments';
 
   static const String getOverView = '${_baseUrl}doctor/GetDoctorProfileById';
+  static const String getReView = '${_baseUrl}/review/GetAllReviewsForDoctor';
 }

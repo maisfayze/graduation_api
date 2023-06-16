@@ -697,7 +697,7 @@ class _PatientHomeState extends State<PatientHome> {
           return AlertDialog(
             // titlePadding: EdgeInsets.symmetric(horizontal: 34),
             title: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40.w),
+              padding: EdgeInsets.symmetric(horizontal: 65.w),
               child: Center(
                 child: Text(
                   AppLocalizations.of(context)!.log_out_of_your_account,

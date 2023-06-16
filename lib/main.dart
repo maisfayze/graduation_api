@@ -15,6 +15,7 @@ import 'package:graduation/ui/Doctor/doctorProfile/my_patient.dart';
 import 'package:graduation/ui/Doctor/doctorProfile/doctor_profile.dart';
 import 'package:graduation/ui/Doctor/doctorProfile/edit_doctor_profile.dart';
 import 'package:graduation/ui/Doctor/doctorProfile/my_patient_appointment.dart';
+import 'package:graduation/ui/Doctor/doctorProfile/review.dart';
 import 'package:graduation/ui/Doctor/doctorProfile/social_media.dart';
 import 'package:graduation/ui/auth/auth.dart';
 import 'package:graduation/ui/auth/doc_signup.dart';
@@ -162,6 +163,7 @@ class MyApp extends StatelessWidget {
                 ClientSaying.id: (context) => ClientSaying(),
                 AboutUs.id: (context) => AboutUs(),
                 SocialMedia.id: (context) => SocialMedia(),
+                Review.id: (context) => Review(),
               },
             );
           },

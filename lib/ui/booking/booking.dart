@@ -34,7 +34,9 @@ class Booking extends StatefulWidget {
 
 class _BookingState extends State<Booking> {
   int? data;
+
   _BookingState(this.data);
+
   DateTime selectedDate = DateTime.now();
   String selectedDay = DateFormat.EEEE().format(DateTime.now());
   int tapped_index = 0;
@@ -47,6 +49,9 @@ class _BookingState extends State<Booking> {
 
   TimeOfDay? selectedStartTime;
   TimeOfDay? selectedEndTime;
+  String? start;
+  String? end;
+  late String myString;
 
   @override
   void initState() {
@@ -134,6 +139,105 @@ class _BookingState extends State<Booking> {
           : FadeInLeft(
               child: ListView(
                 children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: 20.h, left: 24.w, right: 24.w, bottom: 15.h),
+                    child: Container(
+                      height: 132.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r),
+                        border:
+                            Border.all(color: Colors.grey.shade400, width: .5),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25.0.w),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                                borderRadius: BorderRadius.circular(10.r),
+                                child: Image.network(
+                                  'http://ac7a1ae098-001-site1.etempurl.com${data.doctorImage}',
+                                  height: 80.h,
+                                  width: 80.w,
+                                  fit: BoxFit.cover,
+                                )),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  bottom: 20.h,
+                                  left: 18.w,
+                                  top: 20.h,
+                                  right: 0),
+                              // padding:
+                              //     EdgeInsets.symmetric(horizontal: 18, vertical: 30),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: 150.w,
+                                    child: Text(
+                                      'Dr.${data.doctorName}',
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16.sp,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 8.h,
+                                  ),
+                                  RatingBar.builder(
+                                    initialRating: 3.5,
+                                    minRating: 1,
+                                    itemSize: 14,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    itemPadding:
+                                        EdgeInsets.symmetric(horizontal: 2.0.w),
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
+                                      color: Color(0xffF4C150),
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: 8.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Icon(
+                                        Icons.location_on,
+                                        size: 12,
+                                        color: Colors.grey.shade400,
+                                      ),
+                                      Text(
+                                        '${data.clinicAddress}',
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14.sp,
+                                          color: Colors.grey.shade400,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 28.h,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -166,9 +270,13 @@ class _BookingState extends State<Booking> {
                       SizedBox(
                         height: 10.h,
                       ),
+                      Divider(color: Colors.grey.shade300, thickness: .8),
+                      SizedBox(
+                        height: 8.h,
+                      ),
                       Container(
                         // margin: EdgeInsets.only(left: 24.w, right: 24.w),
-                        color: Constant.textFiledColor,
+                        color: Colors.white,
                         child: DatePicker(
                           DateTime.now(),
 
@@ -178,7 +286,7 @@ class _BookingState extends State<Booking> {
                           initialSelectedDate: DateTime.timestamp(),
                           // initialSelectedDate: DateTime.now(),
                           selectionColor: Constant.primaryColor,
-                          selectedTextColor: Colors.white,
+                          selectedTextColor: Constant.textFiledColor,
                           monthTextStyle: GoogleFonts.poppins(
                               fontSize: 14.sp, fontWeight: FontWeight.w600),
                           dateTextStyle: GoogleFonts.poppins(
@@ -187,22 +295,19 @@ class _BookingState extends State<Booking> {
                             // New date selected
                             setState(() {
                               selectedDate = date;
+                              print('my date is$selectedDate');
                             });
                           },
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 24.0.w, vertical: 16.h),
-                        child: Text(
-                          'Available Time',
-                          style: GoogleFonts.poppins(
-                              color: Colors.black,
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w600),
-                        ),
+                      SizedBox(
+                        height: 8.h,
                       ),
+                      Divider(color: Colors.grey.shade300, thickness: .8),
                     ],
+                  ),
+                  SizedBox(
+                    height: 20.h,
                   ),
                   FutureBuilder(
                     future: GetScheduletimingsForDoctor()
@@ -226,222 +331,71 @@ class _BookingState extends State<Booking> {
                           }
                         }
                         return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 24.w),
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
                           child: Container(
-                            width: 398.w,
-                            height: 800.h,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: Colors.grey.shade300, width: 1.w),
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12.r)),
+                            // width: 398.w,
+                            height: 400.h,
+                            // decoration: BoxDecoration(
+                            //     border: Border.all(
+                            //         color: Colors.grey.shade300, width: 1.w),
+                            //     color: Colors.white,
+                            //     borderRadius: BorderRadius.circular(12.r)),
                             child: ListView(
+                              physics: NeverScrollableScrollPhysics(),
                               children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10.w, vertical: 10.h),
-                                  child: GridView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: time.length,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            childAspectRatio: 3),
-                                    itemBuilder: (context, index) {
-                                      return InkWell(
-                                        splashColor: Colors.transparent,
-                                        onTap: () {
-                                          setState(() {
-                                            _currentIndex = index;
-                                            _timeSelected = true;
-                                          });
-                                        },
-                                        child: Container(
-                                          width: 120.w,
-                                          height: 33.h,
-                                          margin: const EdgeInsets.all(5),
-                                          decoration: BoxDecoration(
-                                            // border: Border.all(
-                                            //   color: _currentIndex == index
-                                            //       ? Color(0xffE9E9E9)
-                                            //       : Colors.black,
-                                            // ),
-                                            borderRadius:
-                                                BorderRadius.circular(5.r),
-                                            color: _currentIndex == index
-                                                ? Constant.primaryColor
-                                                : Color(0xffE9E9E9),
-                                          ),
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            '${time[index].item1}',
-                                            style: GoogleFonts.poppins(
-                                                fontWeight: FontWeight.normal,
-                                                color: _currentIndex == index
-                                                    ? Colors.white
-                                                    : null,
-                                                fontSize: 12.sp),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 24.0.w),
-                                  child: Text(
-                                    'Start time',
-                                    style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18.sp,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10.w, vertical: 10.h),
-                                  child: Expanded(
-                                      child: TextField(
-                                    decoration: InputDecoration(
-                                        hintText:
-                                            '${selectedStartTime != null ? DateFormat.Hm().format(DateTime(2021, 1, 1, selectedStartTime!.hour, selectedStartTime!.minute)) : ''}',
-                                        suffixIcon: Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 34.w, top: 0, bottom: 0),
-                                          child: IconButton(
-                                              onPressed: () {
-                                                // _openStartTimePickerSheet(
-                                                //     context);
-                                                _selectStartTime(context);
-                                              },
-                                              icon: Icon(
-                                                  Icons.access_time_outlined,
-                                                  color: Colors.grey)),
-                                        ),
-                                        constraints: BoxConstraints(
-                                          maxHeight: 60.h,
-                                          minHeight: 60.h,
-                                        ),
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 16.w),
-                                        hintStyle: GoogleFonts.poppins(
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.grey),
-                                        filled: false,
+                                GridView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: time.length,
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 3,
+                                          childAspectRatio: 2),
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      onTap: () {
+                                        setState(() {
+                                          myString = time[index].item1;
+                                          print('my substring$myString');
+                                          start = myString.substring(0, 5);
+                                          print('my start$start');
+                                          print('my date is$selectedDate');
+                                          end = myString.substring(8, 13);
+                                          print('my end$end');
 
-                                        // fillColor: Constant.textFiledColor,
-                                        counterText: '',
-                                        border: InputBorder.none,
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Color(0xffe7e7e7),
-                                              width: 1),
+                                          _currentIndex = index;
+                                          _timeSelected = true;
+                                        });
+                                      },
+                                      child: Container(
+                                        width: 135.w,
+                                        height: 66.h,
+                                        margin: const EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                          // border: Border.all(
+                                          //   color: _currentIndex == index
+                                          //       ? Color(0xffE9E9E9)
+                                          //       : Colors.black,
+                                          // ),
                                           borderRadius:
-                                              BorderRadius.circular(10.r),
+                                              BorderRadius.circular(5.r),
+                                          color: _currentIndex == index
+                                              ? Constant.primaryColor
+                                              : Color(0xffE9E9E9),
                                         ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Constant.primaryColor,
-                                              width: 1),
-                                          borderRadius:
-                                              BorderRadius.circular(10.r),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          '${time[index].item1}',
+                                          style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.normal,
+                                              color: _currentIndex == index
+                                                  ? Colors.white
+                                                  : null,
+                                              fontSize: 12.sp),
                                         ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.red, width: 1),
-                                          borderRadius:
-                                              BorderRadius.circular(10.r),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.red, width: 1),
-                                          borderRadius:
-                                              BorderRadius.circular(80.r),
-                                        ),
-                                        errorStyle: GoogleFonts.poppins(
-                                            fontSize: 12.sp)),
-                                  )),
-                                ),
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 24.0.w),
-                                  child: Text(
-                                    'End time',
-                                    style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18.sp,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10.w, vertical: 10.h),
-                                  child: Expanded(
-                                      child: TextField(
-                                    decoration: InputDecoration(
-                                        hintText:
-                                            '${selectedEndTime != null ? DateFormat.Hm().format(DateTime(2021, 1, 1, selectedEndTime!.hour, selectedEndTime!.minute)) : ''}',
-                                        suffixIcon: Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 34.w, top: 0, bottom: 0),
-                                          child: IconButton(
-                                              onPressed: () {
-                                                // _openEndTimePickerSheet(
-                                                //     context);
-                                                _selectEndTime(context);
-                                              },
-                                              icon: Icon(
-                                                  Icons.access_time_outlined,
-                                                  color: Colors.grey)),
-                                        ),
-                                        constraints: BoxConstraints(
-                                          maxHeight: 60.h,
-                                          minHeight: 60.h,
-                                        ),
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 16.w),
-                                        hintStyle: GoogleFonts.poppins(
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.grey),
-                                        filled: false,
-
-                                        // fillColor: Constant.textFiledColor,
-                                        counterText: '',
-                                        border: InputBorder.none,
-                                        enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Color(0xffe7e7e7),
-                                              width: 1),
-                                          borderRadius:
-                                              BorderRadius.circular(10.r),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Constant.primaryColor,
-                                              width: 1),
-                                          borderRadius:
-                                              BorderRadius.circular(10.r),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.red, width: 1),
-                                          borderRadius:
-                                              BorderRadius.circular(10.r),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.red, width: 1),
-                                          borderRadius:
-                                              BorderRadius.circular(80.r),
-                                        ),
-                                        errorStyle: GoogleFonts.poppins(
-                                            fontSize: 12.sp)),
-                                  )),
+                                      ),
+                                    );
+                                  },
                                 ),
                                 Padding(
                                   padding: EdgeInsets.symmetric(
@@ -504,6 +458,9 @@ class _BookingState extends State<Booking> {
                                 ),
                               ),
                             ),
+                            SizedBox(
+                              height: 65.h,
+                            ),
                           ]),
                         );
                       }
@@ -527,19 +484,22 @@ class _BookingState extends State<Booking> {
         id: widget.data!.toString(),
         date: '${DateFormat('yyyy-MM-dd').format(selectedDate!)}T00:00:00.875Z',
         day: DateFormat.EEEE().format(selectedDate!),
-        Start:
-            '${DateFormat('yyyy-MM-dd').format(selectedDate!)}T${DateFormat.Hm().format(DateTime(2021, 1, 1, selectedStartTime!.hour, selectedStartTime!.minute))}:00.875Z',
-        End:
-            '${DateFormat('yyyy-MM-dd').format(selectedDate!)}T${DateFormat.Hm().format(DateTime(2021, 1, 1, selectedEndTime!.hour, selectedEndTime!.minute))}:00.875Z');
+        // Start:
+        //     '${DateFormat('yyyy-MM-dd').format(selectedDate!)}T${DateFormat.Hm().format(DateTime(2021, 1, 1, selectedStartTime!.hour, selectedStartTime!.minute))}:00.875Z',
+        // End:
+        //     '${DateFormat('yyyy-MM-dd').format(selectedDate!)}T${DateFormat.Hm().format(DateTime(2021, 1, 1, selectedEndTime!.hour, selectedEndTime!.minute))}:00.875Z');
+        Start: '${DateFormat('yyyy-MM-dd').format(selectedDate!)}T$start:00.875Z',
+        End: '${DateFormat('yyyy-MM-dd').format(selectedDate!)}T$end:00.875Z');
     if (processResponse?.doctorId == widget.data!) {
       Invoice invoice = Invoice();
       invoice.docName = processResponse!.doctorName;
       invoice.data = '${DateFormat('dd-MM-yyyy').format(selectedDate!)}';
       invoice.day = processResponse!.day;
+      invoice.time = myString;
 
-      invoice.time =
-          '${DateFormat.Hm().format(DateTime(2021, 1, 1, selectedStartTime!.hour, selectedStartTime!.minute))} -'
-          '${DateFormat.Hm().format(DateTime(2021, 1, 1, selectedEndTime!.hour, selectedEndTime!.minute))}';
+      // invoice.time =
+      //     '${DateFormat.Hm().format(DateTime(2021, 1, 1, selectedStartTime!.hour, selectedStartTime!.minute))} -'
+      //     '${DateFormat.Hm().format(DateTime(2021, 1, 1, selectedEndTime!.hour, selectedEndTime!.minute))}';
       Navigator.push(
         context,
         MaterialPageRoute(
