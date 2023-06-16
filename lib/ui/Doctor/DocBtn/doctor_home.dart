@@ -630,11 +630,11 @@ class _DoctorHomeState extends State<DoctorHome> {
                   },
                   title: AppLocalizations.of(context)!.about_Us,
                 ),
-                DrawerWidget(
-                  img: 'images/price.png',
-                  onPressed: () {},
-                  title: AppLocalizations.of(context)!.pricing_plan,
-                ),
+                // DrawerWidget(
+                //   img: 'images/price.png',
+                //   onPressed: () {},
+                //   title: AppLocalizations.of(context)!.pricing_plan,
+                // ),
                 DrawerWidget(
                   img: 'images/faqs.png',
                   onPressed: () {
