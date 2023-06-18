@@ -3,12 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:graduation/utiles/context_extention.dart';
 import 'package:intl/intl.dart';
 
 import '../../../constant/constant.dart';
+import '../../../controller/control_patient_appoitment.dart';
 import '../../../controller/get_my_appoitment_controller.dart';
 import '../../../controller/get_specialities.dart';
 import '../../../controller/get_top_doctors_controller.dart';
+import '../../../models/api_response.dart';
 import '../../../models/my_appoitment.dart';
 import '../../../models/specialities_model.dart';
 import '../../../models/top_doctors.dart';
@@ -50,143 +53,10 @@ class _MyAppointmentState extends State<MyAppointment> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      // body: Padding(
-      //   padding: EdgeInsets.symmetric(
-      //     horizontal: 24.w,
-      //   ),
-      //   child: FadeInLeft(
-      //     child: FutureBuilder<List<MyAppData>>(
-      //       future: GetMyAppointment().getMyAppointment(),
-      //       builder: (context, snapshot) {
-      //         if (snapshot.connectionState == ConnectionState.waiting) {
-      //           return Center(
-      //             child: CircularProgressIndicator(
-      //               color: Constant.primaryColor,
-      //             ),
-      //           );
-      //         } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-      //           return ListView.builder(
-      //             shrinkWrap: true,
-      //             itemCount: snapshot.data!.length,
-      //             scrollDirection: Axis.vertical,
-      //             itemBuilder: (context, index) {
-      //               return Container(
-      //                 height: 150,
-      //                 child: Row(
-      //                   mainAxisAlignment: MainAxisAlignment.start,
-      //                   crossAxisAlignment: CrossAxisAlignment.start,
-      //                   children: [
-      //                     ClipRRect(
-      //                         borderRadius: BorderRadius.circular(10.r),
-      //                         child: Image.network(
-      //                           'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].doctorImage}',
-      //                           height: 95.h,
-      //                           width: 185.w,
-      //                           fit: BoxFit.fill,
-      //                         )),
-      //                     SizedBox(
-      //                       height: 16.h,
-      //                     ),
-      //                     Column(
-      //                       children: [
-      //                         Text(
-      //                           'Dr.${snapshot.data![index].doctorName}',
-      //                           overflow: TextOverflow.ellipsis,
-      //                           style: GoogleFonts.poppins(
-      //                             fontWeight: FontWeight.w600,
-      //                             fontSize: 14.sp,
-      //                             color: Colors.black,
-      //                           ),
-      //                         ),
-      //                         Text(
-      //                           '${snapshot.data![index].doctorName}',
-      //                           style: GoogleFonts.poppins(
-      //                             fontWeight: FontWeight.w400,
-      //                             fontSize: 14.sp,
-      //                             color: Colors.grey,
-      //                           ),
-      //                         ),
-      //                         SizedBox(
-      //                           height: 12.h,
-      //                         ),
-      //                         Row(
-      //                           children: [
-      //                             Container(
-      //                               height: 23.5.h,
-      //                               width: 43.w,
-      //                               decoration: BoxDecoration(
-      //                                   color: Constant.primaryColor
-      //                                       .withOpacity(0.2),
-      //                                   borderRadius:
-      //                                       BorderRadius.circular(2.r)),
-      //                               child: Row(
-      //                                 mainAxisAlignment:
-      //                                     MainAxisAlignment.spaceEvenly,
-      //                                 children: [
-      //                                   Icon(
-      //                                     Icons.star,
-      //                                     size: 12,
-      //                                     color: Color(0xffF4C150),
-      //                                   ),
-      //                                   Text(
-      //                                     '4.5',
-      //                                     style: GoogleFonts.poppins(
-      //                                       fontWeight: FontWeight.w600,
-      //                                       fontSize: 12.sp,
-      //                                       color: Constant.primaryColor,
-      //                                     ),
-      //                                   ),
-      //                                 ],
-      //                               ),
-      //                             ),
-      //                             SizedBox(
-      //                               width: 30.w,
-      //                             ),
-      //                             Row(
-      //                               mainAxisAlignment:
-      //                                   MainAxisAlignment.spaceEvenly,
-      //                               children: [
-      //                                 Icon(
-      //                                   Icons.location_on,
-      //                                   size: 12,
-      //                                   color: Colors.grey.shade400,
-      //                                 ),
-      //                                 Text(
-      //                                   '${snapshot.data![index].doctorSpecialty}',
-      //                                   style: GoogleFonts.poppins(
-      //                                     fontWeight: FontWeight.w600,
-      //                                     fontSize: 12.sp,
-      //                                     color: Colors.grey.shade400,
-      //                                   ),
-      //                                 ),
-      //                               ],
-      //                             ),
-      //                           ],
-      //                         ),
-      //                       ],
-      //                     ),
-      //                     SizedBox(
-      //                       height: 14.h,
-      //                     ),
-      //                   ],
-      //                 ),
-      //               );
-      //             },
-      //           );
-      //         } else {
-      //           return Center(
-      //             child: Text('NO DATA'),
-      //           );
-      //         }
-      //       },
-      //     ),
-      //   ),
-      // ),
-
       body: FutureBuilder<List<MyAppData>>(
         future: GetMyAppointment().getMyAppointment(),
         builder: (context, snapshot) {
-          print('my sna${snapshot.data}');
+          // print('my sna${snapshot.data}');
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(
@@ -195,158 +65,197 @@ class _MyAppointmentState extends State<MyAppointment> {
             );
           } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
             return ListView.builder(
-              reverse: true,
+              reverse: false,
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 String trimmedString = snapshot.data![index].date.trim();
                 DateTime dateTime = DateTime.parse(trimmedString);
-                return Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
-                  child: Container(
-                    height: 200.h,
-                    width: 375.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
-                      border:
-                          Border.all(color: Colors.grey.shade300, width: .5),
+                return Dismissible(
+                  key: UniqueKey(),
+                  background: Container(
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.only(left: 20),
+                    color: Colors.green,
+                    child: Text(
+                      'Update',
+                      style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500),
                     ),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 21.w, bottom: 30.h, top: 24.h, right: 0.w),
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.r),
-                              child: Image.network(
-                                'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].doctorImage}',
-                                height: 148.h,
-                                width: 120.w,
-                                fit: BoxFit.cover,
-                              )),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 18.w, bottom: 16.h, top: 20.h, right: 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${snapshot.data![index].doctorName}',
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14.sp,
-                                  color: Colors.black,
+                  ),
+                  secondaryBackground: Container(
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.only(right: 20),
+                    color: Colors.red,
+                    child: Text(
+                      'Delete',
+                      style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  onDismissed: (direction) {
+                    if (direction == DismissDirection.endToStart) {
+                      delete(Appid: snapshot.data![index].appointmentId);
+                    }
+                    if (direction == DismissDirection.startToEnd) {}
+                  },
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
+                    child: Container(
+                      height: 200.h,
+                      width: 375.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r),
+                        border:
+                            Border.all(color: Colors.grey.shade300, width: .5),
+                      ),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 21.w,
+                                bottom: 30.h,
+                                top: 24.h,
+                                right: 0.w),
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10.r),
+                                child: Image.network(
+                                  'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].doctorImage}',
+                                  height: 148.h,
+                                  width: 120.w,
+                                  fit: BoxFit.cover,
+                                )),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 18.w, bottom: 16.h, top: 20.h, right: 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${snapshot.data![index].doctorName}',
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14.sp,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Icon(
-                                        Icons.date_range,
-                                        color: Color(0xff757575),
-                                        size: 14,
-                                      ),
-                                      Text(
-                                        ' ${snapshot.data![index].day} ${DateFormat('dd-MM-yyyy').format(dateTime)}',
-                                        style: GoogleFonts.poppins(
-                                            color: Colors.grey.shade500,
-                                            fontSize: 14.sp),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Icon(
-                                        Icons.access_time_outlined,
-                                        color: Color(0xff757575),
-                                        size: 14,
-                                      ),
-                                      Text(
-                                        ' ${snapshot.data![index].time}',
-                                        style: GoogleFonts.poppins(
-                                            color: Colors.grey.shade500,
-                                            fontSize: 14.sp),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Icon(
-                                        Icons.medical_services_outlined,
-                                        color: Color(0xff757575),
-                                        size: 14,
-                                      ),
-                                      SizedBox(
-                                        width: 180.w,
-                                        child: Text(
-                                          ' ${snapshot.data![index].doctorSpecialty}',
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  // mainAxisAlignment:
+                                  //     MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Icon(
+                                          Icons.date_range,
+                                          color: Color(0xff757575),
+                                          size: 14,
+                                        ),
+                                        Text(
+                                          ' ${snapshot.data![index].day} ${DateFormat('dd-MM-yyyy').format(dateTime)}',
                                           style: GoogleFonts.poppins(
                                               color: Colors.grey.shade500,
                                               fontSize: 14.sp),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  Container(
-                                    height: 29.5.h,
-                                    width: 66.w,
-                                    decoration: BoxDecoration(
-                                        color: Constant.primaryColor
-                                            .withOpacity(0.2),
-                                        borderRadius:
-                                            BorderRadius.circular(2.r)),
-                                    child: Row(
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          MainAxisAlignment.start,
                                       children: [
                                         Icon(
-                                          Icons.remove_red_eye_outlined,
-                                          size: 13,
-                                          color: Constant.primaryColor,
+                                          Icons.access_time_outlined,
+                                          color: Color(0xff757575),
+                                          size: 14,
                                         ),
                                         Text(
-                                          'View',
+                                          ' ${snapshot.data![index].time}',
                                           style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 13.sp,
-                                            color: Constant.primaryColor,
+                                              color: Colors.grey.shade500,
+                                              fontSize: 14.sp),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Icon(
+                                          Icons.medical_services_outlined,
+                                          color: Color(0xff757575),
+                                          size: 14,
+                                        ),
+                                        SizedBox(
+                                          width: 180.w,
+                                          child: Text(
+                                            ' ${snapshot.data![index].doctorSpecialty}',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.grey.shade500,
+                                                fontSize: 14.sp),
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ],
-                              )
-                            ],
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Container(
+                                      height: 29.5.h,
+                                      width: 66.w,
+                                      decoration: BoxDecoration(
+                                          color: Constant.primaryColor
+                                              .withOpacity(0.2),
+                                          borderRadius:
+                                              BorderRadius.circular(2.r)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.remove_red_eye_outlined,
+                                            size: 13,
+                                            color: Constant.primaryColor,
+                                          ),
+                                          Text(
+                                            'View',
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 13.sp,
+                                              color: Constant.primaryColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -359,6 +268,16 @@ class _MyAppointmentState extends State<MyAppointment> {
           }
         },
       ),
+    );
+  }
+
+  void delete({required int Appid}) async {
+    ApiResponse processResponse =
+        await ControlPatientAppoitnment().deleteApp(id: Appid);
+    if (processResponse.sucess) {}
+    context.showSnakBar(
+      message: processResponse.msg,
+      error: !processResponse.sucess,
     );
   }
 }

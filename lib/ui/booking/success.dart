@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../constant/constant.dart';
 import '../../models/invoice_data.dart';
+import '../patient/PatientBtn/my_appoitment_for_patient.dart';
 import 'invoice.dart';
 
 class Success extends StatefulWidget {
@@ -231,7 +232,7 @@ class _SuccessState extends State<Success> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Navigator.pushNamed(context, Success.id);
+                    Navigator.pushNamed(context, MyAppointment.id);
                   },
                   child: Text(
                     'View Appointment',

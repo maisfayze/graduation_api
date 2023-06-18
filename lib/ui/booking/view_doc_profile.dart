@@ -8,6 +8,8 @@ import 'package:graduation/constant/constant.dart';
 import 'package:graduation/models/top_doctors.dart';
 import 'package:provider/provider.dart';
 
+import '../../controller/get_review_for_doctor.dart';
+import '../../models/review_model.dart';
 import '../../models/view_profile_model.dart';
 import '../../provider/fav_provider.dart';
 import 'Tabs/review_tab.dart';
@@ -217,10 +219,33 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
                     first: '99%',
                     icons: Icons.bookmark_border,
                   ),
-                  RowWidget(
-                    first: '35 Feedback',
-                    icons: Icons.messenger_outline,
-                  ),
+                  FutureBuilder<List<ReviewModel>>(
+                      future: GetReview().getReView(id: data.doctorId),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return SizedBox(
+                            width: 20.w,
+                            height: 20.h,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: Constant.primaryColor,
+                              ),
+                            ),
+                          );
+                        } else if (snapshot.hasData &&
+                            snapshot.data!.isNotEmpty) {
+                          return RowWidget(
+                            first: '${snapshot.data!.length} Feedback',
+                            icons: Icons.messenger_outline,
+                          );
+                        } else {
+                          return RowWidget(
+                            first: '0 Feedback',
+                            icons: Icons.messenger_outline,
+                          );
+                        }
+                      }),
                   RowWidget(
                     first: '100\$ per hour',
                     icons: Icons.money,

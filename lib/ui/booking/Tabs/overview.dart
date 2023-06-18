@@ -246,36 +246,59 @@ class _OverViewTabState extends State<OverViewTab> {
                           height: 20.h,
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 60.0.w),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  settings:
-                                      RouteSettings(arguments: receivedData),
-                                  builder: (context) => Booking(
-                                    data: receivedData.doctorId,
-                                  ),
+                          padding: EdgeInsets.only(left: 20.0.w, right: 50.w),
+                          child: Row(
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  //go to chat
+                                },
+                                child: Icon(Icons.chat,
+                                    color: Constant.primaryColor),
+                                style: ElevatedButton.styleFrom(
+                                    shadowColor: Colors.transparent,
+                                    minimumSize: Size(50.w, 59.h),
+                                    backgroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      side:
+                                          BorderSide(color: Color(0xffDFDFDF)),
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    )),
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      settings: RouteSettings(
+                                          arguments: receivedData),
+                                      builder: (context) => Booking(
+                                        data: receivedData.doctorId,
+                                      ),
+                                    ),
+                                  );
+                                  // Navigator.pushNamed(context, Colors.grey.id);
+                                },
+                                child: Text(
+                                  'Book Appointment',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.w500),
                                 ),
-                              );
-                              // Navigator.pushNamed(context, Colors.grey.id);
-                            },
-                            child: Text(
-                              'Book Appointment',
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                                shadowColor: Colors.transparent,
-                                minimumSize: Size(100.w, 59.h),
-                                backgroundColor: Constant.primaryColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                )),
+                                style: ElevatedButton.styleFrom(
+                                    shadowColor: Colors.transparent,
+                                    minimumSize: Size(100.w, 59.h),
+                                    backgroundColor: Constant.primaryColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.r),
+                                    )),
+                              ),
+                            ],
                           ),
                         ),
                         SizedBox(
