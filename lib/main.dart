@@ -28,6 +28,7 @@ import 'package:graduation/ui/auth/reset.dart';
 import 'package:graduation/ui/booking/booking.dart';
 import 'package:graduation/ui/booking/success.dart';
 import 'package:graduation/ui/booking/view_doc_profile.dart';
+import 'package:graduation/ui/chat/private-chat.dart';
 import 'package:graduation/ui/drawerScreens/about_us.dart';
 import 'package:graduation/ui/drawerScreens/asked_questions.dart';
 import 'package:graduation/ui/drawerScreens/client_saying.dart';
@@ -164,6 +165,7 @@ class MyApp extends StatelessWidget {
                 AboutUs.id: (context) => AboutUs(),
                 SocialMedia.id: (context) => SocialMedia(),
                 Review.id: (context) => Review(),
+                // PrivateChat.id: (context) => PrivateChat(),
               },
             );
           },

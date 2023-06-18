@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/models/top_doctors.dart';
+import 'package:graduation/ui/chat/private-chat.dart';
 import 'package:graduation/widget/customPrimaryButton.dart';
 
 import '../../../constant/constant.dart';
@@ -252,6 +253,15 @@ class _OverViewTabState extends State<OverViewTab> {
                               ElevatedButton(
                                 onPressed: () {
                                   //go to chat
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      settings: RouteSettings(),
+                                      builder: (context) => PrivateChat(
+                                        data: receivedData,
+                                      ),
+                                    ),
+                                  );
                                 },
                                 child: Icon(Icons.chat,
                                     color: Constant.primaryColor),

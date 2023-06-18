@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../constant/constant.dart';
+import '../../../controller/chat_api_controller.dart';
 import '../../../widget/bookButton.dart';
 import '../../../widget/search_bar.dart';
 import '../../../widget/viewProfileButton.dart';
@@ -73,7 +74,7 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: ListView(
+      body: Column(
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -87,35 +88,105 @@ class _ChatScreenState extends State<ChatScreen> {
                 )),
           ),
           SizedBox(
-            height: 50.h,
+            height: 12.h,
           ),
-          Container(
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                FadeInDown(
-                  child: Center(
-                      child: Image.asset(
-                    'images/Messaging.gif',
-                    width: 310.w,
-                    height: 310.h,
-                  )),
-                ),
-                FadeInUp(
-                  child: SizedBox(
-                    width: 280.w,
-                    child: Text(
-                      'There is no messages to display at the moment , start a new chat with doctors',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                          fontSize: 16.sp, fontWeight: FontWeight.w400),
-                    ),
+          FutureBuilder(
+            future: chatApiController().getListChat(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Constant.primaryColor,
                   ),
-                ),
-              ],
-            ),
+                );
+              } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    var data = snapshot.data![index].createdDate;
+                    String extractedString = data.substring(11, 16);
+                    print('image is${snapshot.data![index].user.image}');
+                    return Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CircleAvatar(
+                            radius: 25.r,
+                            backgroundImage: NetworkImage(
+                                'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].user.image}'),
+                          ),
+                          SizedBox(
+                            width: 12.w,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Row(
+                                // mainAxisAlignment:
+                                //     MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('${snapshot.data![index].user.name}',
+                                      style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16.sp)),
+                                  SizedBox(
+                                    width: 170.w,
+                                  ),
+                                  Text('${extractedString}',
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.grey.shade400,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16.sp)),
+                                ],
+                              ),
+                              Text('${snapshot.data![index].lastMessage}',
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.grey.shade400,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16.sp)),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              } else {
+                return Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      FadeInDown(
+                        child: Center(
+                            child: Image.asset(
+                          'images/Messaging.gif',
+                          width: 310.w,
+                          height: 310.h,
+                        )),
+                      ),
+                      FadeInUp(
+                        child: SizedBox(
+                          width: 280.w,
+                          child: Text(
+                            'There is no messages to display at the moment , start a new chat',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                fontSize: 16.sp, fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
           ),
         ],
       ),

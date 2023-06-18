@@ -345,6 +345,7 @@ class _BookingState extends State<Booking> {
                               children: [
                                 GridView.builder(
                                   shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
                                   itemCount: time.length,
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(

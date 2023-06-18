@@ -20,7 +20,7 @@ class CreateAppointments with Helpers {
     required String End,
   }) async {
     String token = SharedPrefController().getValueFor('token');
-    print('id$id,$date,$day,$Start,$End');
+    // print('id$id,$date,$day,$Start,$End');
     Uri uri = Uri.parse(ApiSetting.CreateAppointments);
 
     http.Response response = await http.post(uri, body: {

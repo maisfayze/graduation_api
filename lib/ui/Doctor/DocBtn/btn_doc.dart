@@ -28,7 +28,9 @@ class _BtnDocState extends State<BtnDoc> {
   final List<BtnScreen> _screens = <BtnScreen>[
     const BtnScreen(title: 'Home', widget: DoctorHome()),
     const BtnScreen(title: 'Appointment', widget: MyPatientAppointments()),
-    const BtnScreen(title: 'Chat', widget: DocChatScreen()),
+    const BtnScreen(title: 'Chat', widget: ChatScreen()),
+
+    // const BtnScreen(title: 'Chat', widget: DocChatScreen()),
     const BtnScreen(title: 'Profile', widget: DoctorProfile()),
   ];
 

@@ -25,7 +25,7 @@ class PatientAuthApiController {
       "Password": pass
     });
     var json = jsonDecode(response.body);
-    print(json);
+    // print(json);
 
     if (response.statusCode == 200 || response.statusCode == 400) {
       print('${response.statusCode}');
@@ -45,7 +45,7 @@ class PatientAuthApiController {
 
     if (response.statusCode == 200 || response.statusCode == 400) {
       var json = jsonDecode(response.body);
-      print('$json');
+      // print('$json');
       var decodedJson = json['data'];
       if (response.statusCode == 200) {
         print('after if');
