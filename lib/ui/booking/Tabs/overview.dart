@@ -8,6 +8,7 @@ import 'package:graduation/widget/customPrimaryButton.dart';
 
 import '../../../constant/constant.dart';
 import '../../../controller/get_overview.dart';
+import '../../../models/ChatDataModel.dart';
 import '../../../models/overview.dart';
 import '../booking.dart';
 import '../booking2.dart';
@@ -200,27 +201,27 @@ class _OverViewTabState extends State<OverViewTab> {
                         SizedBox(
                           height: 20.h,
                         ),
-                        Text(
-                          'Specializations',
-                          style: GoogleFonts.poppins(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff272B41)),
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        //data from api
-                        Text(
-                          '${snapshot.data![index].specialtyName}',
-                          style: GoogleFonts.poppins(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.normal,
-                              color: Color(0xff6B7280)),
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
+                        // Text(
+                        //   'Specializations',
+                        //   style: GoogleFonts.poppins(
+                        //       fontSize: 18.sp,
+                        //       fontWeight: FontWeight.bold,
+                        //       color: Color(0xff272B41)),
+                        // ),
+                        // SizedBox(
+                        //   height: 10.h,
+                        // ),
+                        // //data from api
+                        // Text(
+                        //   '${snapshot.data![index].specialtyName}',
+                        //   style: GoogleFonts.poppins(
+                        //       fontSize: 14.sp,
+                        //       fontWeight: FontWeight.normal,
+                        //       color: Color(0xff6B7280)),
+                        // ),
+                        // SizedBox(
+                        //   height: 20.h,
+                        // ),
                         Text(
                           'Specializations',
                           style: GoogleFonts.poppins(
@@ -252,13 +253,17 @@ class _OverViewTabState extends State<OverViewTab> {
                             children: [
                               ElevatedButton(
                                 onPressed: () {
+                                  ChatDataModel model = ChatDataModel();
+                                  model.image = receivedData.doctorImage;
+                                  model.name = receivedData.doctorName;
+                                  model.Id = snapshot.data![index].userId;
                                   //go to chat
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       settings: RouteSettings(),
                                       builder: (context) => PrivateChat(
-                                        data: receivedData,
+                                        data: model,
                                       ),
                                     ),
                                   );

@@ -1,6 +1,7 @@
 class OverviewModel {
   OverviewModel({
     required this.fullName,
+    required this.userId,
     required this.email,
     required this.doctorImage,
     required this.gender,
@@ -23,6 +24,7 @@ class OverviewModel {
     required this.membership,
   });
   late final String fullName;
+  late final String userId;
   late final String email;
   late final String doctorImage;
   late final String gender;
@@ -45,6 +47,7 @@ class OverviewModel {
   late final String membership;
 
   OverviewModel.fromJson(Map<String, dynamic> json) {
+    userId = json['userId'];
     fullName = json['fullName'];
     email = json['email'];
     doctorImage = json['doctorImage'];

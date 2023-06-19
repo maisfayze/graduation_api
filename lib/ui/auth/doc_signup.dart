@@ -329,6 +329,9 @@ class _DocSignUpState extends State<DocSignUp> {
       print('pass2');
       Navigator.pushReplacementNamed(context, BtnDoc.id);
     } else {
+      setState(() {
+        loading = false;
+      });
       context.showSnakBar(
         message: processResponse.msg,
         error: !processResponse.sucess,

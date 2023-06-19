@@ -116,7 +116,7 @@ class _MyPatientAppointmentsState extends State<MyPatientAppointments> {
                                     borderRadius: BorderRadius.circular(10.r),
                                     child: Image.network(
                                       'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].patientImage}',
-                                      height: 135.h,
+                                      height: 140.h,
                                       width: 120.w,
                                       fit: BoxFit.cover,
                                     )),
@@ -125,7 +125,7 @@ class _MyPatientAppointmentsState extends State<MyPatientAppointments> {
                                 padding: EdgeInsets.only(
                                     left: 18.w,
                                     bottom: 16.h,
-                                    top: 16.h,
+                                    top: 35.h,
                                     right: 0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

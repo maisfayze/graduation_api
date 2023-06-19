@@ -321,6 +321,9 @@ class _PatientLoginPageState extends State<PatientLoginPage> with Helpers {
       Navigator.pushNamed(context, BtnPatient.id);
     }
     // ignore: use_build_context_synchronously
+    setState(() {
+      loading = false;
+    });
     context.showSnakBar(
       message: processResponse.msg,
       error: !processResponse.sucess,

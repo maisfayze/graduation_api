@@ -31,6 +31,7 @@ class SharedPrefController {
     await _sharedPreferences.setString('image', user.image ?? '');
     await _sharedPreferences.setString('email', user.email);
     await _sharedPreferences.setInt('doctorId', user.doctorId);
+    await _sharedPreferences.setString('id', user.id);
     await _sharedPreferences.setString('userType', user.userType);
     //complete the rest of variable methode in the same way
     // all variable in the enum above are same variable in the model user

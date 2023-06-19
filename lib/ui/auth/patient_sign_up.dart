@@ -395,7 +395,9 @@ class _PatientSignUpState extends State<PatientSignUp> {
     }
     // showSnackBar(context,
     //     message: AppLocalizations.of(context)!.error_message, erorr: true);
-
+    setState(() {
+      loading = false;
+    });
     context.showSnakBar(message: 'Enter Required Data !', error: true);
 
     return false;

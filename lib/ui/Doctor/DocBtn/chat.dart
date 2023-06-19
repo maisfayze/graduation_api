@@ -90,102 +90,108 @@ class _ChatScreenState extends State<ChatScreen> {
           SizedBox(
             height: 12.h,
           ),
-          FutureBuilder(
-            future: chatApiController().getListChat(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: Constant.primaryColor,
-                  ),
-                );
-              } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    var data = snapshot.data![index].createdDate;
-                    String extractedString = data.substring(11, 16);
-                    print('image is${snapshot.data![index].user.image}');
-                    return Padding(
-                      padding: EdgeInsets.all(12.0),
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          CircleAvatar(
-                            radius: 29.r,
-                            backgroundImage: NetworkImage(
-                                'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].user.image}'),
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('${snapshot.data![index].user.name}',
-                                      style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 16.sp)),
-                                  SizedBox(
-                                    width: 170.w,
-                                  ),
-                                  Text('${extractedString}',
-                                      style: GoogleFonts.poppins(
-                                          color: Colors.grey.shade400,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 16.sp)),
-                                ],
-                              ),
-                              Text('${snapshot.data![index].lastMessage}',
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.grey.shade400,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16.sp)),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              } else {
-                return Container(
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      FadeInDown(
-                        child: Center(
-                            child: Image.asset(
-                          'images/Messaging.gif',
-                          width: 310.w,
-                          height: 310.h,
-                        )),
-                      ),
-                      FadeInUp(
-                        child: SizedBox(
-                          width: 280.w,
-                          child: Text(
-                            'There is no messages to display at the moment , start a new chat',
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.poppins(
-                                fontSize: 16.sp, fontWeight: FontWeight.w400),
+          Expanded(
+            child: FutureBuilder(
+              future: chatApiController().getListChat(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: Constant.primaryColor,
+                    ),
+                  );
+                } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                  print('${snapshot.data}');
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    // reverse: true,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      var data = snapshot.data![index].createdDate;
+                      String extractedString = data.substring(11, 16);
+                      print('image is${snapshot.data![index].user.image}');
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.w, vertical: 12.h),
+                        // padding: EdgeInsets.all(12.0),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CircleAvatar(
+                              radius: 29.r,
+                              backgroundImage: NetworkImage(
+                                  'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].user.image}'),
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('${snapshot.data![index].user.name}',
+                                        style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16.sp)),
+                                    SizedBox(
+                                      width: 170.w,
+                                    ),
+                                    Text('${extractedString}',
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.grey.shade400,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16.sp)),
+                                  ],
+                                ),
+                                Text('${snapshot.data![index].lastMessage}',
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.grey.shade400,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16.sp)),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return Container(
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        FadeInDown(
+                          child: Center(
+                              child: Image.asset(
+                            'images/Messaging.gif',
+                            width: 310.w,
+                            height: 310.h,
+                          )),
+                        ),
+                        FadeInUp(
+                          child: SizedBox(
+                            width: 280.w,
+                            child: Text(
+                              'There is no messages to display at the moment , start a new chat',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.poppins(
+                                  fontSize: 16.sp, fontWeight: FontWeight.w400),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-            },
+                      ],
+                    ),
+                  );
+                }
+              },
+            ),
           ),
         ],
       ),

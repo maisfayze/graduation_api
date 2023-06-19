@@ -25,11 +25,11 @@ class ListChatModel {
 
 class User {
   User({
-    this.image,
+    required this.image,
     required this.name,
     required this.id,
   });
-  late final String? image;
+  late final String image;
   late final String name;
   late final String id;
 

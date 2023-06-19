@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('${SharedPrefController().getValueFor('doctorId')}');
+    print('${SharedPrefController().getValueFor('id')}');
 
     return Scaffold(
       body: Container(

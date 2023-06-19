@@ -320,6 +320,9 @@ class _DoctorLoginPageState extends State<DoctorLoginPage> with Helpers {
     if (processResponse.sucess) {
       Navigator.pushNamed(context, BtnDoc.id);
     }
+    setState(() {
+      loading = false;
+    });
     context.showSnakBar(
       message: processResponse.msg,
       error: !processResponse.sucess,

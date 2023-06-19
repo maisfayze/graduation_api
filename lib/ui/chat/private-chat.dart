@@ -4,19 +4,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
 
+import '../../controller/chat_api_controller.dart';
+import '../../models/ChatDataModel.dart';
 import '../../models/top_doctors.dart';
+import '../../prefs/prefs.dart';
 
 class PrivateChat extends StatefulWidget {
   PrivateChat({Key? key, required this.data}) : super(key: key);
   static const id = 'PrivateChat';
-  final TopDoctorsModel data;
+  final ChatDataModel data;
 
   @override
   State<PrivateChat> createState() => _PrivateChatState();
 }
 
 class _PrivateChatState extends State<PrivateChat> {
-  late TopDoctorsModel receivedData;
+  late ChatDataModel receivedData;
   late TextEditingController controller;
 
   @override
@@ -51,13 +54,13 @@ class _PrivateChatState extends State<PrivateChat> {
             children: [
               CircleAvatar(
                 backgroundImage: NetworkImage(
-                    'http://ac7a1ae098-001-site1.etempurl.com${receivedData.doctorImage}'),
+                    'http://ac7a1ae098-001-site1.etempurl.com${receivedData.image}'),
                 radius: 18,
               ),
               SizedBox(
                 width: 12.w,
               ),
-              Text('${receivedData.doctorName}',
+              Text('${receivedData.name}',
                   style: GoogleFonts.poppins(
                       color: Colors.black,
                       fontWeight: FontWeight.w500,
@@ -76,6 +79,40 @@ class _PrivateChatState extends State<PrivateChat> {
         ),
         body: Column(
           children: [
+            FutureBuilder(
+              future: chatApiController().GetChatMassage(id: receivedData.Id),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: Constant.primaryColor,
+                    ),
+                  );
+                } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                  return Expanded(
+                      child: ListView.builder(
+                          // shrinkWrap: true,
+                          // reverse: true,
+                          itemCount: snapshot.data!.length,
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context, index) {
+                            String id =
+                                SharedPrefController().getValueFor('id');
+
+                            final currentUser = id;
+                            return MessageBubble(
+                                messages: snapshot.data![index].message,
+                                index: index,
+                                isMe: snapshot.data![index].senderUserId ==
+                                    currentUser);
+                          }));
+                } else {
+                  return Center(
+                    child: Text('Start your conversation with doctors'),
+                  );
+                }
+              },
+            ),
             Spacer(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 12.0.w, vertical: 12.h),
@@ -136,7 +173,13 @@ class _PrivateChatState extends State<PrivateChat> {
                         color: Constant.primaryColor),
                     child: Center(
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            chatApiController().SendMsg(
+                                id: receivedData.Id, msg: controller.text);
+                            setState(() {
+                              controller.clear();
+                            });
+                          },
                           icon: Icon(
                             Icons.send,
                             size: 20,
@@ -149,6 +192,65 @@ class _PrivateChatState extends State<PrivateChat> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MessageBubble extends StatelessWidget {
+  const MessageBubble(
+      {Key? key,
+      required this.messages,
+      required this.index,
+      // required this.sender,
+      required this.isMe})
+      : super(key: key);
+
+  final String messages;
+  final int index;
+  // final String sender;
+  final bool isMe;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment:
+            isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+        children: [
+          // Text(
+          //   '$sender',
+          //   style: TextStyle(fontSize: 12, color: Color(0xff9e59aa)),
+          // ),
+          SizedBox(
+            height: 8,
+          ),
+          Material(
+            color: isMe ? Constant.primaryColor : Colors.grey.shade400,
+            borderRadius: isMe
+                ? BorderRadius.only(
+                    topRight: Radius.circular(15.r),
+                    bottomLeft: Radius.circular(15.r),
+                    bottomRight: Radius.circular(15.r),
+                  )
+                : BorderRadius.only(
+                    topLeft: Radius.circular(15.r),
+                    bottomLeft: Radius.circular(15.r),
+                    bottomRight: Radius.circular(15.r),
+                  ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                '${messages}',
+                style: GoogleFonts.poppins(
+                  fontSize: 18.sp,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

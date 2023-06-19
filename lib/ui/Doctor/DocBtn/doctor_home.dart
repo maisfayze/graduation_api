@@ -620,7 +620,9 @@ class _DoctorHomeState extends State<DoctorHome> {
                 ),
                 DrawerWidget(
                   img: 'images/Blo.png',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, Blogs.id);
+                  },
                   title: AppLocalizations.of(context)!.blogs,
                 ),
                 DrawerWidget(
