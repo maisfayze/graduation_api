@@ -92,6 +92,7 @@ class MyApp extends StatelessWidget {
       create: (context) => LocalizationProvider(),
       builder: (context, child) {
         return ScreenUtilInit(
+          useInheritedMediaQuery: true,
           designSize: const Size(414, 896),
           // designSize: const Size(313, 800),
 

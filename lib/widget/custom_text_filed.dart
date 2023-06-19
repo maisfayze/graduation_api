@@ -67,7 +67,7 @@ class CustomTextFiled extends StatelessWidget {
           ),
           // contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
           hintStyle: GoogleFonts.poppins(
-              fontSize: 12.sp,
+              fontSize: 16.sp,
               fontWeight: FontWeight.normal,
               color: Color(0xffb4b4b4)),
           filled: false,

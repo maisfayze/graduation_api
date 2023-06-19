@@ -110,25 +110,24 @@ class _ChatScreenState extends State<ChatScreen> {
                     return Padding(
                       padding: EdgeInsets.all(12.0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CircleAvatar(
-                            radius: 25.r,
+                            radius: 29.r,
                             backgroundImage: NetworkImage(
                                 'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].user.image}'),
                           ),
                           SizedBox(
-                            width: 12.w,
+                            width: 10.w,
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Row(
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('${snapshot.data![index].user.name}',
                                       style: GoogleFonts.poppins(
