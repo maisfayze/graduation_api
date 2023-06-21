@@ -7,9 +7,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../constant/constant.dart';
 import '../../../controller/chat_api_controller.dart';
+import '../../../models/ChatDataModel.dart';
 import '../../../widget/bookButton.dart';
 import '../../../widget/search_bar.dart';
 import '../../../widget/viewProfileButton.dart';
+import '../../chat/private-chat.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -114,48 +116,65 @@ class _ChatScreenState extends State<ChatScreen> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 12.h),
                         // padding: EdgeInsets.all(12.0),
-                        child: Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              radius: 29.r,
-                              backgroundImage: NetworkImage(
-                                  'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].user.image}'),
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('${snapshot.data![index].user.name}',
-                                        style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16.sp)),
-                                    SizedBox(
-                                      width: 170.w,
-                                    ),
-                                    Text('${extractedString}',
-                                        style: GoogleFonts.poppins(
-                                            color: Colors.grey.shade400,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16.sp)),
-                                  ],
+                        child: InkWell(
+                          onTap: () {
+                            ChatDataModel model = ChatDataModel();
+                            model.image = snapshot.data![index].user.image;
+                            model.name = snapshot.data![index].user.name;
+                            model.Id = snapshot.data![index].user.id;
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                settings: RouteSettings(),
+                                builder: (context) => PrivateChat(
+                                  data: model,
                                 ),
-                                Text('${snapshot.data![index].lastMessage}',
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.grey.shade400,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16.sp)),
-                              ],
-                            ),
-                          ],
+                              ),
+                            );
+                          },
+                          child: Row(
+                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CircleAvatar(
+                                radius: 29.r,
+                                backgroundImage: NetworkImage(
+                                    'http://ac7a1ae098-001-site1.etempurl.com${snapshot.data![index].user.image}'),
+                              ),
+                              SizedBox(
+                                width: 10.w,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('${snapshot.data![index].user.name}',
+                                          style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16.sp)),
+                                      SizedBox(
+                                        width: 170.w,
+                                      ),
+                                      Text('${extractedString}',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.grey.shade400,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16.sp)),
+                                    ],
+                                  ),
+                                  Text('${snapshot.data![index].lastMessage}',
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.grey.shade400,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16.sp)),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
