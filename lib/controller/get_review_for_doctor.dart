@@ -16,13 +16,13 @@ class GetReview {
       'Accept': 'application/json',
       'Authorization': token,
     });
-    // print('my commmenttttttt${response.body}');
+    print('my commmenttttttt${response.body}');
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       var DecodedData = data['data'] as List;
       List<ReviewModel> review =
           DecodedData.map((obj) => ReviewModel.fromJson(obj)).toList();
-
+      print('json is${review}');
       return review;
     }
     return [];

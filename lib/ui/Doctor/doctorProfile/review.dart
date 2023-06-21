@@ -55,12 +55,14 @@ class _ReviewState extends State<Review> {
                 .getReView(id: SharedPrefController().getValueFor('doctorId')),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
+                print('errorr');
                 return Center(
                   child: CircularProgressIndicator(
                     color: Constant.primaryColor,
                   ),
                 );
               } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                print('my data${snapshot.data}');
                 return Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 12.w,
@@ -107,7 +109,7 @@ class _ReviewState extends State<Review> {
                                             ),
                                           ),
                                           Text(
-                                            '${snapshot.data![index].creatdDate}',
+                                            '${snapshot.data![index].created}',
                                             textAlign: TextAlign.center,
                                             style: GoogleFonts.poppins(
                                               fontWeight: FontWeight.w400,
@@ -147,7 +149,7 @@ class _ReviewState extends State<Review> {
                 );
               } else {
                 return Center(
-                  child: Text(''),
+                  child: Text('No Review'),
                 );
               }
             },

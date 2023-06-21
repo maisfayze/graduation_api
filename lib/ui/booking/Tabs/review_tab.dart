@@ -39,19 +39,23 @@ class _ReviewTabState extends State<ReviewTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: true,
       body: ListView(
         children: [
           FutureBuilder<List<ReviewModel>>(
             future: GetReview().getReView(id: receivedData.doctorId),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
+                print('my data no ');
+
                 return Center(
                   child: CircularProgressIndicator(
                     color: Constant.primaryColor,
                   ),
                 );
               } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                print('my data${snapshot.data}');
+
                 return Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 24.w, vertical: 22.h),
@@ -85,7 +89,7 @@ class _ReviewTabState extends State<ReviewTab> {
                                       ),
                                     ),
                                     Text(
-                                      '${snapshot.data![index].creatdDate}',
+                                      '${snapshot.data![index].created}',
                                       textAlign: TextAlign.center,
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w400,
@@ -122,7 +126,7 @@ class _ReviewTabState extends State<ReviewTab> {
                 );
               } else {
                 return Center(
-                  child: Text(''),
+                  child: Text('error'),
                 );
               }
             },
@@ -160,7 +164,8 @@ class _ReviewTabState extends State<ReviewTab> {
               minLines: 5,
               maxLines: 5,
               decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 26.w),
+                  contentPadding:
+                      EdgeInsets.symmetric(horizontal: 26.w, vertical: 12.h),
                   constraints: BoxConstraints(
                     maxHeight: 130.h,
                     minHeight: 130.h,
@@ -233,7 +238,7 @@ class _ReviewTabState extends State<ReviewTab> {
             ),
           ),
           SizedBox(
-            height: 50.h,
+            height: 80.h,
           ),
         ],
       ),

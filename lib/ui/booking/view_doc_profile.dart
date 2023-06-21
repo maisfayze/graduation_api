@@ -40,6 +40,7 @@ class _ViewDoctorProfileState extends State<ViewDoctorProfile>
 
     return Scaffold(
       backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(

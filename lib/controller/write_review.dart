@@ -15,7 +15,7 @@ class WriteReview with Helpers {
     String token = SharedPrefController().getValueFor('token');
 
     Uri uri = Uri.parse(
-        'http://ac7a1ae098-001-site1.etempurl.com/api/review/GetAllReviewsForDoctor?doctorId=$id');
+        'http://ac7a1ae098-001-site1.etempurl.com/api/review/AddReviewsForDoctor?doctorId=$id');
     http.Response response = await http.post(uri, body: {
       'Comment': comment
     }, headers: {

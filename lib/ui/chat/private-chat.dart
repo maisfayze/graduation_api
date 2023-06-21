@@ -90,6 +90,7 @@ class _PrivateChatState extends State<PrivateChat> {
                   );
                 } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                   return Expanded(
+                      flex: 20,
                       child: ListView.builder(
                           // shrinkWrap: true,
                           // reverse: true,

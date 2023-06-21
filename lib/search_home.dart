@@ -50,6 +50,7 @@ class _DoctorHomeState extends State<SearchHome> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
