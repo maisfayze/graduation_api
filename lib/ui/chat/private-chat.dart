@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graduation/constant/constant.dart';
+import 'package:graduation/models/ChatMsgModel.dart';
 
 import '../../controller/chat_api_controller.dart';
 import '../../models/ChatDataModel.dart';
@@ -21,6 +22,7 @@ class PrivateChat extends StatefulWidget {
 class _PrivateChatState extends State<PrivateChat> {
   late ChatDataModel receivedData;
   late TextEditingController controller;
+  late ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
@@ -32,6 +34,18 @@ class _PrivateChatState extends State<PrivateChat> {
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  Stream<List<ChatMsgModel>> getStream() async* {
+    int i = 0;
+    while (i < 10) {
+      List<ChatMsgModel> myStreamData =
+          await chatApiController().GetChatMassage(id: receivedData.Id);
+
+      await Future.delayed(Duration(milliseconds: 200));
+
+      yield myStreamData;
+    }
   }
 
   @override
@@ -79,8 +93,8 @@ class _PrivateChatState extends State<PrivateChat> {
         ),
         body: Column(
           children: [
-            FutureBuilder(
-              future: chatApiController().GetChatMassage(id: receivedData.Id),
+            StreamBuilder(
+              stream: getStream(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
@@ -94,6 +108,7 @@ class _PrivateChatState extends State<PrivateChat> {
                       child: ListView.builder(
                           // shrinkWrap: true,
                           // reverse: true,
+                          // controller: scrollController.jumpTo(scrollController.position.maxScrollExtent) ,
                           itemCount: snapshot.data!.length,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
@@ -108,8 +123,31 @@ class _PrivateChatState extends State<PrivateChat> {
                                     currentUser);
                           }));
                 } else {
-                  return Center(
-                    child: Text('Start your conversation with doctors'),
+                  return Expanded(
+                    flex: 8,
+                    child: ListView(
+                      children: [
+                        SizedBox(
+                          height: 80.h,
+                        ),
+                        Center(
+                            child: Image.asset(
+                          'images/doctor chat.gif',
+                          width: 200.w,
+                          height: 300.h,
+                        )),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Center(
+                          child: Text('Start your conversation with doctors',
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16.sp)),
+                        ),
+                        Spacer(),
+                      ],
+                    ),
                   );
                 }
               },
