@@ -194,7 +194,7 @@ class PatientProfile extends StatelessWidget {
                         image: NetworkImage(
                             'http://ac7a1ae098-001-site1.etempurl.com${SharedPrefController().getValueFor('image')}'),
                         fit: BoxFit.cover),
-                color: Colors.grey,
+                color: Constant.primaryColor,
                 borderRadius: BorderRadius.all(Radius.circular(100.r)),
               ),
             ),

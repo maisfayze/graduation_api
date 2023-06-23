@@ -126,7 +126,7 @@ class _ReviewTabState extends State<ReviewTab> {
                 );
               } else {
                 return Center(
-                  child: Text('error'),
+                  child: Text(''),
                 );
               }
             },
