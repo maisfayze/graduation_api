@@ -83,8 +83,19 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key});
+  MaterialColor primarySwatchColor = MaterialColor(0xff6EC7C3, {
+    50: Color(0xff6EC7C3),
+    100: Color(0xff6EC7C3),
+    200: Color(0xff6EC7C3),
+    300: Color(0xff6EC7C3),
+    400: Color(0xff6EC7C3),
+    500: Color(0xff6EC7C3),
+    600: Color(0xff6EC7C3),
+    700: Color(0xff6EC7C3),
+    800: Color(0xff6EC7C3),
+    900: Color(0xff6EC7C3),
+  });
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -101,7 +112,7 @@ class MyApp extends StatelessWidget {
           builder: (context, child) {
             return MaterialApp(
               theme: ThemeData(
-                primarySwatch: Colors.teal,
+                primarySwatch: primarySwatchColor,
                 radioTheme: RadioThemeData(
                   fillColor: MaterialStateColor.resolveWith(
                       (states) => Constant.primaryColor),
