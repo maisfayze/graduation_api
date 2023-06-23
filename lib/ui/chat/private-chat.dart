@@ -64,6 +64,12 @@ class _PrivateChatState extends State<PrivateChat> {
               Navigator.pop(context);
             },
           ),
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 14.w),
+              child: Icon(Icons.more_vert_outlined),
+            )
+          ],
           title: Row(
             children: [
               CircleAvatar(

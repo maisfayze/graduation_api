@@ -248,7 +248,7 @@ class _OverViewTabState extends State<OverViewTab> {
                           height: 20.h,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 20.0.w, right: 50.w),
+                          padding: EdgeInsets.only(left: 20.0.w, right: 20.w),
                           child: Row(
                             children: [
                               ElevatedButton(
@@ -307,7 +307,8 @@ class _OverViewTabState extends State<OverViewTab> {
                                 ),
                                 style: ElevatedButton.styleFrom(
                                     shadowColor: Colors.transparent,
-                                    minimumSize: Size(100.w, 59.h),
+                                    minimumSize: Size(150.w, 59.h),
+                                    maximumSize: Size(400.w, 59.h),
                                     backgroundColor: Constant.primaryColor,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20.r),

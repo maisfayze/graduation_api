@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../patientProfile/new_pass.dart';
 import '../schedule _timings.dart';
+import '../scheduleTabs.dart';
 import 'my_patient_appointment.dart';
 import 'my_patient.dart';
 import 'edit_doctor_profile.dart';
@@ -89,7 +90,7 @@ class DoctorProfile extends StatelessWidget {
                   // sub_title: AppLocalizations.of(context)!
                   //     .see_your_paid_pending,
                   onPresseed: () {
-                    Navigator.pushNamed(context, ScheduleTimings.id);
+                    Navigator.pushNamed(context, ScheduleTabs.id);
                   },
                 ),
                 Padding(

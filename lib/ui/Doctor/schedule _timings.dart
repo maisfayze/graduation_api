@@ -31,6 +31,8 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
   //   TimeIntervel(id: 2, title: '45 mins'),
   //   TimeIntervel(id: 2, title: '1 hour')
   // ];
+  TabController? _tabController;
+
   int? _selectedTime;
   String? dropDownValue;
   List<String> timeList = [
@@ -129,29 +131,29 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
     // Config().init(context);
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(
-            'Schedule Timings',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontWeight: FontWeight.w600,
-              fontSize: 18.sp,
-              color: Colors.black,
-            ),
-          ),
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios_sharp,
-              color: Colors.black,
-              size: 24,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          backgroundColor: Colors.transparent,
-        ),
+        // appBar: AppBar(
+        //   title: Text(
+        //     'Schedule Timings',
+        //     textAlign: TextAlign.center,
+        //     style: GoogleFonts.poppins(
+        //       fontWeight: FontWeight.w600,
+        //       fontSize: 18.sp,
+        //       color: Colors.black,
+        //     ),
+        //   ),
+        //   elevation: 0,
+        //   leading: IconButton(
+        //     icon: Icon(
+        //       Icons.arrow_back_ios_sharp,
+        //       color: Colors.black,
+        //       size: 24,
+        //     ),
+        //     onPressed: () {
+        //       Navigator.pop(context);
+        //     },
+        //   ),
+        //   backgroundColor: Colors.transparent,
+        // ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -618,15 +620,28 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                                   borderRadius: BorderRadius.circular(5.r),
                                   border: Border.all(
                                       color: Colors.grey.shade300, width: 1)),
-                              child: Center(
-                                child: Text(
-                                  snapshot.data![index].item1,
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 15.sp,
-                                    color: Colors.white,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      snapshot.data![index].item1,
+                                      style: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 15.sp,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  SizedBox(
+                                    width: 5.w,
+                                  ),
+                                  Icon(
+                                    Icons.close,
+                                    color: Color(0xffE48784),
+                                    size: 14,
+                                  ),
+                                ],
                               ),
                             );
                           },
